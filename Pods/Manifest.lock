@@ -1,4 +1,5 @@
 PODS:
+  - ActiveLabel (0.8.1)
   - Mockingjay (2.0.1):
     - Mockingjay/Core (= 2.0.1)
     - Mockingjay/XCTest (= 2.0.1)
@@ -6,6 +7,26 @@ PODS:
     - URITemplate (~> 2.0)
   - Mockingjay/XCTest (2.0.1):
     - Mockingjay/Core
+  - PINCache (3.0.1-beta.6):
+    - PINCache/Arc-exception-safe (= 3.0.1-beta.6)
+    - PINCache/Core (= 3.0.1-beta.6)
+  - PINCache/Arc-exception-safe (3.0.1-beta.6):
+    - PINCache/Core
+  - PINCache/Core (3.0.1-beta.6):
+    - PINOperation (~> 1.1.0)
+  - PINOperation (1.1.1)
+  - PINRemoteImage/Core (3.0.0-beta.13):
+    - PINOperation
+  - PINRemoteImage/iOS (3.0.0-beta.13):
+    - PINRemoteImage/Core
+  - PINRemoteImage/PINCache (3.0.0-beta.13):
+    - PINCache (= 3.0.1-beta.6)
+    - PINRemoteImage/Core
+  - Reusable (4.0.2):
+    - Reusable/Storyboard (= 4.0.2)
+    - Reusable/View (= 4.0.2)
+  - Reusable/Storyboard (4.0.2)
+  - Reusable/View (4.0.2)
   - RxBlocking (4.1.2):
     - RxSwift (~> 4.0)
   - RxCocoa (4.1.2):
@@ -14,35 +35,57 @@ PODS:
   - RxTest (4.1.2):
     - RxSwift (~> 4.0)
   - SwiftGen (4.2.1)
+  - Texture (2.7):
+    - Texture/PINRemoteImage (= 2.7)
+  - Texture/Core (2.7)
+  - Texture/PINRemoteImage (2.7):
+    - PINRemoteImage/iOS (= 3.0.0-beta.13)
+    - PINRemoteImage/PINCache
+    - Texture/Core
   - URITemplate (2.0.3)
 
 DEPENDENCIES:
+  - ActiveLabel (~> 0.8.1)
   - Mockingjay (~> 2.0.1)
+  - Reusable (~> 4.0)
   - RxBlocking (~> 4.0)
   - RxCocoa (~> 4.0)
   - RxSwift (~> 4.0)
   - RxTest (~> 4.0)
   - SwiftGen (~> 4.2)
+  - Texture
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
+    - ActiveLabel
     - Mockingjay
+    - PINCache
+    - PINOperation
+    - PINRemoteImage
+    - Reusable
     - RxBlocking
     - RxCocoa
     - RxSwift
     - RxTest
     - SwiftGen
+    - Texture
     - URITemplate
 
 SPEC CHECKSUMS:
+  ActiveLabel: e361127c355b911a467db3d5a897b3d7f902e568
   Mockingjay: 11a621880d2887f1775bdcf824341eb68f218450
+  PINCache: d195fdba255283f7e9900a55e3cced377f431f9b
+  PINOperation: a6219e6fc9db9c269eb7a7b871ac193bcf400aac
+  PINRemoteImage: d6d51c5d2adda55f1ce30c96e850b6c4ebd2856a
+  Reusable: 584a5629747c52e0f6a77841b400dc2643f6fa0f
   RxBlocking: f6054985901412fc8c02daa84e92d4ba68c61389
   RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
   RxSwift: e49536837d9901277638493ea537394d4b55f570
   RxTest: e634f15fd2c2cd0e0120132ef7a4f7be69ad0393
   SwiftGen: 2ba2a88fc6130b96e38e2baa0029e4bd222ffd85
+  Texture: 9d7e38965cf22ccd7cd9c249dd78b3f14e70ab6c
   URITemplate: ace0c4c46dcf8afe6e89b4060621852886b15c3b
 
-PODFILE CHECKSUM: f099d43e00f07ab4fdfbea606b573e0d61246302
+PODFILE CHECKSUM: 5fc531598ecab8fa8073b8fa788f2c3f6f65a456
 
 COCOAPODS: 1.5.0
