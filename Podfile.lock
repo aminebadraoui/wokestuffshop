@@ -1,12 +1,18 @@
 PODS:
   - ActiveLabel (0.8.1)
-  - Mockingjay (2.0.1):
-    - Mockingjay/Core (= 2.0.1)
-    - Mockingjay/XCTest (= 2.0.1)
-  - Mockingjay/Core (2.0.1):
-    - URITemplate (~> 2.0)
-  - Mockingjay/XCTest (2.0.1):
-    - Mockingjay/Core
+  - OHHTTPStubs/Core (6.1.0)
+  - OHHTTPStubs/Default (6.1.0):
+    - OHHTTPStubs/Core
+    - OHHTTPStubs/JSON
+    - OHHTTPStubs/NSURLSession
+    - OHHTTPStubs/OHPathHelpers
+  - OHHTTPStubs/JSON (6.1.0):
+    - OHHTTPStubs/Core
+  - OHHTTPStubs/NSURLSession (6.1.0):
+    - OHHTTPStubs/Core
+  - OHHTTPStubs/OHPathHelpers (6.1.0)
+  - OHHTTPStubs/Swift (6.1.0):
+    - OHHTTPStubs/Default
   - PINCache (3.0.1-beta.6):
     - PINCache/Arc-exception-safe (= 3.0.1-beta.6)
     - PINCache/Core (= 3.0.1-beta.6)
@@ -22,6 +28,9 @@ PODS:
   - PINRemoteImage/PINCache (3.0.0-beta.13):
     - PINCache (= 3.0.1-beta.6)
     - PINRemoteImage/Core
+  - R.swift (4.0.0):
+    - R.swift.Library (~> 4.0.0)
+  - R.swift.Library (4.0.0)
   - Reusable (4.0.2):
     - Reusable/Storyboard (= 4.0.2)
     - Reusable/View (= 4.0.2)
@@ -34,6 +43,7 @@ PODS:
   - RxSwift (4.1.2)
   - RxTest (4.1.2):
     - RxSwift (~> 4.0)
+  - SnapKit (4.0.0)
   - SwiftGen (4.2.1)
   - Texture (2.7):
     - Texture/PINRemoteImage (= 2.7)
@@ -42,50 +52,55 @@ PODS:
     - PINRemoteImage/iOS (= 3.0.0-beta.13)
     - PINRemoteImage/PINCache
     - Texture/Core
-  - URITemplate (2.0.3)
 
 DEPENDENCIES:
   - ActiveLabel (~> 0.8.1)
-  - Mockingjay (~> 2.0.1)
+  - OHHTTPStubs/Swift
+  - R.swift
   - Reusable (~> 4.0)
   - RxBlocking (~> 4.0)
   - RxCocoa (~> 4.0)
   - RxSwift (~> 4.0)
   - RxTest (~> 4.0)
+  - SnapKit (~> 4.0.0)
   - SwiftGen (~> 4.2)
   - Texture
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - ActiveLabel
-    - Mockingjay
+    - OHHTTPStubs
     - PINCache
     - PINOperation
     - PINRemoteImage
+    - R.swift
+    - R.swift.Library
     - Reusable
     - RxBlocking
     - RxCocoa
     - RxSwift
     - RxTest
+    - SnapKit
     - SwiftGen
     - Texture
-    - URITemplate
 
 SPEC CHECKSUMS:
   ActiveLabel: e361127c355b911a467db3d5a897b3d7f902e568
-  Mockingjay: 11a621880d2887f1775bdcf824341eb68f218450
+  OHHTTPStubs: 1e21c7d2c084b8153fc53d48400d8919d2d432d0
   PINCache: d195fdba255283f7e9900a55e3cced377f431f9b
   PINOperation: a6219e6fc9db9c269eb7a7b871ac193bcf400aac
   PINRemoteImage: d6d51c5d2adda55f1ce30c96e850b6c4ebd2856a
+  R.swift: d6a5ec2f55a8441dc0ed9f1f8b37d7d11ae85c66
+  R.swift.Library: c3af34921024333546e23b70e70d0b4e0cffca75
   Reusable: 584a5629747c52e0f6a77841b400dc2643f6fa0f
   RxBlocking: f6054985901412fc8c02daa84e92d4ba68c61389
   RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
   RxSwift: e49536837d9901277638493ea537394d4b55f570
   RxTest: e634f15fd2c2cd0e0120132ef7a4f7be69ad0393
+  SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwiftGen: 2ba2a88fc6130b96e38e2baa0029e4bd222ffd85
   Texture: 9d7e38965cf22ccd7cd9c249dd78b3f14e70ab6c
-  URITemplate: ace0c4c46dcf8afe6e89b4060621852886b15c3b
 
-PODFILE CHECKSUM: 5fc531598ecab8fa8073b8fa788f2c3f6f65a456
+PODFILE CHECKSUM: 93dfe9ccb7cedcc664784bfaba9434772aad0d82
 
 COCOAPODS: 1.5.0

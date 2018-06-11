@@ -6,4 +6,18 @@
 //  Copyright © 2018 aminebadraoui. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import Rswift
+import Reusable
+
+class CartViewController: UIViewController, StoryboardSceneBased {
+    
+    static var sceneStoryboard: UIStoryboard = R.storyboard.cart()
+    
+    public static func make() -> CartViewController {
+        let vc = self.instantiate()
+        vc.title = "Cart"
+        return vc
+    }
+    
+}

@@ -6,4 +6,23 @@
 //  Copyright © 2018 aminebadraoui. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import RxSwift
+
+class CartCoordinator: Coordinator {
+    
+    var childCoordinators: [Coordinator] = []
+    var rootViewController: UIViewController
+    
+    init(rootViewController: UIViewController){
+        self.rootViewController = rootViewController
+    }
+    
+    func start() {
+        let vc = CartViewController.make()
+        if let cartNav = rootViewController as? UINavigationController {
+            cartNav.pushViewController(vc, animated: true)
+        }
+    }
+}
+

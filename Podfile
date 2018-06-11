@@ -13,14 +13,17 @@ target 'wokestuffshop' do
     pod 'SwiftGen',                             '~> 4.2'
     pod 'Reusable',                             '~> 4.0'
     pod 'ActiveLabel',                          '~> 0.8.1'
-
+    pod 'SnapKit',                              '~> 4.0.0'
+    pod 'R.swift'
+    pod 'Texture'
+    
   target 'wokestuffshopTests' do
     inherit! :search_paths
     # Pods for testing
     pod 'RxBlocking',                           '~> 4.0'
     pod 'RxTest',                               '~> 4.0'
-    pod 'Mockingjay',                           '~> 2.0.1'
-    pod 'Texture'
+    pod 'OHHTTPStubs/Swift'
+    
   end
 
   target 'wokestuffshopUITests' do

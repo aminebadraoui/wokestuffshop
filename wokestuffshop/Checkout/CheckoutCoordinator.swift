@@ -6,4 +6,20 @@
 //  Copyright © 2018 aminebadraoui. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class CheckoutCoordinator: Coordinator {
+    var childCoordinators: [Coordinator] = []
+    var rootViewController: UIViewController
+    
+    init(rootViewController: UIViewController){
+        self.rootViewController = rootViewController
+    }
+    
+    func start() {
+        let vc = ProductViewController.make()
+        if let checkoutNav = rootViewController as? UINavigationController {
+            checkoutNav.pushViewController(vc, animated: true)
+        }
+    }
+}

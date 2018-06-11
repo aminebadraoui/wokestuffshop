@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1EA23263096A0EEF4DDF7C94 /* Pods_wokestuffshop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9A4C4CC4F69CD55A921E288 /* Pods_wokestuffshop.framework */; };
+		67069C9520CCFCFE000E1C69 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67069C9420CCFCFE000E1C69 /* R.generated.swift */; };
 		6706A16B20C77FCE00BC6760 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6706A16A20C77FCE00BC6760 /* AppDelegate.swift */; };
-		6706A17020C77FCE00BC6760 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6706A16E20C77FCE00BC6760 /* Main.storyboard */; };
 		6706A17220C77FD100BC6760 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6706A17120C77FD100BC6760 /* Assets.xcassets */; };
 		6706A17520C77FD100BC6760 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6706A17320C77FD100BC6760 /* LaunchScreen.storyboard */; };
 		6706A18020C77FD200BC6760 /* wokestuffshopTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6706A17F20C77FD200BC6760 /* wokestuffshopTests.swift */; };
@@ -34,6 +34,9 @@
 		6706A1C020C7841600BC6760 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6706A1BF20C7841600BC6760 /* CheckoutViewController.swift */; };
 		6706A1C220C7842700BC6760 /* CheckoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6706A1C120C7842700BC6760 /* CheckoutViewModel.swift */; };
 		6706A1C420C7844200BC6760 /* CheckoutCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6706A1C320C7844200BC6760 /* CheckoutCoordinator.swift */; };
+		6715DBF220CA18E4001242AD /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6715DBF120CA18E4001242AD /* Coordinator.swift */; };
+		6715DBF420CA18F3001242AD /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6715DBF320CA18F3001242AD /* AppCoordinator.swift */; };
+		6715DBFB20CC4E3C001242AD /* WokeTabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6715DBFA20CC4E3C001242AD /* WokeTabBarCoordinator.swift */; };
 		672BB93920C786AF00544C2D /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 672BB93820C786AF00544C2D /* Podfile */; };
 		B296BD5B5D0C95A0CD35582B /* Pods_wokestuffshopTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183419FBD705B949954E4EED /* Pods_wokestuffshopTests.framework */; };
 		ED2E2461F44E7E2CD65081F9 /* Pods_wokestuffshopUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6900B8603AA8449D0DAD5CA0 /* Pods_wokestuffshopUITests.framework */; };
@@ -59,9 +62,9 @@
 /* Begin PBXFileReference section */
 		183419FBD705B949954E4EED /* Pods_wokestuffshopTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wokestuffshopTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A9C25ABD79A2ABB347305D0 /* Pods-wokestuffshopTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wokestuffshopTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-wokestuffshopTests/Pods-wokestuffshopTests.release.xcconfig"; sourceTree = "<group>"; };
+		67069C9420CCFCFE000E1C69 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		6706A16720C77FCE00BC6760 /* wokestuffshop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wokestuffshop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6706A16A20C77FCE00BC6760 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		6706A16F20C77FCE00BC6760 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6706A17120C77FD100BC6760 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6706A17420C77FD100BC6760 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6706A17620C77FD100BC6760 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -91,6 +94,9 @@
 		6706A1BF20C7841600BC6760 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 		6706A1C120C7842700BC6760 /* CheckoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewModel.swift; sourceTree = "<group>"; };
 		6706A1C320C7844200BC6760 /* CheckoutCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutCoordinator.swift; sourceTree = "<group>"; };
+		6715DBF120CA18E4001242AD /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		6715DBF320CA18F3001242AD /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		6715DBFA20CC4E3C001242AD /* WokeTabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WokeTabBarCoordinator.swift; sourceTree = "<group>"; };
 		672BB93820C786AF00544C2D /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; };
 		68F6290E3726707651BE9276 /* Pods-wokestuffshop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wokestuffshop.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wokestuffshop/Pods-wokestuffshop.debug.xcconfig"; sourceTree = "<group>"; };
 		6900B8603AA8449D0DAD5CA0 /* Pods_wokestuffshopUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wokestuffshopUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -167,13 +173,16 @@
 		6706A16920C77FCE00BC6760 /* wokestuffshop */ = {
 			isa = PBXGroup;
 			children = (
+				67069C9420CCFCFE000E1C69 /* R.generated.swift */,
 				6706A1A220C7832000BC6760 /* Checkout */,
 				6706A1A120C7831400BC6760 /* Cart */,
 				6706A1A020C7830B00BC6760 /* Product */,
 				6706A19F20C782F200BC6760 /* Collection */,
 				6706A19820C7826700BC6760 /* Home */,
 				6706A16A20C77FCE00BC6760 /* AppDelegate.swift */,
-				6706A16E20C77FCE00BC6760 /* Main.storyboard */,
+				6715DBFA20CC4E3C001242AD /* WokeTabBarCoordinator.swift */,
+				6715DBF320CA18F3001242AD /* AppCoordinator.swift */,
+				6715DBF120CA18E4001242AD /* Coordinator.swift */,
 				6706A17120C77FD100BC6760 /* Assets.xcassets */,
 				6706A17320C77FD100BC6760 /* LaunchScreen.storyboard */,
 				6706A17620C77FD100BC6760 /* Info.plist */,
@@ -273,6 +282,7 @@
 			buildConfigurationList = 6706A18F20C77FD200BC6760 /* Build configuration list for PBXNativeTarget "wokestuffshop" */;
 			buildPhases = (
 				5DBABD7087536DF99D8EF533 /* [CP] Check Pods Manifest.lock */,
+				67069C9320CCFC5C000E1C69 /* R Swift */,
 				6706A16320C77FCE00BC6760 /* Sources */,
 				6706A16420C77FCE00BC6760 /* Frameworks */,
 				6706A16520C77FCE00BC6760 /* Resources */,
@@ -377,7 +387,6 @@
 				6706A1BE20C7840700BC6760 /* Checkout.storyboard in Resources */,
 				6706A17520C77FD100BC6760 /* LaunchScreen.storyboard in Resources */,
 				6706A17220C77FD100BC6760 /* Assets.xcassets in Resources */,
-				6706A17020C77FCE00BC6760 /* Main.storyboard in Resources */,
 				6706A19E20C782BF00BC6760 /* Home.storyboard in Resources */,
 				6706A1AE20C7838C00BC6760 /* Product.storyboard in Resources */,
 				672BB93920C786AF00544C2D /* Podfile in Resources */,
@@ -429,16 +438,28 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-wokestuffshop/Pods-wokestuffshop-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ActiveLabel/ActiveLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/PINCache/PINCache.framework",
+				"${BUILT_PRODUCTS_DIR}/PINOperation/PINOperation.framework",
+				"${BUILT_PRODUCTS_DIR}/PINRemoteImage/PINRemoteImage.framework",
+				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
 				"${BUILT_PRODUCTS_DIR}/Reusable/Reusable.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Texture/AsyncDisplayKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActiveLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINCache.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINOperation.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINRemoteImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reusable.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AsyncDisplayKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -453,26 +474,16 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-wokestuffshopTests/Pods-wokestuffshopTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/Mockingjay/Mockingjay.framework",
-				"${BUILT_PRODUCTS_DIR}/PINCache/PINCache.framework",
-				"${BUILT_PRODUCTS_DIR}/PINOperation/PINOperation.framework",
-				"${BUILT_PRODUCTS_DIR}/PINRemoteImage/PINRemoteImage.framework",
+				"${BUILT_PRODUCTS_DIR}/OHHTTPStubs/OHHTTPStubs.framework",
 				"${BUILT_PRODUCTS_DIR}/RxBlocking/RxBlocking.framework",
 				"${BUILT_PRODUCTS_DIR}/RxTest/RxTest.framework",
-				"${BUILT_PRODUCTS_DIR}/Texture/AsyncDisplayKit.framework",
-				"${BUILT_PRODUCTS_DIR}/URITemplate/URITemplate.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mockingjay.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINCache.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINOperation.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINRemoteImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OHHTTPStubs.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxBlocking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxTest.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AsyncDisplayKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/URITemplate.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -496,6 +507,20 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		67069C9320CCFC5C000E1C69 /* R Swift */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "R Swift";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT\"\n";
 		};
 		88700A5F56CA3707DA1706FA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -525,13 +550,17 @@
 				6706A1C220C7842700BC6760 /* CheckoutViewModel.swift in Sources */,
 				6706A1BA20C783E000BC6760 /* CartViewModel.swift in Sources */,
 				6706A1B420C783B300BC6760 /* ProductCoordinator.swift in Sources */,
+				6715DBFB20CC4E3C001242AD /* WokeTabBarCoordinator.swift in Sources */,
 				6706A1A620C7834600BC6760 /* CollectionViewController.swift in Sources */,
 				6706A19C20C782AD00BC6760 /* HomeViewModel.swift in Sources */,
 				6706A1AA20C7836700BC6760 /* CollectionCoordinator.swift in Sources */,
+				67069C9520CCFCFE000E1C69 /* R.generated.swift in Sources */,
+				6715DBF420CA18F3001242AD /* AppCoordinator.swift in Sources */,
 				6706A19A20C7829400BC6760 /* HomeViewController.swift in Sources */,
 				6706A1C020C7841600BC6760 /* CheckoutViewController.swift in Sources */,
 				6706A16B20C77FCE00BC6760 /* AppDelegate.swift in Sources */,
 				6706A1B220C783A500BC6760 /* ProductViewModel.swift in Sources */,
+				6715DBF220CA18E4001242AD /* Coordinator.swift in Sources */,
 				6706A1BC20C783F900BC6760 /* CartCoordinator.swift in Sources */,
 				6706A1B820C783D200BC6760 /* CartViewController.swift in Sources */,
 				6706A1AC20C7837600BC6760 /* HomeCoordinator.swift in Sources */,
@@ -573,14 +602,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		6706A16E20C77FCE00BC6760 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6706A16F20C77FCE00BC6760 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		6706A17320C77FD100BC6760 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -715,7 +736,10 @@
 				DEVELOPMENT_TEAM = 7H24YLZ5RG;
 				INFOPLIST_FILE = wokestuffshop/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.aminebadraoui.wokestuffshop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -732,7 +756,10 @@
 				DEVELOPMENT_TEAM = 7H24YLZ5RG;
 				INFOPLIST_FILE = wokestuffshop/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.aminebadraoui.wokestuffshop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -749,7 +776,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7H24YLZ5RG;
 				INFOPLIST_FILE = wokestuffshopTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.aminebadraoui.wokestuffshopTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -767,7 +798,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7H24YLZ5RG;
 				INFOPLIST_FILE = wokestuffshopTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.aminebadraoui.wokestuffshopTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -784,7 +819,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7H24YLZ5RG;
 				INFOPLIST_FILE = wokestuffshopUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.aminebadraoui.wokestuffshopUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -801,7 +840,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7H24YLZ5RG;
 				INFOPLIST_FILE = wokestuffshopUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.aminebadraoui.wokestuffshopUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

@@ -7,16 +7,16 @@
 //
 
 import UIKit
+import RxSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var disposeBag = DisposeBag()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
         setup()
-        
         return true
     }
 
@@ -46,11 +46,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Create window & set it's root controller to a nav controller
         self.window = UIWindow()
-        let navigationController = UINavigationController()
-        window?.rootViewController = navigationController
-        
         window?.makeKeyAndVisible()
-    }
+        
+       
+            let appCoordinator = AppCoordinator()
+                appCoordinator.start()
+        
+            self.window?.rootViewController = appCoordinator.rootViewController
+        }
+        
+       
+        
+        
+       
 
+  
 }
 

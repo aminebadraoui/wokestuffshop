@@ -7,12 +7,17 @@
 //
 
 import UIKit
+import Reusable
+import Rswift
 
-class HomeViewController: UIViewController {
-
+class HomeViewController: UIViewController,
+                        StoryboardSceneBased {
+    
+    static var sceneStoryboard: UIStoryboard = R.storyboard.home()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+      
         // Do any additional setup after loading the view.
     }
 
@@ -21,6 +26,11 @@ class HomeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    public static func make() -> HomeViewController {
+       let vc =  self.instantiate()
+        vc.title = "Home"
+        return vc
+    }
 
     /*
     // MARK: - Navigation
