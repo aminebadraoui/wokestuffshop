@@ -22,8 +22,10 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.file` struct is generated, and contains static references to 11 files.
+  /// This `R.file` struct is generated, and contains static references to 12 files.
   struct file {
+    /// Resource file `Default-568h@2x.png`.
+    static let default568h2xPng = Rswift.FileResource(bundle: R.hostingBundle, name: "Default-568h@2x", pathExtension: "png")
     /// Resource file `OpenSans-Bold.ttf`.
     static let openSansBoldTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "OpenSans-Bold", pathExtension: "ttf")
     /// Resource file `OpenSans-BoldItalic.ttf`.
@@ -46,6 +48,12 @@ struct R: Rswift.Validatable {
     static let openSansSemiboldItalicTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "OpenSans-SemiboldItalic", pathExtension: "ttf")
     /// Resource file `Podfile`.
     static let podfile = Rswift.FileResource(bundle: R.hostingBundle, name: "Podfile", pathExtension: "")
+    
+    /// `bundle.url(forResource: "Default-568h@2x", withExtension: "png")`
+    static func default568h2xPng(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.default568h2xPng
+      return fileResource.bundle.url(forResource: fileResource)
+    }
     
     /// `bundle.url(forResource: "OpenSans-Bold", withExtension: "ttf")`
     static func openSansBoldTtf(_: Void = ()) -> Foundation.URL? {
@@ -205,8 +213,10 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 4 images.
+  /// This `R.image` struct is generated, and contains static references to 5 images.
   struct image {
+    /// Image `Default-568h`.
+    static let default568h = Rswift.ImageResource(bundle: R.hostingBundle, name: "Default-568h")
     /// Image `ic_apps`.
     static let ic_apps = Rswift.ImageResource(bundle: R.hostingBundle, name: "ic_apps")
     /// Image `ic_home`.
@@ -215,6 +225,11 @@ struct R: Rswift.Validatable {
     static let ic_shopping_cart = Rswift.ImageResource(bundle: R.hostingBundle, name: "ic_shopping_cart")
     /// Image `logo_wokestuff`.
     static let logo_wokestuff = Rswift.ImageResource(bundle: R.hostingBundle, name: "logo_wokestuff")
+    
+    /// `UIImage(named: "Default-568h", bundle: ..., traitCollection: ...)`
+    static func default568h(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.default568h, compatibleWith: traitCollection)
+    }
     
     /// `UIImage(named: "ic_apps", bundle: ..., traitCollection: ...)`
     static func ic_apps(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
