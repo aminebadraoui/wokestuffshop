@@ -34,7 +34,10 @@ class WokeTabBarCoordinator: Coordinator {
  
     init() {
         rootViewController = UITabBarController()
+        homeNav.navigationBar.barTintColor = .black
         childCoordinators = []
+        
+        
     }
     
     func start() {
@@ -43,6 +46,8 @@ class WokeTabBarCoordinator: Coordinator {
         configureTabs()
         configureNavControllers()
         wokeTabBarController.viewControllers = [homeNav,collectionNav,cartNav]
+        wokeTabBarController.tabBar.barTintColor = .black
+        wokeTabBarController.tabBar.tintColor = .white
         
         rootViewController = wokeTabBarController
         
@@ -52,31 +57,33 @@ class WokeTabBarCoordinator: Coordinator {
     
     private func configureTabs() {
         
-        // Tabs titles
-        homeTab.title = "Home"
+        homeTab.title       = "Home"
+        homeTab.image       = R.image.ic_home()
+
         collectionTab.title = "Collections"
-        cartTab.title = "Your Cart"
+        collectionTab.image = R.image.ic_apps()
+
+        cartTab.title       = "Your Cart"
+        cartTab.image       = R.image.ic_shopping_cart()
         
-        // TODO: Tabs images
-        
-        // TODO: Tabs selected images
     }
     
     
     private func configureNavControllers() {
         
-        let homeCoordinator = HomeCoordinator(rootViewController: homeNav)
+        let homeCoordinator       = HomeCoordinator(rootViewController: homeNav)
         let collectionCoordinator = CollectionCoordinator(rootViewController: collectionNav)
-        let cartCoordinator = CartCoordinator(rootViewController: cartNav)
+        let cartCoordinator       = CartCoordinator(rootViewController: cartNav)
         
         homeCoordinator.start()
         collectionCoordinator.start()
         cartCoordinator.start()
         
-        homeNav.tabBarItem = homeTab
+        homeNav.tabBarItem       = homeTab
         collectionNav.tabBarItem = collectionTab
-        cartNav.tabBarItem = cartTab
-
+        cartNav.tabBarItem       = cartTab
+      
+ 
     }
     
     

@@ -9,37 +9,52 @@
 import UIKit
 import Reusable
 import Rswift
+import AsyncDisplayKit
+import SnapKit
 
-class HomeViewController: UIViewController,
-                        StoryboardSceneBased {
+
+class HomeViewController: ASViewController<ASTableNode>  {
     
-    static var sceneStoryboard: UIStoryboard = R.storyboard.home()
+    //  Properties
+    var homeTableNode: ASTableNode!
+    var viewModel: HomeViewModel!
+
+    //  initialization
+    init (vm: HomeViewModel) {
+        
+        self.viewModel = vm
+        homeTableNode = ASTableNode()
+        
+        super.init(node: homeTableNode)
+        
+        setup()
+
+    }
+
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-      
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
-    public static func make() -> HomeViewController {
-       let vc =  self.instantiate()
-        vc.title = "Home"
-        return vc
+    func setup() {
+        
+        //Setup of the table Node
+        homeTableNode.view.allowsSelection = false
+        homeTableNode.view.separatorStyle = .none
+        
+        homeTableNode.delegate = viewModel.dataSource
+        homeTableNode.dataSource = viewModel.dataSource
+        
+        //  Setup of the navigation item
+        self.navigationItem.titleView =  UIImageView(image: #imageLiteral(resourceName: "logo_wokestuff"))
+        
+        //  Setup of the background view
+        self.view.backgroundColor = .white
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
+    
 }
+
+
+    
+

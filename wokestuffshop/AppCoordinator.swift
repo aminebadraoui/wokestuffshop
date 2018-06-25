@@ -18,8 +18,7 @@ class AppCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     var rootViewController: UIViewController
   
-    
- 
+
     var disposeBag =  DisposeBag()
     
     // Init
@@ -33,9 +32,8 @@ class AppCoordinator: Coordinator {
       
         let wokeTabBarCoordinator = WokeTabBarCoordinator()
         wokeTabBarCoordinator.start()
-        let tabBarController = wokeTabBarCoordinator.wokeTabBarController
-        
-       rootViewController = tabBarController
+      
+       rootViewController = wokeTabBarCoordinator.wokeTabBarController
     }
     
     

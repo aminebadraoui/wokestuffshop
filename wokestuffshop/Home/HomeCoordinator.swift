@@ -18,7 +18,9 @@ class HomeCoordinator: Coordinator {
     }
     
     func start() {
-        let vc = HomeViewController.make()
+        let vm = HomeViewModel()
+        let vc = HomeViewController(vm: vm)
+        
         if let homeNav = rootViewController as? UINavigationController {
             homeNav.pushViewController(vc, animated: true)
         }
