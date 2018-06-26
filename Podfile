@@ -1,10 +1,7 @@
-# Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+workspace 'wokestuffshop'
+use_frameworks!
 
-target 'wokestuffshop' do
-  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
-  use_frameworks!
-
+def shared_pods
   # Pods for wokestuffshop
     # Rx
     pod 'RxSwift',                              '~> 4.0'
@@ -16,19 +13,17 @@ target 'wokestuffshop' do
     pod 'SnapKit',                              '~> 4.0.0'
     pod 'R.swift'
     pod 'Texture'
-    
-  target 'wokestuffshopTests' do
-    inherit! :search_paths
-    # Pods for testing
-    pod 'RxBlocking',                           '~> 4.0'
-    pod 'RxTest',                               '~> 4.0'
-    pod 'OHHTTPStubs/Swift'
-    
-  end
-
-  target 'wokestuffshopUITests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
+    pod 'Mobile-Buy-SDK'
 end
+    
+  target 'App' do
+    
+      
+      shared_pods
+  end
+target 'ShopifyKit' do
+    project 'ShopifyKit/ShopifyKit'
+    
+    shared_pods
+end
+

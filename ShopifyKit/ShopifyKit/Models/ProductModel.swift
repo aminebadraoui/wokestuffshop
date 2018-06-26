@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 public struct ProductModel  {
     public var name: String
     public var price: String
