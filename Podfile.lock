@@ -1,6 +1,7 @@
 PODS:
   - ActiveLabel (0.8.1)
   - Mobile-Buy-SDK (3.1.6)
+  - ObjectMapper (3.3.0)
   - PINCache (3.0.1-beta.6):
     - PINCache/Arc-exception-safe (= 3.0.1-beta.6)
     - PINCache/Core (= 3.0.1-beta.6)
@@ -40,6 +41,7 @@ PODS:
 DEPENDENCIES:
   - ActiveLabel (~> 0.8.1)
   - Mobile-Buy-SDK
+  - ObjectMapper (~> 3.3)
   - R.swift
   - Reusable (~> 4.0)
   - RxCocoa (~> 4.0)
@@ -52,6 +54,7 @@ SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - ActiveLabel
     - Mobile-Buy-SDK
+    - ObjectMapper
     - PINCache
     - PINOperation
     - PINRemoteImage
@@ -67,6 +70,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   ActiveLabel: e361127c355b911a467db3d5a897b3d7f902e568
   Mobile-Buy-SDK: ae72bde37c30a7bc29034a8654df91b9df62213b
+  ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
   PINCache: d195fdba255283f7e9900a55e3cced377f431f9b
   PINOperation: a6219e6fc9db9c269eb7a7b871ac193bcf400aac
   PINRemoteImage: d6d51c5d2adda55f1ce30c96e850b6c4ebd2856a
@@ -79,6 +83,6 @@ SPEC CHECKSUMS:
   SwiftGen: 2ba2a88fc6130b96e38e2baa0029e4bd222ffd85
   Texture: 9d7e38965cf22ccd7cd9c249dd78b3f14e70ab6c
 
-PODFILE CHECKSUM: 788ef839e261bb26c13b4288779a5534e64e42df
+PODFILE CHECKSUM: 2e969807e6d8975d0aa197c79daea5cc18c9950f
 
 COCOAPODS: 1.5.0

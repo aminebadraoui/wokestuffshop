@@ -46,6 +46,13 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		674F393020E1D815007C5519 /* API */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 		676991A220E1C99F001C6CA1 = {
 			isa = PBXGroup;
 			children = (
@@ -67,6 +74,7 @@
 		676991AE20E1C99F001C6CA1 /* ShopifyKit */ = {
 			isa = PBXGroup;
 			children = (
+				674F393020E1D815007C5519 /* API */,
 				676991C220E1CC0B001C6CA1 /* Models */,
 				676991AF20E1C99F001C6CA1 /* ShopifyKit.h */,
 				676991B020E1C99F001C6CA1 /* Info.plist */,
@@ -334,7 +342,11 @@
 				INFOPLIST_FILE = ShopifyKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.aminebadraoui.ShopifyKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -359,7 +371,11 @@
 				INFOPLIST_FILE = ShopifyKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.aminebadraoui.ShopifyKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
