@@ -7,6 +7,7 @@
 //
 
 import AsyncDisplayKit
+import ShopifyKit
 
 class FeaturedProductViewModel : NSObject {
     var product: ProductModel

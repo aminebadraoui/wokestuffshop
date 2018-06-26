@@ -7,6 +7,7 @@
 //
 
 import AsyncDisplayKit
+import ShopifyKit
 
 class ProductListViewModel : NSObject, TableCompatible {
    

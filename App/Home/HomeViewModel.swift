@@ -7,6 +7,7 @@
 //
 
 import AsyncDisplayKit
+import ShopifyKit
 
 class HomeViewModel: NSObject{
     
