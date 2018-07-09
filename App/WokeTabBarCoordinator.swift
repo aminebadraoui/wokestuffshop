@@ -72,7 +72,7 @@ class WokeTabBarCoordinator: Coordinator {
     private func configureNavControllers() {
         
         let homeCoordinator       = HomeCoordinator(rootViewController: homeNav)
-        let collectionCoordinator = CollectionCoordinator(rootViewController: collectionNav)
+        let collectionCoordinator = CollectionListCoordinator(rootViewController: collectionNav)
         let cartCoordinator       = CartCoordinator(rootViewController: cartNav)
         
         homeCoordinator.start()

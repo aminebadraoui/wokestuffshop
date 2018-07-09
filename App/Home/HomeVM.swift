@@ -1,5 +1,5 @@
 //
-//  HomeViewModel.swift
+//  HomeVM.swift
 //  wokestuffshop
 //
 //  Created by Amine on 2018-06-05.
@@ -10,7 +10,7 @@ import AsyncDisplayKit
 import ShopifyKit
 
 
-class HomeViewModel: NSObject{
+class HomeVM: NSObject{
     
     //  list o
     var listOfHomeSections = [TableCompatible]()

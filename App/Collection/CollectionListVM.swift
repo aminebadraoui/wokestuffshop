@@ -1,5 +1,5 @@
 //
-//  CollectionViewModel.swift
+//  CollectionListVM.swift
 //  wokestuffshop
 //
 //  Created by Amine on 2018-06-05.

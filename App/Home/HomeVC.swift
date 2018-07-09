@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  HomeVC.swift
 //  wokestuffshop
 //
 //  Created by Amine on 2018-06-05.
@@ -16,17 +16,17 @@ import RxSwift
 
 
 
-class HomeViewController: ASViewController<ASTableNode>  {
+class HomeVC: ASViewController<ASTableNode>  {
     
     let client = Client.shared
     let disposeBag = DisposeBag()
     
     //  Properties
     var homeTableNode: ASTableNode!
-    var viewModel: HomeViewModel!
+    var viewModel: HomeVM!
     
     //  initialization
-    init (vm: HomeViewModel) {
+    init (vm: HomeVM) {
         
         self.viewModel = vm
         homeTableNode  = ASTableNode()

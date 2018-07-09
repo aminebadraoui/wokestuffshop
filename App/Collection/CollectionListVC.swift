@@ -1,5 +1,5 @@
 //
-//  CollectionViewController.swift
+//  CollectionListVC.swift
 //  wokestuffshop
 //
 //  Created by Amine on 2018-06-05.
@@ -11,14 +11,14 @@ import Reusable
 import Rswift
 import RxSwift
 
-class CollectionViewController: UIViewController, StoryboardSceneBased {
+class CollectionListVC: UIViewController, StoryboardSceneBased {
     
     static var sceneStoryboard: UIStoryboard = R.storyboard.collection()
     var didTap = PublishSubject<Bool>()
     
     @IBOutlet weak var productBtn: UIButton!
     
-    public static func make() -> CollectionViewController {
+    public static func make() -> CollectionListVC {
         let vc =  self.instantiate()
         vc.title = "Collections"
         return vc

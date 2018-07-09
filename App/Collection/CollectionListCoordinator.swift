@@ -1,5 +1,5 @@
 //
-//  CollectionCoordinator.swift
+//  CollectionListCoordinator.swift
 //  wokestuffshop
 //
 //  Created by Amine on 2018-06-05.
@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 
-class CollectionCoordinator: Coordinator {
+class CollectionListCoordinator: Coordinator {
     
     var childCoordinators: [Coordinator] = []
     var rootViewController: UIViewController
@@ -23,7 +23,7 @@ class CollectionCoordinator: Coordinator {
     
     func start() {
         
-        let vc = CollectionViewController.make()
+        let vc = CollectionListVC.make()
         
         vc.didTap.subscribe(onNext: { _ in
             print("coordinate to product next")

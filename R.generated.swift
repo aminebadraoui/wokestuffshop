@@ -387,10 +387,10 @@ struct _R: Rswift.Validatable {
     
     struct collection: Rswift.StoryboardResourceType, Rswift.Validatable {
       let bundle = R.hostingBundle
-      let collectionViewController = StoryboardViewControllerResource<CollectionViewController>(identifier: "CollectionViewController")
+      let collectionViewController = StoryboardViewControllerResource<CollectionListVC>(identifier: "CollectionViewController")
       let name = "Collection"
       
-      func collectionViewController(_: Void = ()) -> CollectionViewController? {
+      func collectionViewController(_: Void = ()) -> CollectionListVC? {
         return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: collectionViewController)
       }
       
@@ -403,10 +403,10 @@ struct _R: Rswift.Validatable {
     
     struct home: Rswift.StoryboardResourceType, Rswift.Validatable {
       let bundle = R.hostingBundle
-      let homeViewController = StoryboardViewControllerResource<HomeViewController>(identifier: "HomeViewController")
+      let homeViewController = StoryboardViewControllerResource<HomeVC>(identifier: "HomeViewController")
       let name = "Home"
       
-      func homeViewController(_: Void = ()) -> HomeViewController? {
+      func homeViewController(_: Void = ()) -> HomeVC? {
         return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: homeViewController)
       }
       
