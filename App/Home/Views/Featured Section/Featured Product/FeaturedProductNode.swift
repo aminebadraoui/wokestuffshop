@@ -19,7 +19,7 @@ class FeaturedProductNode: ASDisplayNode {
     
     private let textBackgroundNode = ASDisplayNode()
     
-    private var _productImageUrl: String = ""
+   // private var _productImageUrl: String = ""
     private var _productTitle = ASTextNode()
     private var _productPrice = ASTextNode()
     private var _productOldPrice = ASTextNode()
@@ -28,9 +28,9 @@ class FeaturedProductNode: ASDisplayNode {
     
     func setup(vm: FeaturedProductViewModel) {
         self.viewModel = vm
-        _productImageUrl = vm.product.imageURL
+       // _productImageUrl = vm.product.imageURL
        
-        _featuredImageNode.url = URL(string: _productImageUrl)
+      //  _featuredImageNode.url = URL(string: _productImageUrl)
         
         
         //  Title setup
@@ -39,7 +39,7 @@ class FeaturedProductNode: ASDisplayNode {
             NSAttributedStringKey.foregroundColor : UIColor.white ]
         
         
-        let titleText = NSAttributedString(string: vm.product.name, attributes: titleTextAttributes)
+        let titleText = NSAttributedString(string: vm.product.title, attributes: titleTextAttributes)
         
         _productTitle.attributedText = titleText
         

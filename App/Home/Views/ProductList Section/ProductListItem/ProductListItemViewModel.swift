@@ -12,19 +12,17 @@ import ShopifyKit
 class ProductViewModel: CollectionCompatible, TableCompatible {
    
     
-    var product : ProductModel
+    var product : Product
     var name: String
-    var price: String
-    var oldPrice: String
-    var imageURL: String
     
     
-    init (productModel: ProductModel) {
+    
+    init (productModel: Product) {
         self.product = productModel
-        self.name = productModel.name
-        self.price = productModel.price
-        self.oldPrice = productModel.oldPrice
-        self.imageURL = productModel.imageURL
+        self.name = productModel.title
+       
+
+       
     }
     
     func collectionNode(_ collectionNode: ASCollectionNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
