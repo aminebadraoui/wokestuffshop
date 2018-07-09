@@ -29,7 +29,7 @@ class ProductCellNode: ASCellNode {
     self.viewModel = vm
     //  Image Configuration
   
-    self.productImageNode.url = URL(string: viewModel.imageURL)
+    //self.productImageNode.url = URL(string: viewModel.imageURL)
     
     //  Text Configuration
 
@@ -54,8 +54,8 @@ class ProductCellNode: ASCellNode {
     ]
 
     self.productName.attributedText = NSAttributedString(string: viewModel.name, attributes: productNameAttributes)
-    self.productPrice.attributedText = NSAttributedString(string: viewModel.price, attributes: productPriceAttributes)
-    self.productOldPrice.attributedText = NSAttributedString(string: viewModel.oldPrice, attributes: productOldPriceAttributes)
+    self.productPrice.attributedText = NSAttributedString(string: "", attributes: productPriceAttributes)
+    self.productOldPrice.attributedText = NSAttributedString(string: "", attributes: productOldPriceAttributes)
     
     }
     override init() {

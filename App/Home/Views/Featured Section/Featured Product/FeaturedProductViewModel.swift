@@ -10,9 +10,9 @@ import AsyncDisplayKit
 import ShopifyKit
 
 class FeaturedProductViewModel : NSObject {
-    var product: ProductModel
+    var product: Product
     
-    init(product: ProductModel){
+    init(product: Product){
         self.product = product
     }
 }
