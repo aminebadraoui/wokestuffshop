@@ -29,7 +29,7 @@ class ProductCellNode: ASCellNode {
     self.viewModel = vm
     //  Image Configuration
   
-    //self.productImageNode.url = URL(string: viewModel.imageURL)
+    self.productImageNode.url = URL(string: "https://www.w3schools.com/w3css/img_lights.jpg")
     
     //  Text Configuration
 

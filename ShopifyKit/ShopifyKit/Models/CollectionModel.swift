@@ -9,7 +9,7 @@
 import Foundation
 import MobileBuySDK
 
-public class Collection {
+public class CollectionModel {
     
     public var model: Storefront.Collection
     public var title: String

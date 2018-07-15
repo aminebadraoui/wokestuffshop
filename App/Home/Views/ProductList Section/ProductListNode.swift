@@ -55,7 +55,7 @@ class ProductListNode: ASCellNode {
         /*** General settings ***/
         
         self.style.flexGrow = 1.0
-        self.backgroundColor = .white
+        self.backgroundColor = .blue
         self.automaticallyManagesSubnodes = true
     }
     

@@ -12,12 +12,12 @@ import ShopifyKit
 class ProductViewModel: CollectionCompatible, TableCompatible {
    
     
-    var product : Product
+    var product : ProductModel
     var name: String
     
     
     
-    init (productModel: Product) {
+    init (productModel: ProductModel) {
         self.product = productModel
         self.name = productModel.title
        

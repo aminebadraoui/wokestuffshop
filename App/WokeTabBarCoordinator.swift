@@ -35,6 +35,7 @@ class WokeTabBarCoordinator: Coordinator {
     init() {
         rootViewController = UITabBarController()
         homeNav.navigationBar.barTintColor = .black
+        collectionNav.navigationBar.barTintColor = .black
         childCoordinators = []
         
         
@@ -46,6 +47,7 @@ class WokeTabBarCoordinator: Coordinator {
         configureTabs()
         configureNavControllers()
         wokeTabBarController.viewControllers = [homeNav,collectionNav,cartNav]
+        wokeTabBarController.viewControllers?.forEach { $0.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]}
         wokeTabBarController.tabBar.barTintColor = .black
         wokeTabBarController.tabBar.tintColor = .white
         
@@ -72,7 +74,7 @@ class WokeTabBarCoordinator: Coordinator {
     private func configureNavControllers() {
         
         let homeCoordinator       = HomeCoordinator(rootViewController: homeNav)
-        let collectionCoordinator = CollectionCoordinator(rootViewController: collectionNav)
+        let collectionCoordinator = CollectionListCoordinator(rootViewController: collectionNav)
         let cartCoordinator       = CartCoordinator(rootViewController: cartNav)
         
         homeCoordinator.start()
