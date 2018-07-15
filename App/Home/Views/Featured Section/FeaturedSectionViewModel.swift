@@ -12,10 +12,10 @@ import ShopifyKit
 class FeaturedSectionViewModel : NSObject, TableCompatible {
     
     var sectionTitle: String
-    var productDatasource: Product
+    var productDatasource: ProductModel
     
     
-    init(sectionType: SectionType, productFeed: Product) {
+    init(sectionType: SectionType, productFeed: ProductModel) {
         self.sectionTitle = sectionType.rawValue
         self.productDatasource = productFeed
     }

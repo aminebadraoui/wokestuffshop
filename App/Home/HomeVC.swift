@@ -6,9 +6,6 @@
 //  Copyright © 2018 aminebadraoui. All rights reserved.
 //
 
-import UIKit
-import Reusable
-import Rswift
 import AsyncDisplayKit
 import ShopifyKit
 import MobileBuySDK
@@ -43,19 +40,11 @@ class HomeVC: ASViewController<ASTableNode>  {
     
     func setup() {
         
-        //  Request tests
-        //  To be removed
-        let bikiniObservable = client.fetchCollection(handle: "home").asObservable().share(replay: 1)
-      
-        bikiniObservable.observeOn(MainScheduler.instance)
-            .flatMap  {  self.client.fetchProducts(in: $0)  }
-            .subscribe(onNext: { productList in
-                productList.forEach {print($0.title) }
-            }).disposed(by: disposeBag)
+    
 
         //Setup of the table Node
         homeTableNode.view.allowsSelection = false
-        homeTableNode.view.separatorStyle = .none
+        homeTableNode.view.separatorStyle = .singleLine
         
         homeTableNode.delegate = viewModel.dataSource
         homeTableNode.dataSource = viewModel.dataSource

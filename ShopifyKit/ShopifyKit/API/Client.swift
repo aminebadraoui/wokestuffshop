@@ -25,18 +25,23 @@ public class Client {
     }
     
     /************** Fetch All Collections *********/
-    public func fetchCollections()-> Observable<[Collection]>  {
+    public func fetchCollections()-> Observable<[CollectionModel]>  {
+        
         return Observable.create { observer in
-            var collectionList = [Collection]()
+            var collectionList = [CollectionModel]()
             
             let query = ClientQuery.queryForAllCollections()
             
             let response = self.client.queryGraphWith(query) { response, error in
-                if let collections = response?.shop.collections.edges.map({ $0.node }) {
-                    
-                    collections.forEach { collectionList.append(Collection(from: $0)) }
-                    observer.onNext(collectionList)
+                
+                DispatchQueue.main.async {
+                    if let collections = response?.shop.collections.edges.map({ $0.node }) {
+                        
+                        collections.forEach { collectionList.append(CollectionModel(from: $0)) }
+                        observer.onNext(collectionList)
+                    }
                 }
+                
             }
             response.resume()
             
@@ -48,21 +53,23 @@ public class Client {
     }
     
     /************** Fetch products in collection *********/
-    public func fetchProducts(in collection: Collection)-> Observable<[Product]>  {
+    public func fetchProducts(in collection: CollectionModel)-> Observable<[ProductModel]>  {
         
         return Observable.create { observer in
-            var productList = [Product]()
-
+            var productList = [ProductModel]()
+            
             let query = ClientQuery.queryForProducts(in: collection)
             
             let response = self.client.queryGraphWith(query) { query, error in
                 
-                if let query = query, let collection = query.node as? Storefront.Collection {
-                    let products = collection.products.edges.map ( { $0.node })
-                    
-                    products.forEach { productList.append(Product(from: $0)) }
-                    observer.onNext(productList)
-                    print(productList.count)
+                DispatchQueue.main.async {
+                    if let query = query, let collection = query.node as? Storefront.Collection {
+                        let products = collection.products.edges.map ( { $0.node })
+                        
+                        products.forEach { productList.append(ProductModel(from: $0)) }
+                        observer.onNext(productList)
+                        print(productList.count)
+                    }
                 }
             }
             
@@ -75,17 +82,19 @@ public class Client {
     }
     
     /************** Fetch collection with handle *********/
-    public func fetchCollection(handle: String)-> Observable<Collection>  {
+    public func fetchCollection(handle: String)-> Observable<CollectionModel>  {
         
         return Observable.create { observer in
             
             let query    = ClientQuery.queryForCollection(handle: handle)
             let response = self.client.queryGraphWith(query) { query, error in
                 
-                if let query = query, let collection = query.shop.collectionByHandle  {
-                    let collectionModel = Collection(from: collection)
-                    observer.onNext(collectionModel)
-                    print(collectionModel.handle)
+                DispatchQueue.main.async {
+                    if let query = query, let collection = query.shop.collectionByHandle  {
+                        let collectionModel = CollectionModel(from: collection)
+                        observer.onNext(collectionModel)
+                        print(collectionModel.handle)
+                    }
                 }
             }
             

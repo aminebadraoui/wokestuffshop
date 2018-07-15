@@ -10,7 +10,7 @@ import Foundation
 import MobileBuySDK
 
 
-public struct Product  {
+public struct ProductModel  {
     public var model: Storefront.Product
     public var title: String
     public var handle: String

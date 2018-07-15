@@ -22,19 +22,10 @@ class CollectionListCoordinator: Coordinator {
     }
     
     func start() {
+        let collectionListVM = CollectionListVM()
+        let vc = CollectionListVC(vm: collectionListVM)
         
-        let vc = CollectionListVC.make()
-        
-        vc.didTap.subscribe(onNext: { _ in
-            print("coordinate to product next")
-            self.coordinateToProduct()
-        },
-                            onCompleted: { 
-                                print("coordinate to product complete")
-        },
-                            onDisposed: {
-                                print("coordinate to product dispose")
-        }).disposed(by: disposeBag)
+
         
         if let collectionNav = rootViewController as? UINavigationController {
             collectionNav.pushViewController(vc, animated: true)

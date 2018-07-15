@@ -13,10 +13,10 @@ class ProductListViewModel : NSObject, TableCompatible {
    
     //  Properties
     let sectionTitle: String
-    var productListDatasource: [Product]!
+    var productListDatasource: [ProductModel]!
     
     //  initialization
-    init(sectionType: SectionType, productFeed: [Product]) {
+    init(sectionType: SectionType, productFeed: [ProductModel]) {
         self.sectionTitle          = sectionType.rawValue
         self.productListDatasource = productFeed
     }

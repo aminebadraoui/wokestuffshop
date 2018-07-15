@@ -269,16 +269,12 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.storyboard` struct is generated, and contains static references to 6 storyboards.
+  /// This `R.storyboard` struct is generated, and contains static references to 4 storyboards.
   struct storyboard {
     /// Storyboard `Cart`.
     static let cart = _R.storyboard.cart()
     /// Storyboard `Checkout`.
     static let checkout = _R.storyboard.checkout()
-    /// Storyboard `Collection`.
-    static let collection = _R.storyboard.collection()
-    /// Storyboard `Home`.
-    static let home = _R.storyboard.home()
     /// Storyboard `LaunchScreen`.
     static let launchScreen = _R.storyboard.launchScreen()
     /// Storyboard `Product`.
@@ -292,16 +288,6 @@ struct R: Rswift.Validatable {
     /// `UIStoryboard(name: "Checkout", bundle: ...)`
     static func checkout(_: Void = ()) -> UIKit.UIStoryboard {
       return UIKit.UIStoryboard(resource: R.storyboard.checkout)
-    }
-    
-    /// `UIStoryboard(name: "Collection", bundle: ...)`
-    static func collection(_: Void = ()) -> UIKit.UIStoryboard {
-      return UIKit.UIStoryboard(resource: R.storyboard.collection)
-    }
-    
-    /// `UIStoryboard(name: "Home", bundle: ...)`
-    static func home(_: Void = ()) -> UIKit.UIStoryboard {
-      return UIKit.UIStoryboard(resource: R.storyboard.home)
     }
     
     /// `UIStoryboard(name: "LaunchScreen", bundle: ...)`
@@ -347,10 +333,8 @@ struct _R: Rswift.Validatable {
   struct storyboard: Rswift.Validatable {
     static func validate() throws {
       try cart.validate()
-      try home.validate()
-      try collection.validate()
-      try product.validate()
       try checkout.validate()
+      try product.validate()
     }
     
     struct cart: Rswift.StoryboardResourceType, Rswift.Validatable {
@@ -380,38 +364,6 @@ struct _R: Rswift.Validatable {
       
       static func validate() throws {
         if _R.storyboard.checkout().checkoutViewController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'checkoutViewController' could not be loaded from storyboard 'Checkout' as 'CheckoutViewController'.") }
-      }
-      
-      fileprivate init() {}
-    }
-    
-    struct collection: Rswift.StoryboardResourceType, Rswift.Validatable {
-      let bundle = R.hostingBundle
-      let collectionViewController = StoryboardViewControllerResource<CollectionListVC>(identifier: "CollectionViewController")
-      let name = "Collection"
-      
-      func collectionViewController(_: Void = ()) -> CollectionListVC? {
-        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: collectionViewController)
-      }
-      
-      static func validate() throws {
-        if _R.storyboard.collection().collectionViewController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'collectionViewController' could not be loaded from storyboard 'Collection' as 'CollectionViewController'.") }
-      }
-      
-      fileprivate init() {}
-    }
-    
-    struct home: Rswift.StoryboardResourceType, Rswift.Validatable {
-      let bundle = R.hostingBundle
-      let homeViewController = StoryboardViewControllerResource<HomeVC>(identifier: "HomeViewController")
-      let name = "Home"
-      
-      func homeViewController(_: Void = ()) -> HomeVC? {
-        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: homeViewController)
-      }
-      
-      static func validate() throws {
-        if _R.storyboard.home().homeViewController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'homeViewController' could not be loaded from storyboard 'Home' as 'HomeViewController'.") }
       }
       
       fileprivate init() {}

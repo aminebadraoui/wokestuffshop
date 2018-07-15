@@ -14,7 +14,7 @@ import MobileBuySDK
 public class ClientQuery {
    
     //  fetch all collections
-    static func queryForAllCollections(limit: Int32 = 10) -> Storefront.QueryRootQuery {
+    static func queryForAllCollections(limit: Int32 = 100) -> Storefront.QueryRootQuery {
         return Storefront.buildQuery { $0
             .shop { $0
                 .collections(first: limit) { $0
@@ -36,7 +36,7 @@ public class ClientQuery {
     }
     
     //  fetch products in a specific collection
-    static func queryForProducts( in collection: Collection, limit: Int32 = 10, after cursor: String? = nil) -> Storefront.QueryRootQuery {
+    static func queryForProducts( in collection: CollectionModel, limit: Int32 = 100, after cursor: String? = nil) -> Storefront.QueryRootQuery {
         return Storefront.buildQuery { $0
             .node(id: collection.model.id) { $0
                 .onCollection { $0
@@ -47,6 +47,7 @@ public class ClientQuery {
                                 .handle()
                                 .title()
                                 .description()
+                               
                
                             }
                         }
@@ -57,7 +58,7 @@ public class ClientQuery {
     }
     
     //  fetch a specific collection by its handle 
-    static func queryForCollection(handle: String, limit: Int32 = 10) -> Storefront.QueryRootQuery {
+    static func queryForCollection(handle: String, limit: Int32 = 100) -> Storefront.QueryRootQuery {
         return Storefront.buildQuery { $0
             .shop { $0
                 .collectionByHandle(handle: handle) { $0
