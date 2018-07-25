@@ -9,33 +9,22 @@
 import AsyncDisplayKit
 import ShopifyKit
 
-class ProductViewModel: CollectionCompatible, TableCompatible {
-   
+class ProductListItemViewModel: CollectionCompatible {
     
     var product : ProductModel
-    var name: String
-    
-    
+
     
     init (productModel: ProductModel) {
         self.product = productModel
-        self.name = productModel.title
-       
-
-       
+  
     }
     
     func collectionNode(_ collectionNode: ASCollectionNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
-        let productCellNode = ProductCellNode()
+        let productCellNode = ProductListItemCell()
         productCellNode.setup(vm: self)
         return productCellNode
     }
-    
-    func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
-        let productCellNode = ProductCellNode()
-        productCellNode.setup(vm: self)
-        return productCellNode
-    }
+
     
     
 }

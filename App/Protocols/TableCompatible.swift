@@ -12,4 +12,5 @@ import AsyncDisplayKit
 protocol TableCompatible {
     
     func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode
+    func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath)
 }

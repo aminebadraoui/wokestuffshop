@@ -10,9 +10,9 @@ import AsyncDisplayKit
 
 class CollectionNode: ASCellNode {
     
-//  Featured Product properties are the section title,
-//  the product's image, and the product
-private var _collectionName: ASTextNode!
+    //  Featured Product properties are the section title,
+    //  the product's image, and the product
+    private var _collectionName: ASTextNode!
     
     private var _collectionImage: ASNetworkImageNode = {
         let imageNode = ASNetworkImageNode()
@@ -20,12 +20,10 @@ private var _collectionName: ASTextNode!
         return imageNode
     }()
     
-    let localUrl = URL(string: "https://comotion.uw.edu/wp-content/uploads/2017/06/image.jpg")
-    
-private let textBackgroundNode = ASDisplayNode()
+    private let textBackgroundNode = ASDisplayNode()
     
     var collectionRowVM: CollectionRowVM!
-
+    
     func setup(vm: CollectionRowVM) {
         
         let titleTextAttributes: [NSAttributedStringKey: Any] = [
@@ -38,14 +36,14 @@ private let textBackgroundNode = ASDisplayNode()
         
         _collectionName.attributedText = titleText
         
-}
+    }
     
     override init(){
-      
+        
         _collectionName = ASTextNode()
         super.init()
         self.view.backgroundColor = .white
-         textBackgroundNode.backgroundColor = UIColor(displayP3Red: 0, green: 0, blue: 0, alpha: 0.5)
+        textBackgroundNode.backgroundColor = UIColor(displayP3Red: 0, green: 0, blue: 0, alpha: 0.5)
         self.automaticallyManagesSubnodes = true
         
     }
@@ -54,7 +52,7 @@ private let textBackgroundNode = ASDisplayNode()
         let mainStack = ASStackLayoutSpec.vertical()
         
         /*** Image Setup ***/
-       
+        
         let imageRatioSpec = ASRatioLayoutSpec(ratio: 0.4, child: _collectionImage)
         
         
@@ -88,6 +86,6 @@ private let textBackgroundNode = ASDisplayNode()
         return mainStackLayout
     }
     
-
-
+    
+    
 }

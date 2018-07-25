@@ -15,6 +15,7 @@ public struct ProductModel  {
     public var title: String
     public var handle: String
     public var description: String
+    public var images: [URL]
     public var id: String
     
     public init(from model: Storefront.Product) {
@@ -22,6 +23,7 @@ public struct ProductModel  {
         self.title = model.title
         self.handle = model.handle
         self.description = model.description
+        self.images = model.images.edges.map { $0.node.originalSrc }
         self.id = model.id.rawValue
     }
 }

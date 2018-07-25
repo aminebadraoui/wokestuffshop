@@ -56,9 +56,9 @@ struct AppFont {
         return customFont
     }
     
-    static let productNameSize: CGFloat = 14
-    static let productPriceSize: CGFloat = 16
-    static let productOldPriceSize: CGFloat = 16
+    static let productNameSize: CGFloat = 12
+    static let productPriceSize: CGFloat = 11
+    static let productOldPriceSize: CGFloat = 11
 }
 
 struct AppColor {

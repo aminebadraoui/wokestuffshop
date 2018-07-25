@@ -36,7 +36,7 @@ public class ClientQuery {
     }
     
     //  fetch products in a specific collection
-    static func queryForProducts( in collection: CollectionModel, limit: Int32 = 100, after cursor: String? = nil) -> Storefront.QueryRootQuery {
+    static func queryForProducts( in collection: CollectionModel, limit: Int32 = 10, after cursor: String? = nil) -> Storefront.QueryRootQuery {
         return Storefront.buildQuery { $0
             .node(id: collection.model.id) { $0
                 .onCollection { $0
@@ -47,6 +47,16 @@ public class ClientQuery {
                                 .handle()
                                 .title()
                                 .description()
+                                .images(first: limit) { $0
+                                    .edges({ $0
+                                        .node { $0
+                                            .id()
+                                            .originalSrc()
+                                            
+                                        }
+                                    })
+                                    
+                                }
                                
                
                             }

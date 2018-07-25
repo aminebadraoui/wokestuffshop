@@ -9,8 +9,21 @@
 import Foundation
 import ShopifyKit
 import RxSwift
+import RxCocoa
 
-class CollectionListVM: NSObject {
+protocol CollectionListInputs {
+    
+}
+
+protocol CollectionListOutputs {
+    var selectedCollection: Observable<CollectionModel> { get }
+}
+
+protocol CollectionListType {
+    var inputs: CollectionListInputs { get }
+    var outputs: CollectionListOutputs { get }
+}
+class CollectionListVM: CollectionListOutputs, CollectionListInputs, CollectionListType {
     
     let client = Client.shared
     let disposeBag = DisposeBag()
@@ -18,29 +31,42 @@ class CollectionListVM: NSObject {
     var collectionList = [TableCompatible]()
     var dataSource = Datasource()
     
-    var collections = [CollectionModel]()
-    
     let title = "Collections"
-    
-    // 1. fetch the collections and map them to model
-    // 2. create a collection row view model that is table compatible and takes the model as dependency
-    // 3. append the row view model to collectionlist
-    
-    override init() {
-        super.init()
-
-    }
     
     func fetchCollections() {
         
         let collections = client.fetchCollections().asObservable().share(replay: 1)
         
         collections.observeOn(MainScheduler.instance)
-        .subscribe(onNext: { collectionList in
-            self.collectionList = collectionList.map {  CollectionRowVM(collection: $0) }
+        .subscribe(onNext: { collectionModelList in
+            
+            self.collectionList = collectionModelList.map { collectionModel -> CollectionRowVM in
+                
+                let row = CollectionRowVM(collection: collectionModel)
+                
+                row.outputs.cellTapped
+                    .map{ _ in collectionModel }
+                    .bind(to: self._selectedCollectionSubject)
+                    .disposed(by: self.disposeBag)
+   
+                return row
+                
+                }
+            
             self.dataSource.tableData = self.collectionList
-            print(self.collectionList.count)
+          
         }).disposed(by: disposeBag)
     }
     
+    //  Subjects
+    private  var _selectedCollectionSubject = PublishSubject<CollectionModel>()
+    
+    //  Outputs
+    var selectedCollection: Observable<CollectionModel> {
+        return _selectedCollectionSubject.asObservable()
+    }
+    
+    var inputs: CollectionListInputs { return self }
+    var outputs: CollectionListOutputs { return self }
+ 
 }
