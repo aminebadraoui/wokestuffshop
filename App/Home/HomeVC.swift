@@ -29,8 +29,12 @@ class HomeVC: ASViewController<ASTableNode>  {
         homeTableNode  = ASTableNode()
        
         super.init(node: homeTableNode)
+        viewModel.outputs.datasourceOutput.bind(onNext: { self.homeTableNode.reloadData() })
         
         setup()
+        
+        viewModel.createList(handle: CollectionHandle.sale.rawValue, title: "Latest")
+        viewModel.createList(handle: CollectionHandle.bestsellers.rawValue, title: "Bestsellers")
         
     }
     
@@ -46,6 +50,7 @@ class HomeVC: ASViewController<ASTableNode>  {
         homeTableNode.view.allowsSelection = false
         homeTableNode.view.separatorStyle = .singleLine
         
+      
         homeTableNode.delegate = viewModel.dataSource
         homeTableNode.dataSource = viewModel.dataSource
         

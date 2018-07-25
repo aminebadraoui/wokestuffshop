@@ -8,19 +8,51 @@
 
 import AsyncDisplayKit
 import ShopifyKit
+import RxSwift
 
-class CollectionRowVM: TableCompatible {
+protocol CollectionRowInputs {
+    
+}
+
+protocol CollectionRowOutputs {
+    var cellTapped: Observable<Void> { get }
+}
+
+protocol CollectionRowTypes {
+    var inputs: CollectionRowInputs { get }
+    var outputs: CollectionRowOutputs { get }
+}
+
+class CollectionRowVM: TableCompatible, CollectionRowInputs, CollectionRowOutputs, CollectionRowTypes {
     
     var collection: CollectionModel
     
     init(collection: CollectionModel){
         self.collection = collection
     }
+    
     func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
         let collectionNode = CollectionNode()
         collectionNode.setup(vm: self)
         return collectionNode
     }
+    
+    func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
+        _cellTappedSubject.onNext(())
+    }
+    
+    // Subject
+    private var _cellTappedSubject = PublishSubject<Void>()
+    
+    //  Outputs
+    var cellTapped: Observable<Void> {
+        return _cellTappedSubject.asObservable()
+    }
+    
+    var inputs: CollectionRowInputs { return self }
+    var outputs: CollectionRowOutputs { return self }
+    
+    
     
     
 }

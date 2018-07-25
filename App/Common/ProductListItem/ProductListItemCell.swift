@@ -1,5 +1,5 @@
 //
-//  ProductCellNode.swift
+//  ProductListItemCell.swift
 //  wokestuffshop
 //
 //  Created by Amine on 2018-06-12.
@@ -10,7 +10,7 @@ import UIKit
 import AsyncDisplayKit
 
 
-class ProductCellNode: ASCellNode {
+class ProductListItemCell: ASCellNode {
     
     let productImageNode: ASNetworkImageNode = {
         let imageNode = ASNetworkImageNode()
@@ -22,14 +22,14 @@ class ProductCellNode: ASCellNode {
     let productPrice = ASTextNode()
     let productOldPrice = ASTextNode()
     
-    var viewModel : ProductViewModel!
+    var viewModel : ProductListItemViewModel!
     
-   func setup(vm: ProductViewModel) {
+   func setup(vm: ProductListItemViewModel) {
     
     self.viewModel = vm
     //  Image Configuration
   
-    self.productImageNode.url = URL(string: "https://www.w3schools.com/w3css/img_lights.jpg")
+    self.productImageNode.url = viewModel.product.images.first
     
     //  Text Configuration
 
@@ -53,18 +53,19 @@ class ProductCellNode: ASCellNode {
         NSAttributedStringKey.strikethroughStyle : NSUnderlineStyle.styleSingle.rawValue
     ]
 
-    self.productName.attributedText = NSAttributedString(string: viewModel.name, attributes: productNameAttributes)
-    self.productPrice.attributedText = NSAttributedString(string: "", attributes: productPriceAttributes)
-    self.productOldPrice.attributedText = NSAttributedString(string: "", attributes: productOldPriceAttributes)
+    self.productName.attributedText = NSAttributedString(string: viewModel.product.title, attributes: productNameAttributes)
+    self.productPrice.attributedText = NSAttributedString(string: "17", attributes: productPriceAttributes)
+    self.productOldPrice.attributedText = NSAttributedString(string: "18", attributes: productOldPriceAttributes)
     
     }
     override init() {
         super.init()
-        self.backgroundColor = #colorLiteral(red: 0.9369235635, green: 0.9369235635, blue: 0.9369235635, alpha: 1)
+        self.backgroundColor = .white
         //  Cell configuration
        
-            self.style.preferredSize = CGSize(width: 200, height: 300)
-        self.cornerRadius = 16
+        let size = UIScreen.main.bounds.size.width/2 - 24
+            self.style.preferredSize = CGSize(width: size, height: size)
+        
         
         self.productName.maximumNumberOfLines = 2
 
@@ -77,16 +78,17 @@ class ProductCellNode: ASCellNode {
         let productStack = ASStackLayoutSpec.vertical()
        
         //Image section
-        let imageLayoutSpec = ASRatioLayoutSpec(ratio: 1, child: productImageNode)
+        let imageLayoutSpec = ASRatioLayoutSpec(ratio: 0.75, child: productImageNode)
         productStack.children?.append(imageLayoutSpec)
 
         let productFooterStack = ASStackLayoutSpec.vertical()
-        let productNameLayoutSpec = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8), child: productName)
+        let productNameLayoutSpec = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2), child: productName)
         productFooterStack.children?.append(productNameLayoutSpec)
         
         let productPriceStack = ASStackLayoutSpec.horizontal()
         let productPriceLayoutSpec = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8), child: productPrice)
         let productOldPriceLayoutSpec = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8), child: productOldPrice)
+        
         productPriceStack.children = [productOldPriceLayoutSpec,productPriceLayoutSpec]
 
         
@@ -95,10 +97,9 @@ class ProductCellNode: ASCellNode {
         productFooterStack.alignItems = .center
         productFooterStack.verticalAlignment = .center
         
-        let productFooterLayoutSpec = ASRatioLayoutSpec(ratio: 0.5, child: productFooterStack)
         
         
-        productStack.children?.append(productFooterLayoutSpec)
+        productStack.children?.append(productFooterStack)
 
         return productStack
         

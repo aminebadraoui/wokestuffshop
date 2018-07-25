@@ -18,7 +18,7 @@ class ProductListNode: ASCellNode {
     //  The datasource for the collection
     var sectionDatasource = Datasource()
 
-    func setup(vm: ProductListViewModel) {
+    func setup(vm: ProductListSectionViewModel) {
  
         /*** Title Setup ****/
         
@@ -40,9 +40,9 @@ class ProductListNode: ASCellNode {
         
         //  Create a productViewModel for every productModel from the view model
         //  and append it to the productListDataSource
-        var productList = [ProductViewModel]()
+        var productList = [ProductListItemViewModel]()
         for product in vm.productListDatasource {
-            let productViewModel = ProductViewModel(productModel: product)
+            let productViewModel = ProductListItemViewModel(productModel: product)
             productList.append(productViewModel)
         }
         

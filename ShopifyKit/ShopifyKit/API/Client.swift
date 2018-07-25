@@ -60,16 +60,16 @@ public class Client {
             
             let query = ClientQuery.queryForProducts(in: collection)
             
-            let response = self.client.queryGraphWith(query) { query, error in
+            let response = self.client.queryGraphWith(query) { response, error in
                 
                 DispatchQueue.main.async {
-                    if let query = query, let collection = query.node as? Storefront.Collection {
-                        let products = collection.products.edges.map ( { $0.node })
+                     let collection = response?.node as? Storefront.Collection
+                    let products = collection?.products.edges.map ( { $0.node })
                         
-                        products.forEach { productList.append(ProductModel(from: $0)) }
+                    products?.forEach { productList.append(ProductModel(from: $0)) }
                         observer.onNext(productList)
-                        print(productList.count)
-                    }
+                        print("product fetch count \(productList.count)")
+                    
                 }
             }
             

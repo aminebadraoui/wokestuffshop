@@ -48,7 +48,7 @@ class CollectionListVC: ASViewController<ASTableNode>  {
 
     func setup() {
         //Setup of the table Node
-        collectionListTable.view.allowsSelection = false
+        collectionListTable.view.allowsSelection = true
         collectionListTable.view.separatorStyle = .none
         
         collectionListTable.delegate = viewModel.dataSource

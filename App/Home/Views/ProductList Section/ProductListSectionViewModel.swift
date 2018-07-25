@@ -1,5 +1,5 @@
 //
-//  ProductListViewModel.swift
+//  ProductListSectionViewModel.swift
 //  wokestuffshop
 //
 //  Created by Amine on 2018-06-21.
@@ -9,15 +9,18 @@
 import AsyncDisplayKit
 import ShopifyKit
 
-class ProductListViewModel : NSObject, TableCompatible {
+class ProductListSectionViewModel : NSObject, TableCompatible {
+    
+   
+    
    
     //  Properties
     let sectionTitle: String
     var productListDatasource: [ProductModel]!
     
     //  initialization
-    init(sectionType: SectionType, productFeed: [ProductModel]) {
-        self.sectionTitle          = sectionType.rawValue
+    init(title: String, productFeed: [ProductModel]) {
+        self.sectionTitle          = title
         self.productListDatasource = productFeed
     }
     
@@ -26,5 +29,9 @@ class ProductListViewModel : NSObject, TableCompatible {
         let productList = ProductListNode()
         productList.setup(vm: self)
         return productList
+    }
+    
+    func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
+        
     }
 }

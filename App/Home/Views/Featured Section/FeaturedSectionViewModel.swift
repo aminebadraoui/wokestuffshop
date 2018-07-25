@@ -10,6 +10,8 @@ import AsyncDisplayKit
 import ShopifyKit
 
 class FeaturedSectionViewModel : NSObject, TableCompatible {
+  
+    
     
     var sectionTitle: String
     var productDatasource: ProductModel
@@ -24,5 +26,9 @@ class FeaturedSectionViewModel : NSObject, TableCompatible {
         let featuredProduct = FeaturedSectionNode()
         featuredProduct.setup(vm: self)
         return featuredProduct
+    }
+    
+    func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
+        
     }
 }

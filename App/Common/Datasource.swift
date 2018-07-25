@@ -37,5 +37,9 @@ extension Datasource:  ASTableDelegate, ASTableDataSource {
         let node = tableData[indexPath.row].tableNode(tableNode, nodeForRowAt: indexPath)
         return node
     }
+    
+    func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
+        tableData[indexPath.row].tableNode(tableNode, didSelectRowAt: indexPath)
+    }
 
 }
