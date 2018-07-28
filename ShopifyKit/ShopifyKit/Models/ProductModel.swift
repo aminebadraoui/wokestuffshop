@@ -17,6 +17,11 @@ public struct ProductModel  {
     public var description: String
     public var images: [URL]
     public var id: String
+    public var price: [Decimal]
+    public var compareAtPrice: [Decimal?]
+    public var availableForSale: [Bool]
+    public var sku: [String?]
+    public var variantTitles : [String]
     
     public init(from model: Storefront.Product) {
         self.model = model
@@ -25,5 +30,11 @@ public struct ProductModel  {
         self.description = model.description
         self.images = model.images.edges.map { $0.node.originalSrc }
         self.id = model.id.rawValue
+        self.price = model.variants.edges.map { $0.node.price}
+        self.compareAtPrice = model.variants.edges.map { $0.node.compareAtPrice }
+        self.availableForSale = model.variants.edges.map { $0.node.availableForSale }
+        self.sku = model.variants.edges.map { $0.node.sku }
+        self.variantTitles = model.variants.edges.map { $0.node.title }
+        
     }
 }

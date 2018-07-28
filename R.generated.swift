@@ -277,8 +277,8 @@ struct R: Rswift.Validatable {
     static let checkout = _R.storyboard.checkout()
     /// Storyboard `LaunchScreen`.
     static let launchScreen = _R.storyboard.launchScreen()
-    /// Storyboard `Product`.
-    static let product = _R.storyboard.product()
+    /// Storyboard `ProductDetailViewController`.
+    static let productDetailViewController = _R.storyboard.productDetailViewController()
     
     /// `UIStoryboard(name: "Cart", bundle: ...)`
     static func cart(_: Void = ()) -> UIKit.UIStoryboard {
@@ -295,9 +295,9 @@ struct R: Rswift.Validatable {
       return UIKit.UIStoryboard(resource: R.storyboard.launchScreen)
     }
     
-    /// `UIStoryboard(name: "Product", bundle: ...)`
-    static func product(_: Void = ()) -> UIKit.UIStoryboard {
-      return UIKit.UIStoryboard(resource: R.storyboard.product)
+    /// `UIStoryboard(name: "ProductDetailViewController", bundle: ...)`
+    static func productDetailViewController(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.productDetailViewController)
     }
     
     fileprivate init() {}
@@ -333,8 +333,8 @@ struct _R: Rswift.Validatable {
   struct storyboard: Rswift.Validatable {
     static func validate() throws {
       try cart.validate()
+      try productDetailViewController.validate()
       try checkout.validate()
-      try product.validate()
     }
     
     struct cart: Rswift.StoryboardResourceType, Rswift.Validatable {
@@ -378,17 +378,17 @@ struct _R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    struct product: Rswift.StoryboardResourceType, Rswift.Validatable {
+    struct productDetailViewController: Rswift.StoryboardResourceType, Rswift.Validatable {
       let bundle = R.hostingBundle
-      let name = "Product"
-      let productViewController = StoryboardViewControllerResource<ProductViewController>(identifier: "ProductViewController")
+      let name = "ProductDetailViewController"
+      let productDetailViewController = StoryboardViewControllerResource<ProductDetailViewController>(identifier: "ProductDetailViewController")
       
-      func productViewController(_: Void = ()) -> ProductViewController? {
-        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: productViewController)
+      func productDetailViewController(_: Void = ()) -> ProductDetailViewController? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: productDetailViewController)
       }
       
       static func validate() throws {
-        if _R.storyboard.product().productViewController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'productViewController' could not be loaded from storyboard 'Product' as 'ProductViewController'.") }
+        if _R.storyboard.productDetailViewController().productDetailViewController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'productDetailViewController' could not be loaded from storyboard 'ProductDetailViewController' as 'ProductDetailViewController'.") }
       }
       
       fileprivate init() {}

@@ -34,6 +34,7 @@ struct AppFont {
     enum FontType {
         case light
         case regular
+        case semibold
         case bold
     }
     static func customFont(ofSize size: CGFloat, ofType type: FontType) -> UIFont {
@@ -43,8 +44,11 @@ struct AppFont {
             fontName = "OpenSans-Light"
         case .regular:
             fontName = "OpenSans"
+        case .semibold:
+            fontName = "OpenSans-SemiBold"
         case .bold:
             fontName = "OpenSans-Bold"
+        
         }
         guard let customFont = UIFont(name: fontName, size: size) else {
             fatalError("""
@@ -64,5 +68,5 @@ struct AppFont {
 struct AppColor {
     static let defaultColor = UIColor.black
     static let productPrice = UIColor.black
-    static let productOldPrice = UIColor.red
+    static let productOldPrice = UIColor.gray
 }

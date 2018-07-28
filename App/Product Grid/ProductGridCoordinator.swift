@@ -31,16 +31,29 @@ class ProductGridCoordinator: Coordinator {
         
         let vc = ProductGridViewController(vm: viewModel)
         if let productNav = rootViewController as? UINavigationController {
+            let attrs = [
+                NSAttributedStringKey.foregroundColor: UIColor.white
+            ]
+            productNav.navigationBar.titleTextAttributes = attrs
+            productNav.setNeedsStatusBarAppearanceUpdate()
+            productNav.navigationBar.tintColor = .white
             productNav.pushViewController(vc, animated: true)
         }
+        
+        viewModel.outputs.selectedProduct
+            .subscribe(onNext: { product in
+                self.coordinateToProductDetail(product: product)
+            })
+            .disposed(by: disposeBag)
     }
     
-    func coordinateToCart() {
-        
-        let vc = CartViewController.make()
-        if let productNav = rootViewController as? UINavigationController {
-            productNav.pushViewController(vc, animated: true)
+    func coordinateToProductDetail(product: ProductModel){
+        let vc = ProductDetailViewController.make()
+        if let nav = rootViewController as? UINavigationController {
+            nav.pushViewController(vc, animated: true)
         }
+        vc.title = product.title
     }
+    
 }
 

@@ -33,9 +33,17 @@ class WokeTabBarCoordinator: Coordinator {
     var tabControllers: [UINavigationController] = []
  
     init() {
+        let attrs = [
+            NSAttributedStringKey.foregroundColor: UIColor.white
+        ]
+        collectionNav.navigationBar.titleTextAttributes = attrs
+        collectionNav.setNeedsStatusBarAppearanceUpdate()
+        
         rootViewController = UITabBarController()
         homeNav.navigationBar.barTintColor = .black
         collectionNav.navigationBar.barTintColor = .black
+     
+        
         childCoordinators = []
         
         
@@ -47,7 +55,6 @@ class WokeTabBarCoordinator: Coordinator {
         configureTabs()
         configureNavControllers()
         wokeTabBarController.viewControllers = [homeNav,collectionNav,cartNav]
-        wokeTabBarController.viewControllers?.forEach { $0.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]}
         wokeTabBarController.tabBar.barTintColor = .black
         wokeTabBarController.tabBar.tintColor = .white
         

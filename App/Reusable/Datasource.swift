@@ -24,6 +24,10 @@ extension Datasource : ASCollectionDelegate, ASCollectionDataSource {
     func collectionNode(_ collectionNode: ASCollectionNode, nodeForItemAt indexPath: IndexPath) -> ASCellNode {
         return collectionData[indexPath.row].collectionNode(collectionNode, nodeForRowAt: indexPath)
     }
+    
+    func collectionNode(_ collectionNode: ASCollectionNode, didSelectItemAt indexPath: IndexPath) {
+        collectionData[indexPath.row].collectionNode(collectionNode, didSelectItemAt: indexPath)
+    }
 }
 
 

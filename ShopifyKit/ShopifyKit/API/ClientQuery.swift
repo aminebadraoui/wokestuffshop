@@ -55,9 +55,19 @@ public class ClientQuery {
                                             
                                         }
                                     })
+                                }
+                                .variants(first: limit) { $0
+                                    .edges({ $0
+                                        .node { $0
+                                            .price()
+                                            .compareAtPrice()
+                                            .availableForSale()
+                                            .sku()
+                                            .title()
+                                        }
+                                    })
                                     
                                 }
-                               
                
                             }
                         }

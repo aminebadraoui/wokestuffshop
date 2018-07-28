@@ -37,7 +37,7 @@ class ProductGridViewController: ASViewController<ASCollectionNode>  {
         
         super.init(node: productList)
         
-        self.view.backgroundColor = #colorLiteral(red: 0.9163427982, green: 0.9163427982, blue: 0.9163427982, alpha: 1)
+        self.view.backgroundColor = .white
         
         setup()
         
@@ -58,6 +58,7 @@ class ProductGridViewController: ASViewController<ASCollectionNode>  {
     override func viewDidLoad() {
         super.viewDidLoad()
         productList.view.isScrollEnabled = true
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
     }
     
     
@@ -66,8 +67,8 @@ class ProductGridViewController: ASViewController<ASCollectionNode>  {
         self.productList.delegate = viewModel.datasource
         
         self.navigationItem.title = viewModel.title
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
-        self.navigationController?.navigationBar.tintColor = .white
+        self.navigationController?.navigationBar.tintColor = .white 
+  
         
         viewModel.outputs.datasourceOutput
             .bind(onNext: { self.productList.reloadData() })
