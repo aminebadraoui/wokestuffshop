@@ -13,4 +13,5 @@ import AsyncDisplayKit
 protocol CollectionCompatible {
     
     func collectionNode(_ collectionNode: ASCollectionNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode
+    func collectionNode(_ collectionNode: ASCollectionNode, didSelectItemAt indexPath: IndexPath)
 }

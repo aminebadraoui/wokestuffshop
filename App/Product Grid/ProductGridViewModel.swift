@@ -9,12 +9,13 @@
 import Foundation
 import ShopifyKit
 import RxSwift
+import RxCocoa
 
 protocol ProductGridViewModelInputs {
-    var selectCollectionAction: AnyObserver<CollectionModel> { get }
+    var selectProductAction: AnyObserver<ProductModel> { get }
 }
 protocol ProductGridViewModelOutputs {
-    var selectedCollection: Observable<CollectionModel> { get }
+    var selectedProduct: Observable<ProductModel> { get }
     var datasourceOutput: Observable<Void> { get }
 }
 
@@ -42,10 +43,22 @@ class ProductGridViewModel: ProductGridViewModelInputs, ProductGridViewModelOutp
     func fetchProducts() {
         
         let productsObservable = client.fetchProducts(in: collection).asObservable().share(replay: 1)
+        let cellDisposeBag = DisposeBag()
         
         productsObservable.observeOn(MainScheduler.instance)
             .subscribe(onNext: { productList in
-                self.products = productList.map { ProductListItemViewModel(productModel: $0) }
+                self.products = productList.map { product in
+                    let cell = ProductListItemViewModel(productModel: product)
+                
+                 cell.outputs.cellTapped
+                    .map{ _ in product }
+                    .bind(to: self._selectedProductSubject)
+                    .disposed(by: cellDisposeBag)
+                    
+                    
+                    
+                    return cell
+                }
                 
                 self.datasource.collectionData = self.products
                 self._datasourceSubject.onNext(()) 
@@ -53,17 +66,17 @@ class ProductGridViewModel: ProductGridViewModelInputs, ProductGridViewModelOutp
     }
     
     //  Subjects
-    private var _selectedCollection = PublishSubject<CollectionModel>()
+    private var _selectedProductSubject = PublishSubject<ProductModel>()
     private var _datasourceSubject = PublishSubject<Void>()
     
     //  Inputs
-    var selectCollectionAction: AnyObserver<CollectionModel> {
-        return _selectedCollection.asObserver()
+    var selectProductAction: AnyObserver<ProductModel> {
+        return _selectedProductSubject.asObserver()
     }
     
     //  Outputs
-    var selectedCollection: Observable<CollectionModel> {
-        return _selectedCollection.asObservable()
+    var selectedProduct: Observable<ProductModel> {
+        return _selectedProductSubject.asObservable()
     }
     var datasourceOutput: Observable<Void> {
         return _datasourceSubject.asObservable()

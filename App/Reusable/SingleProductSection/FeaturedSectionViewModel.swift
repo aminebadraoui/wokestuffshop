@@ -17,8 +17,8 @@ class FeaturedSectionViewModel : NSObject, TableCompatible {
     var productDatasource: ProductModel
     
     
-    init(sectionType: SectionType, productFeed: ProductModel) {
-        self.sectionTitle = sectionType.rawValue
+    init(title: String, productFeed: ProductModel) {
+        self.sectionTitle = title
         self.productDatasource = productFeed
     }
     

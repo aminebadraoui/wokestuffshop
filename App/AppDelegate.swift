@@ -14,9 +14,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var disposeBag = DisposeBag()
+    var navigationBarAppearance = UINavigationBar.appearance()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
+        navigationBarAppearance.tintColor = .white
         setup()
         return true
     }

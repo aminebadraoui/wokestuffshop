@@ -1,5 +1,5 @@
 //
-//  ProductViewController.swift
+//  ProductDetailViewController.swift
 //  wokestuffshop
 //
 //  Created by Amine on 2018-06-05.
@@ -12,12 +12,12 @@ import Reusable
 import RxSwift
 
 
-class ProductViewController: UIViewController, StoryboardSceneBased {
-    static var sceneStoryboard: UIStoryboard = R.storyboard.product()
+class ProductDetailViewController: UIViewController, StoryboardSceneBased {
+    static var sceneStoryboard: UIStoryboard = R.storyboard.productDetailViewController()
     
-    public static func make() -> ProductViewController {
+    public static func make() -> ProductDetailViewController {
         let vc = self.instantiate()
-        vc.title = "Product"
+       // vc.title = "Product"
         return vc
     }
     

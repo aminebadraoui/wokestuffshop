@@ -1,5 +1,5 @@
 //
-//  ProductCoordinator.swift
+//  ProductDetailCoordinator.swift
 //  wokestuffshop
 //
 //  Created by Amine on 2018-06-05.
@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 
-class ProductCoordinator: Coordinator {
+class ProductDetailCoordinator: Coordinator {
     
     var childCoordinators: [Coordinator] = []
     var rootViewController: UIViewController
@@ -20,7 +20,7 @@ class ProductCoordinator: Coordinator {
     }
     
     func start() {
-        let vc = ProductViewController.make()
+        let vc = ProductDetailViewController.make()
         vc.showCart.subscribe(onNext: { _ in
             print("next event on showcart")
             self.coordinateToCart()
@@ -43,5 +43,6 @@ class ProductCoordinator: Coordinator {
         if let productNav = rootViewController as? UINavigationController {
             productNav.pushViewController(vc, animated: true)
         }
+        
     }
 }

@@ -29,7 +29,10 @@ class HomeVC: ASViewController<ASTableNode>  {
         homeTableNode  = ASTableNode()
        
         super.init(node: homeTableNode)
-        viewModel.outputs.datasourceOutput.bind(onNext: { self.homeTableNode.reloadData() })
+        
+        viewModel.outputs.datasourceOutput
+            .bind(onNext: { self.homeTableNode.reloadData()
+            }).disposed(by: disposeBag)
         
         setup()
         
