@@ -10,9 +10,6 @@ import UIKit
 import RxSwift
 
 class AppCoordinator: Coordinator {
-    
-    
-    
     //  Properties
     
     var childCoordinators: [Coordinator] = []
@@ -30,7 +27,7 @@ class AppCoordinator: Coordinator {
     // Start function
     func start()  {
       
-        let wokeTabBarCoordinator = WokeTabBarCoordinator()
+        let wokeTabBarCoordinator = MenuTabBarCoordinator()
         wokeTabBarCoordinator.start()
       
        rootViewController = wokeTabBarCoordinator.wokeTabBarController

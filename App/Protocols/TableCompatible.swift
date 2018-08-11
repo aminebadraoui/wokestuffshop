@@ -1,16 +1,17 @@
 //
 //  TableCompatible.swift
-//  wokestuffshop
+//  App
 //
-//  Created by Amine on 2018-06-21.
+//  Created by Amine on 2018-07-28.
 //  Copyright © 2018 aminebadraoui. All rights reserved.
 //
 
 import UIKit
-import AsyncDisplayKit
 
 protocol TableCompatible {
     
-    func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode
-    func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath)
+    var height : CGFloat { get }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell 
 }
+

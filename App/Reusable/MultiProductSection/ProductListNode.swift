@@ -47,7 +47,7 @@ class ProductListNode: ASCellNode {
         }
         
         //  Assigning the productListDatasource to the collection dataSource
-        sectionDatasource.collectionData =  productList
+        sectionDatasource.ASCollectionData =  productList
         
         _collectionNode.delegate = sectionDatasource
         _collectionNode.dataSource = sectionDatasource

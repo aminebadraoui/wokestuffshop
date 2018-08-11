@@ -34,10 +34,11 @@ class ProductGridViewModel: ProductGridViewModelInputs, ProductGridViewModelOutp
     var datasource = Datasource()
     var products = [ProductListItemViewModel]()
     
-    let title = "Products"
+    let title: String
     
     init(collection: CollectionModel) {
         self.collection = collection
+        title = collection.title
     }
     
     func fetchProducts() {
@@ -54,13 +55,10 @@ class ProductGridViewModel: ProductGridViewModelInputs, ProductGridViewModelOutp
                     .map{ _ in product }
                     .bind(to: self._selectedProductSubject)
                     .disposed(by: cellDisposeBag)
-                    
-                    
-                    
                     return cell
                 }
                 
-                self.datasource.collectionData = self.products
+                self.datasource.ASCollectionData = self.products
                 self._datasourceSubject.onNext(()) 
             }).disposed(by: disposeBag)
     }

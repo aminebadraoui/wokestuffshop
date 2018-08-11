@@ -48,11 +48,10 @@ class ProductGridCoordinator: Coordinator {
     }
     
     func coordinateToProductDetail(product: ProductModel){
-        let vc = ProductDetailViewController.make()
-        if let nav = rootViewController as? UINavigationController {
-            nav.pushViewController(vc, animated: true)
-        }
-        vc.title = product.title
+        let productDetailCoordinator = ProductDetailCoordinator(rootViewController: self.rootViewController, product: product)
+        
+        productDetailCoordinator.start()
+ 
     }
     
 }

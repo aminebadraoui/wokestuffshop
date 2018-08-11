@@ -12,6 +12,7 @@ import RxSwift
 class CartCoordinator: Coordinator {
     
     var childCoordinators: [Coordinator] = []
+    
     var rootViewController: UIViewController
     
     init(rootViewController: UIViewController){

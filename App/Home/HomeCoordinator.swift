@@ -25,7 +25,4 @@ class HomeCoordinator: Coordinator {
             homeNav.pushViewController(vc, animated: true)
         }
     }
-    
-    
-
 }

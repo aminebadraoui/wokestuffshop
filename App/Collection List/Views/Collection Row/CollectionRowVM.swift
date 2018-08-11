@@ -23,7 +23,7 @@ protocol CollectionRowTypes {
     var outputs: CollectionRowOutputs { get }
 }
 
-class CollectionRowVM: TableCompatible, CollectionRowInputs, CollectionRowOutputs, CollectionRowTypes {
+class CollectionRowVM: ASTableCompatible, CollectionRowInputs, CollectionRowOutputs, CollectionRowTypes {
     
     var collection: CollectionModel
     

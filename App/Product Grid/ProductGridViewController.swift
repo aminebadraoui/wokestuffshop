@@ -11,8 +11,6 @@ import RxSwift
 import AsyncDisplayKit
 
 class ProductGridViewController: ASViewController<ASCollectionNode>  {
-    
-    
     let disposeBag = DisposeBag()
     
     //  Properties
@@ -25,9 +23,9 @@ class ProductGridViewController: ASViewController<ASCollectionNode>  {
         self.viewModel = vm
         
         let productListFlow = UICollectionViewFlowLayout()
-        productListFlow.scrollDirection = .vertical
+        productListFlow.scrollDirection         = .vertical
         productListFlow.minimumInteritemSpacing = 1
-        productListFlow.minimumLineSpacing = 8
+        productListFlow.minimumLineSpacing      = 8
         productListFlow.sectionInset = UIEdgeInsetsMake(8, 8, 8, 8)
         
         productList  = ASCollectionNode(frame: CGRect.zero, collectionViewLayout: productListFlow)
@@ -42,12 +40,6 @@ class ProductGridViewController: ASViewController<ASCollectionNode>  {
         setup()
         
         viewModel.fetchProducts()
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
     }
     
     required init?(coder aDecoder: NSCoder) {

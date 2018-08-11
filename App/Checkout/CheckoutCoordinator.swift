@@ -17,9 +17,6 @@ class CheckoutCoordinator: Coordinator {
     }
     
     func start() {
-        let vc = ProductDetailViewController.make()
-        if let checkoutNav = rootViewController as? UINavigationController {
-            checkoutNav.pushViewController(vc, animated: true)
-        }
+   
     }
 }

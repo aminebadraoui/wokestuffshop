@@ -25,7 +25,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqK-7N-zko">
                                 <rect key="frame" x="0.0" y="613" width="375" height="54"/>
-                                <color key="backgroundColor" red="0.29816058722581906" green="0.77510310913705582" blue="0.072467758348963657" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.19660993744604446" green="0.51675523477157359" blue="0.051764936091901283" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="54" id="CA6-Q4-p9x"/>
                                 </constraints>
@@ -53,6 +53,7 @@
                     </view>
                     <connections>
                         <outlet property="productBtn" destination="wqK-7N-zko" id="mAX-G3-cc0"/>
+                        <outlet property="tableView" destination="0s2-m6-eMK" id="aXt-bm-oZ4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E4q-Gp-cSm" userLabel="First Responder" sceneMemberID="firstResponder"/>

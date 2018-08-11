@@ -9,10 +9,10 @@
 import Foundation
 import MobileBuySDK
 
- //  TODO: Make fragments in seperate files
+//  TODO: Make fragments in seperate files
 
 public class ClientQuery {
-   
+    
     //  fetch all collections
     static func queryForAllCollections(limit: Int32 = 100) -> Storefront.QueryRootQuery {
         return Storefront.buildQuery { $0
@@ -36,7 +36,7 @@ public class ClientQuery {
     }
     
     //  fetch products in a specific collection
-    static func queryForProducts( in collection: CollectionModel, limit: Int32 = 10, after cursor: String? = nil) -> Storefront.QueryRootQuery {
+    static func queryForProducts( in collection: CollectionModel, limit: Int32 = 20, after cursor: String? = nil) -> Storefront.QueryRootQuery {
         return Storefront.buildQuery { $0
             .node(id: collection.model.id) { $0
                 .onCollection { $0
@@ -46,29 +46,44 @@ public class ClientQuery {
                                 .id()
                                 .handle()
                                 .title()
-                                .description()
+                                .descriptionHtml()
                                 .images(first: limit) { $0
                                     .edges({ $0
                                         .node { $0
                                             .id()
                                             .originalSrc()
-                                            
                                         }
                                     })
+                                }
+                                .options { $0
+                                    .name()
+                                    .values()
                                 }
                                 .variants(first: limit) { $0
                                     .edges({ $0
                                         .node { $0
+                                            .id()
+                                            .title()
+                                            .image{
+                                                $0.originalSrc()
+                                            }
+                                            .selectedOptions({ $0
+                                                .name()
+                                                
+                                            })
+                                            .sku()
                                             .price()
                                             .compareAtPrice()
                                             .availableForSale()
-                                            .sku()
-                                            .title()
+                                            .product {$0
+                                                .handle()
+                                                .title()
+                                                .id()
+                                                .description()
+                                            }
                                         }
                                     })
-                                    
                                 }
-               
                             }
                         }
                     }
@@ -82,16 +97,116 @@ public class ClientQuery {
         return Storefront.buildQuery { $0
             .shop { $0
                 .collectionByHandle(handle: handle) { $0
-                            .id()
-                            .handle()
-                            .title()
-                            .description()
-                            .image({ $0
-                                .id()
-                                .originalSrc()
-                            })
-                        }
+                    .id()
+                    .handle()
+                    .title()
+                    .description()
+                    .image({ $0
+                        .id()
+                        .originalSrc()
+                    })
+                }
+            }
+        }
+    }
+    
+    static func queryForOptionsInProduct(in product: ProductModel)-> Storefront.QueryRootQuery {
+        return Storefront.buildQuery{ $0
+            .shop { $0
+                .productByHandle(handle: product.handle) { $0
+                    .options { $0
+                        .name()
+                    }
+                    
+                }
+            }
+            
+        }
+    }
+    
+    static func queryForVariant(in product: ProductModel, selectedOptions: [Storefront.SelectedOptionInput])-> Storefront.QueryRootQuery {
+        return Storefront.buildQuery{ $0
+            .shop { $0
+                .productByHandle(handle: product.handle) { $0
+                    .variantBySelectedOptions(selectedOptions: selectedOptions) {$0
+                        .id()
+                        .price()
+                        .title()
                     }
                 }
             }
+            
+        }
+    }
+    
+    
+    
+    // ----------------------------------
+    //  MARK: - Checkout -
+    //
+    static func mutationForCreateCheckout(with cartItems: [CartItemModel]) -> Storefront.MutationQuery {
+        let lineItems = cartItems.map { item in
+            Storefront.CheckoutLineItemInput.create(quantity: Int32(item.quantity), variantId: GraphQL.ID(rawValue: item.variant.id))
+        }
+        
+        let checkoutInput = Storefront.CheckoutCreateInput.create(
+            lineItems: .value(lineItems),
+            allowPartialAddresses: .value(true)
+        )
+        
+        return Storefront.buildMutation { $0
+            .checkoutCreate(input: checkoutInput) { $0
+                .checkout { $0
+                    .id()
+                    .ready()
+                    .requiresShipping()
+                    .taxesIncluded()
+                    .email()
+                    
+                    .shippingAddress { $0
+                        .firstName()
+                        .lastName()
+                        .phone()
+                        .address1()
+                        .address2()
+                        .city()
+                        .country()
+                        .countryCode()
+                        .province()
+                        .provinceCode()
+                        .zip()
+                    }
+                    
+                    .shippingLine { $0
+                        .handle()
+                        .title()
+                        .price()
+                    }
+                    
+                    .note()
+                    .lineItems(first: 250) { $0
+                        .edges { $0
+                            .cursor()
+                            .node { $0
+                                .variant { $0
+                                    .id()
+                                    .price()
+                                }
+                                .title()
+                                .quantity()
+                            }
+                        }
+                    }
+                    .webUrl()
+                    .currencyCode()
+                    .subtotalPrice()
+                    .totalTax()
+                    .totalPrice()
+                    .paymentDue()
+                }
+            }
+        }
+    }
 }
+
+

@@ -10,30 +10,40 @@ import UIKit
 import Rswift
 import Reusable
 import RxSwift
-
+import RxCocoa
 
 class ProductDetailViewController: UIViewController, StoryboardSceneBased {
     static var sceneStoryboard: UIStoryboard = R.storyboard.productDetailViewController()
     
-    public static func make() -> ProductDetailViewController {
+    var viewModel: ProductDetailViewModel!
+    
+    var disposeBag = DisposeBag()
+    
+    public static func instantiate(viewModel: ProductDetailViewModel) -> ProductDetailViewController {
         let vc = self.instantiate()
-       // vc.title = "Product"
+        vc.viewModel = viewModel
         return vc
+    }
+  
+    override func viewDidLoad() {
+       tableView.delegate = viewModel.datasource
+        tableView.dataSource = viewModel.datasource
+        tableView.allowsSelection = false
+        tableView.separatorStyle = .none
+        tableView.register(cellType: ProductHeaderCell.self)
+        
+        self.title = viewModel.title
+        
+        productBtn.rx.tap
+            .bind(to: viewModel.inputs.atcAction)
+            .disposed(by: disposeBag)
     }
     
     @IBOutlet weak var productBtn: UIButton!
+    @IBOutlet weak var tableView: UITableView!
+    
+
     
     var showCart = PublishSubject<Bool>()
-    
-    override func viewDidLoad() {
-        productBtn.addTarget(self, action: #selector(testBtn), for: .touchUpInside)
-        
-    }
-    
-    @objc func testBtn() {
-        showCart.onNext(true)
-        
-        print("btn pressed")
-    }
     
 }

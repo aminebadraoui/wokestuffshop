@@ -28,7 +28,7 @@ class CollectionListVM: CollectionListOutputs, CollectionListInputs, CollectionL
     let client = Client.shared
     let disposeBag = DisposeBag()
     
-    var collectionList = [TableCompatible]()
+    var collectionList = [ASTableCompatible]()
     var dataSource = Datasource()
     
     let title = "Collections"
@@ -53,7 +53,7 @@ class CollectionListVM: CollectionListOutputs, CollectionListInputs, CollectionL
                 
                 }
             
-            self.dataSource.tableData = self.collectionList
+            self.dataSource.ASTableData = self.collectionList
           
         }).disposed(by: disposeBag)
     }

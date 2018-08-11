@@ -14,7 +14,8 @@ def shared_pods
     pod 'R.swift'
     pod 'Texture'
     pod 'Mobile-Buy-SDK'
-    pod 'ObjectMapper', '~> 3.3'
+    pod 'ObjectMapper',                         '~> 3.3'
+    pod 'AlamofireImage',                       '~> 3.3'
 end
     
   target 'App' do

@@ -12,7 +12,7 @@ import SnapKit
 import Rswift
  
 
-class WokeTabBarCoordinator: Coordinator {
+class MenuTabBarCoordinator: Coordinator {
     var childCoordinators: [Coordinator]
     var rootViewController: UIViewController
     

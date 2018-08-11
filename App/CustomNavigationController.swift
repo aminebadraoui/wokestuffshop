@@ -7,3 +7,20 @@
 //
 import UIKit
 
+class CustomNavigationController: UINavigationController {
+
+
+    override init(rootViewController: UIViewController) {
+        super.init(rootViewController: rootViewController)
+        self.navigationBar.barTintColor = .black
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+}

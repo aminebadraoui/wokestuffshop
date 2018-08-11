@@ -23,7 +23,7 @@ protocol ProductListItemTypes {
     var outputs: ProductListItemOutputs { get }
 }
 
-class ProductListItemViewModel: CollectionCompatible , ProductListItemInputs, ProductListItemOutputs, ProductListItemTypes {
+class ProductListItemViewModel: ASCollectionCompatible , ProductListItemInputs, ProductListItemOutputs, ProductListItemTypes {
    
     var product : ProductModel
 

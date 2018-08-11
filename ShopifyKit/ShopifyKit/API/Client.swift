@@ -24,7 +24,9 @@ public class Client {
         //self.client.cachePolicy = .cacheFirst(expireIn: 3600)
     }
     
-    /************** Fetch All Collections *********/
+    // ----------------------------------
+    //  MARK: - All collections -
+    //
     public func fetchCollections()-> Observable<[CollectionModel]>  {
         
         return Observable.create { observer in
@@ -52,7 +54,9 @@ public class Client {
         
     }
     
-    /************** Fetch products in collection *********/
+    // ----------------------------------
+    //  MARK: - Products of collection -
+    //
     public func fetchProducts(in collection: CollectionModel)-> Observable<[ProductModel]>  {
         
         return Observable.create { observer in
@@ -81,7 +85,9 @@ public class Client {
         }
     }
     
-    /************** Fetch collection with handle *********/
+    // ----------------------------------
+    //  MARK: - Collection from handle -
+    //
     public func fetchCollection(handle: String)-> Observable<CollectionModel>  {
         
         return Observable.create { observer in
@@ -93,7 +99,6 @@ public class Client {
                     if let query = query, let collection = query.shop.collectionByHandle  {
                         let collectionModel = CollectionModel(from: collection)
                         observer.onNext(collectionModel)
-                        print(collectionModel.handle)
                     }
                 }
             }
@@ -106,4 +111,70 @@ public class Client {
         }
     }
     
+    // ----------------------------------
+    //  MARK: - Options of product -
+    //
+    public func fetchOptions(in product: ProductModel)-> Observable<[String]>  {
+        
+        return Observable.create { observer in
+            
+            let query    = ClientQuery.queryForOptionsInProduct(in: product)
+            let response = self.client.queryGraphWith(query) { query, error in
+                
+                DispatchQueue.main.async {
+                    if let query = query, let product = query.shop.productByHandle  {
+                        let productOptions = product.options.map { $0.name }
+                        observer.onNext(productOptions)
+                    }
+                }
+            }
+            
+            response.resume()
+            
+            return Disposables.create {
+                response.cancel()
+            }
+        }
+    }
+    
+    // ----------------------------------
+    //  MARK: - Variant by option selection-
+    //
+    public func fetchVariantForOptions(in product: ProductModel, for options: [Storefront.SelectedOptionInput])-> Observable<VariantModel>  {
+        
+        return Observable.create { observer in
+            
+            let query    = ClientQuery.queryForVariant(in: product, selectedOptions: options)
+            let response = self.client.queryGraphWith(query) { query, error in
+                
+                DispatchQueue.main.async {
+                    if let query = query, let variant = query.shop.productByHandle?.variantBySelectedOptions  {
+                        let variantModel = VariantModel(from: variant)
+                        observer.onNext(variantModel)
+                    }
+                }
+            }
+            
+            response.resume()
+            
+            return Disposables.create {
+                response.cancel()
+            }
+        }
+    }
+    
+    
+    // ----------------------------------
+    //  MARK: - Checkout -
+    //
+    public func createCheckout(with cartItems: [CartItemModel], completion: @escaping (CheckoutModel?) -> Void) -> Task {
+        let mutation = ClientQuery.mutationForCreateCheckout(with: cartItems)
+        let task     = self.client.mutateGraphWith(mutation) { response, error in
+           
+            completion(CheckoutModel(from: (response?.checkoutCreate?.checkout)! ))
+        }
+        
+        task.resume()
+        return task
+    }
 }

@@ -70,3 +70,18 @@ struct AppColor {
     static let productPrice = UIColor.black
     static let productOldPrice = UIColor.gray
 }
+
+struct HelperMethods {
+    static func priceFormatter(price: Decimal?) -> String {
+        
+        let currencyFormatter = NumberFormatter()
+        currencyFormatter.usesGroupingSeparator = true
+        currencyFormatter.numberStyle = .currency
+        
+        // localize to your grouping and decimal separator
+        currencyFormatter.locale = Locale(identifier: "en_US_POSIX")
+        
+        guard let price = price else { return "" }
+        return currencyFormatter.string(from: price as NSNumber) ?? ""
+    }
+}

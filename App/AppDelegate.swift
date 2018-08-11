@@ -57,12 +57,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
             self.window?.rootViewController = appCoordinator.rootViewController
         }
-        
-       
-        
-        
-       
-
-  
 }
 

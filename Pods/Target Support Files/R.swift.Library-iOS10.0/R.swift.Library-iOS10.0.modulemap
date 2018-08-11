@@ -1,0 +1,6 @@
+framework module Rswift {
+  umbrella header "R.swift.Library-iOS10.0-umbrella.h"
+
+  export *
+  module * { export * }
+}

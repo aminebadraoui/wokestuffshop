@@ -33,8 +33,8 @@ class ProductListItemCell: ASCellNode {
         let currentPrice = viewModel.product.price.first
         let compareAtPrice = viewModel.product.compareAtPrice.first ?? nil
         
-        let currentPriceString = priceFormatter(price: currentPrice)
-        let compareAtPriceString = priceFormatter(price: compareAtPrice)
+        let currentPriceString = HelperMethods.priceFormatter(price: currentPrice)
+        let compareAtPriceString = HelperMethods.priceFormatter(price: compareAtPrice)
         
         //  Text Configuration
         
@@ -65,19 +65,6 @@ class ProductListItemCell: ASCellNode {
         self.productOldPrice.attributedText = NSAttributedString(string: compareAtPriceString, attributes: productOldPriceAttributes)
         
     }
-    
-    func priceFormatter(price: Decimal?) -> String {
-        
-        let currencyFormatter = NumberFormatter()
-        currencyFormatter.usesGroupingSeparator = true
-        currencyFormatter.numberStyle = .currency
-        
-        // localize to your grouping and decimal separator
-        currencyFormatter.locale = Locale(identifier: "en_US_POSIX")
-        
-        guard let price = price else { return "" }
-        return currencyFormatter.string(from: price as NSNumber) ?? ""
-        }
     
     override init() {
         super.init()

@@ -9,7 +9,7 @@
 import AsyncDisplayKit
 import ShopifyKit
 
-class ProductListSectionViewModel : NSObject, TableCompatible {
+class ProductListSectionViewModel : NSObject, ASTableCompatible {
     
    
     
