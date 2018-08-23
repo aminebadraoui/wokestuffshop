@@ -9,6 +9,7 @@ import MobileBuySDK
 
 public struct LineItemModel {
     public let model:    Storefront.CheckoutLineItemEdge
+    
     public let variantID:       String?
     public let title:           String
     public let quantity:        Int
@@ -20,6 +21,7 @@ public struct LineItemModel {
     //
     public init(from model: Storefront.CheckoutLineItemEdge) {
         self.model           = model
+        
         self.variantID       = model.node.variant!.id.rawValue
         self.title           = model.node.title
         self.quantity        = Int(model.node.quantity)

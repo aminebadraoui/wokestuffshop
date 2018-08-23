@@ -12,31 +12,25 @@ import MobileBuySDK
 
 public struct ProductModel  {
     public var model: Storefront.Product
+    
     public var title: String
     public var handle: String
     public var description: String
     public var images: [URL]
     public var id: String
-    public var price: [Decimal]
-    public var compareAtPrice: [Decimal?]
-    public var availableForSale: [Bool]
-    public var sku: [String?]
-    public var options: [Storefront.ProductOption]
-    public var variants: [Storefront.ProductVariantEdge]
+    public var options: [OptionModel]
+    public var variants: [VariantModel]
     
     public init(from model: Storefront.Product) {
         self.model = model
+        
         self.title = model.title
         self.handle = model.handle
         self.description = model.descriptionHtml
         self.images = model.images.edges.map { $0.node.originalSrc }
         self.id = model.id.rawValue
-        self.price = model.variants.edges.map { $0.node.price}
-        self.compareAtPrice = model.variants.edges.map { $0.node.compareAtPrice }
-        self.availableForSale = model.variants.edges.map { $0.node.availableForSale }
-        self.sku = model.variants.edges.map { $0.node.sku }
-        self.options = model.options
-        self.variants = model.variants.edges
+        self.options = model.options.map { OptionModel(from: $0)}
+        self.variants = model.variants.edges.map { VariantModel(from: $0.node)}
     }
 }
 

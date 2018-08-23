@@ -30,8 +30,8 @@ class ProductListItemCell: ASCellNode {
         //  Image Configuration
         self.productImageNode.url = viewModel.product.images.first
         
-        let currentPrice = viewModel.product.price.first
-        let compareAtPrice = viewModel.product.compareAtPrice.first ?? nil
+        let currentPrice = viewModel.product.variants.first?.price
+        let compareAtPrice = viewModel.product.variants.first?.price ?? nil
         
         let currentPriceString = HelperMethods.priceFormatter(price: currentPrice)
         let compareAtPriceString = HelperMethods.priceFormatter(price: compareAtPrice)

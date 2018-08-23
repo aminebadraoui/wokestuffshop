@@ -11,20 +11,18 @@ import ShopifyKit
 import RxSwift
 import RxCocoa
 
-class ProductImagesRowViewModel: TableCompatible {
-    var height: CGFloat = 450
+class ProductImagesRowViewModel:  ProductDetailItem {
+    var height: CGFloat = 350
     var product: ProductModel
+    
+    var type: ProductDetailViewModelType = .images
+    var sectionTitle: String = "images"
     
     init(product: ProductModel){
         self.product = product
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        tableView.register(cellType: ProductImagesCell.self)
-        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: ProductImagesCell.self)
-        cell.configure(product: product)
-        return cell
-    }
+
     
     
 }

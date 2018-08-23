@@ -302,7 +302,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.reuseIdentifier` struct is generated, and contains static references to 5 reuse identifiers.
+  /// This `R.reuseIdentifier` struct is generated, and contains static references to 4 reuse identifiers.
   struct reuseIdentifier {
     /// Reuse identifier `OptionCell`.
     static let optionCell: Rswift.ReuseIdentifier<OptionValueCell> = Rswift.ReuseIdentifier(identifier: "OptionCell")
@@ -312,8 +312,6 @@ struct R: Rswift.Validatable {
     static let productHeaderCell: Rswift.ReuseIdentifier<ProductHeaderCell> = Rswift.ReuseIdentifier(identifier: "ProductHeaderCell")
     /// Reuse identifier `ProductImagesCell`.
     static let productImagesCell: Rswift.ReuseIdentifier<ProductImagesCell> = Rswift.ReuseIdentifier(identifier: "ProductImagesCell")
-    /// Reuse identifier `ProductVariantsCell`.
-    static let productVariantsCell: Rswift.ReuseIdentifier<ProductVariantsCell> = Rswift.ReuseIdentifier(identifier: "ProductVariantsCell")
     
     fileprivate init() {}
   }
@@ -323,12 +321,10 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.storyboard` struct is generated, and contains static references to 5 storyboards.
+  /// This `R.storyboard` struct is generated, and contains static references to 4 storyboards.
   struct storyboard {
     /// Storyboard `Cart`.
     static let cart = _R.storyboard.cart()
-    /// Storyboard `Checkout`.
-    static let checkout = _R.storyboard.checkout()
     /// Storyboard `LaunchScreen`.
     static let launchScreen = _R.storyboard.launchScreen()
     /// Storyboard `OptionListViewController`.
@@ -339,11 +335,6 @@ struct R: Rswift.Validatable {
     /// `UIStoryboard(name: "Cart", bundle: ...)`
     static func cart(_: Void = ()) -> UIKit.UIStoryboard {
       return UIKit.UIStoryboard(resource: R.storyboard.cart)
-    }
-    
-    /// `UIStoryboard(name: "Checkout", bundle: ...)`
-    static func checkout(_: Void = ()) -> UIKit.UIStoryboard {
-      return UIKit.UIStoryboard(resource: R.storyboard.checkout)
     }
     
     /// `UIStoryboard(name: "LaunchScreen", bundle: ...)`
@@ -441,11 +432,8 @@ struct _R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    struct _ProductVariantsCell: Rswift.NibResourceType, Rswift.ReuseIdentifierType {
-      typealias ReusableType = ProductVariantsCell
-      
+    struct _ProductVariantsCell: Rswift.NibResourceType {
       let bundle = R.hostingBundle
-      let identifier = "ProductVariantsCell"
       let name = "ProductVariantsCell"
       
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> ProductVariantsCell? {
@@ -460,10 +448,9 @@ struct _R: Rswift.Validatable {
   
   struct storyboard: Rswift.Validatable {
     static func validate() throws {
-      try productDetailViewController.validate()
-      try optionListViewController.validate()
       try cart.validate()
-      try checkout.validate()
+      try optionListViewController.validate()
+      try productDetailViewController.validate()
     }
     
     struct cart: Rswift.StoryboardResourceType, Rswift.Validatable {
@@ -477,22 +464,6 @@ struct _R: Rswift.Validatable {
       
       static func validate() throws {
         if _R.storyboard.cart().cartViewController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'cartViewController' could not be loaded from storyboard 'Cart' as 'CartViewController'.") }
-      }
-      
-      fileprivate init() {}
-    }
-    
-    struct checkout: Rswift.StoryboardResourceType, Rswift.Validatable {
-      let bundle = R.hostingBundle
-      let checkoutViewController = StoryboardViewControllerResource<CheckoutViewController>(identifier: "checkoutViewController")
-      let name = "Checkout"
-      
-      func checkoutViewController(_: Void = ()) -> CheckoutViewController? {
-        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: checkoutViewController)
-      }
-      
-      static func validate() throws {
-        if _R.storyboard.checkout().checkoutViewController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'checkoutViewController' could not be loaded from storyboard 'Checkout' as 'CheckoutViewController'.") }
       }
       
       fileprivate init() {}

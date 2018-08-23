@@ -11,9 +11,13 @@ import MobileBuySDK
 
 public struct  VariantModel {
     public let model:  Storefront.ProductVariant
+    
     public let id:     String
     public let title:  String
     public let price:  Decimal
+    public let compareAtPrice: Decimal?
+    public let sku: String?
+    public let availableForSale: Bool
     
     // ----------------------------------
     //  MARK: - Init -
@@ -22,8 +26,10 @@ public struct  VariantModel {
         self.model  = model
         self.id     = model.id.rawValue
         self.title  = model.title
-        self.price  = model.price as Decimal
-        
+        self.price  = model.price
+        self.compareAtPrice = model.compareAtPrice
+        self.sku = model.sku
+        self.availableForSale = model.availableForSale
     }
 }
 

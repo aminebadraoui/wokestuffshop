@@ -59,6 +59,15 @@ extension Storefront {
 
 		/// Represents an error in the input of a mutation. 
 		@discardableResult
+		open func onCustomerUserError(subfields: (CustomerUserErrorQuery) -> Void) -> DisplayableErrorQuery {
+			let subquery = CustomerUserErrorQuery()
+			subfields(subquery)
+			addInlineFragment(on: "CustomerUserError", subfields: subquery)
+			return self
+		}
+
+		/// Represents an error in the input of a mutation. 
+		@discardableResult
 		open func onUserError(subfields: (UserErrorQuery) -> Void) -> DisplayableErrorQuery {
 			let subquery = UserErrorQuery()
 			subfields(subquery)
@@ -97,6 +106,8 @@ extension Storefront {
 				throw SchemaViolationError(type: UnknownDisplayableError.self, field: "__typename", value: fields["__typename"] ?? NSNull())
 			}
 			switch typeName {
+				case "CustomerUserError": return try CustomerUserError.init(fields: fields)
+
 				case "UserError": return try UserError.init(fields: fields)
 
 				default:

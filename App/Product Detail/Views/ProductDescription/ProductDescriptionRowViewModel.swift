@@ -24,36 +24,22 @@ protocol ProductDescriptionRowViewModelTypes {
     var outputs: ProductDescriptionRowViewModelOutputs { get }
 }
 
-class ProductDescriptionRowViewModel: TableCompatible, ProductDescriptionRowViewModelInputs, ProductDescriptionRowViewModelOutputs, ProductDescriptionRowViewModelTypes   {
+class ProductDescriptionRowViewModel: 
+ProductDetailItem,
+ProductDescriptionRowViewModelInputs,
+ProductDescriptionRowViewModelOutputs,
+ProductDescriptionRowViewModelTypes   {
+    
+    var disposeBag = DisposeBag()
+    
+    var type: ProductDetailViewModelType = .description
+    var sectionTitle: String = "Description"
+    
     
     /******************************/
     //  MARK: Initialization
     init(product: ProductModel){
         self.product = product
-    }
-    var refreshRow = PublishSubject<IndexPath>()
-    var disposeBag = DisposeBag()
-    
-    /******************************/
-    //  MARK: TableView delegate
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //var rowDisposeBag = DisposeBag()
-        tableView.register(cellType: ProductDescriptionCell.self)
-        
-        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: ProductDescriptionCell.self)
-        
-//       cell.heightObservable.asObservable()
-//        .map {height in
-//            self.height = height
-//            return indexPath
-//        }.bind(to: refreshRow)
-//        .disposed(by: disposeBag)
-        
-        cell.configure(row: self)
-        
-       // _productDescriptionSubject.onNext(product.description.htmlToString)
-
-        return cell
     }
     
     /******************************/
@@ -64,9 +50,7 @@ class ProductDescriptionRowViewModel: TableCompatible, ProductDescriptionRowView
     
     //  Subjects
     private var _productDescriptionSubject = PublishSubject<String>()
-    
-    //  Inputs
-    
+
     //  Outputs
     var productDescription: Observable<String> {
         return _productDescriptionSubject.asObservable()

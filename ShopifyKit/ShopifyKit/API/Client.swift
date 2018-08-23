@@ -114,7 +114,7 @@ public class Client {
     // ----------------------------------
     //  MARK: - Options of product -
     //
-    public func fetchOptions(in product: ProductModel)-> Observable<[String]>  {
+    public func fetchOptions(in product: ProductModel)-> Observable<[OptionModel]>  {
         
         return Observable.create { observer in
             
@@ -123,7 +123,7 @@ public class Client {
                 
                 DispatchQueue.main.async {
                     if let query = query, let product = query.shop.productByHandle  {
-                        let productOptions = product.options.map { $0.name }
+                        let productOptions = product.options.map { OptionModel(from: $0) }
                         observer.onNext(productOptions)
                     }
                 }
