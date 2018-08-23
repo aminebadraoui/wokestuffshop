@@ -28,27 +28,32 @@ protocol ProductHeaderRowViewModelTypes {
 }
 
 /******************************/
-class ProductHeaderRowViewModel: TableCompatible, NibReusable, ProductHeaderRowViewModelInputs, ProductHeaderRowViewModelOutputs, ProductHeaderRowViewModelTypes {
+class ProductHeaderRowViewModel:
+ProductDetailItem,
+NibReusable,
+ProductHeaderRowViewModelInputs,
+ProductHeaderRowViewModelOutputs,
+ProductHeaderRowViewModelTypes {
   
+    var type: ProductDetailViewModelType = .header
+    var sectionTitle: String = "Product"
+    
     init(product: ProductModel){
     self.product = product
+        
+      
     }
+
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        tableView.register(cellType: ProductHeaderCell.self)
-        
-        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: ProductHeaderCell.self)
-        
-        cell.configure(row: self)
+    func bindData() {
         
         let productTitle = formatProductName(product.title)
-        let productPrice = formatCurrentPrice(product.price.first)
-        let productCompareAtPrice = formatCompareAt(product.compareAtPrice.first)
+        let productPrice = formatCurrentPrice(product.variants.first?.price)
+        let productCompareAtPrice = formatCompareAt(product.variants.first?.compareAtPrice)
         
         _nameSubject.onNext(productTitle)
         _priceSubject.onNext(productPrice)
         _compareAtPriceSubject.onNext(productCompareAtPrice)
-        return cell
     }
     
     private func formatCompareAt(_ price: Decimal??) -> NSAttributedString{

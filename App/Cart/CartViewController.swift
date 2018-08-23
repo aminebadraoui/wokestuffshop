@@ -12,27 +12,46 @@ import Reusable
 import MobileBuySDK
 import ShopifyKit
 import SafariServices
+import RxSwift
+import RxCocoa
 
 class CartViewController: UIViewController, StoryboardSceneBased {
     
     static var sceneStoryboard: UIStoryboard = R.storyboard.cart()
     
     @IBOutlet fileprivate weak var tableView: UITableView!
+    @IBOutlet weak var subTotal: UILabel!
+    
+    var viewModel: CartViewModel!
+    var disposeBag = DisposeBag()
     
     @IBAction func CheckoutAction(_ sender: Any) {
         checkout()
     }
     
-    public static func make() -> CartViewController {
+    public static func make(viewModel: CartViewModel) -> CartViewController {
         let vc = self.instantiate()
         vc.title = "Cart"
+        vc.viewModel = viewModel
         return vc
     }
-    
+
     override func viewDidLoad() {
         configureTableView()
         
+        viewModel.outputs.reloadView.subscribe(onNext: {
+            self.tableView.reloadData()
+        })
+        .disposed(by: disposeBag)
+        
+        viewModel.outputs.subtotalObservable
+            .map { Currency.stringFrom($0) }
+            .asDriver(onErrorJustReturn: "0.0")
+            .drive(subTotal.rx.text)
+            .disposed(by: disposeBag)
     }
+    
+
     
  
     private func configureTableView() {
@@ -55,6 +74,7 @@ class CartViewController: UIViewController, StoryboardSceneBased {
             }
                     self.openSafariFor(checkout)
             }
+        
 }
     
     func openSafariFor(_ checkout: CheckoutModel) {
@@ -67,12 +87,41 @@ class CartViewController: UIViewController, StoryboardSceneBased {
 extension CartViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return CartManager.shared.items.count
+        print("count: \(viewModel.items.count)")
+        return viewModel.items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: CartCell.self)
+        let row = viewModel.items[indexPath.row]
+        cell.configure(row: row)
+        
+       row.outputs.tappedStepper
+        .map { stepperValue in
+            (stepperValue, indexPath) }
+        .bind(to: viewModel.inputs.updateQuantityAction)
+        .disposed(by: disposeBag)
+        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        switch editingStyle {
+        case .delete:
+            
+            tableView.beginUpdates()
+            
+            viewModel.inputs.removeItemAction.onNext(indexPath)
+            
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.endUpdates()
+            
+        default:
+            break
+        }
     }
 }
 

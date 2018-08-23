@@ -26,23 +26,34 @@ class ProductDetailViewController: UIViewController, StoryboardSceneBased {
     }
   
     override func viewDidLoad() {
-       tableView.delegate = viewModel.datasource
-        tableView.dataSource = viewModel.datasource
+   
+        tableView.dataSource = viewModel
+        tableView.delegate = viewModel
+        
         tableView.allowsSelection = false
         tableView.separatorStyle = .none
+        
+        tableView.register(cellType: ProductImagesCell.self)
         tableView.register(cellType: ProductHeaderCell.self)
+        tableView.register(cellType: ProductVariantsCell.self)
+        tableView.register(cellType: ProductDescriptionCell.self)
         
         self.title = viewModel.title
         
         productBtn.rx.tap
             .bind(to: viewModel.inputs.atcAction)
             .disposed(by: disposeBag)
+        
+        viewModel.outputs.reloadData
+            .subscribe(onNext: {
+                self.tableView.reloadData()
+            })
+        .disposed(by: disposeBag)
     }
+
     
     @IBOutlet weak var productBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
-    
-
     
     var showCart = PublishSubject<Bool>()
     

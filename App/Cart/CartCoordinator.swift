@@ -20,7 +20,8 @@ class CartCoordinator: Coordinator {
     }
     
     func start() {
-        let vc = CartViewController.make()
+        let viewModel = CartViewModel()
+        let vc = CartViewController.make(viewModel: viewModel)
         if let cartNav = rootViewController as? UINavigationController {
             cartNav.pushViewController(vc, animated: true)
         }

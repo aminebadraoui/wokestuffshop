@@ -1,10 +1,8 @@
 PODS:
-  - ActiveLabel (0.8.1)
-  - Alamofire (4.7.2)
+  - Alamofire (4.7.3)
   - AlamofireImage (3.3.1):
     - Alamofire (~> 4.5)
-  - Mobile-Buy-SDK (3.1.6)
-  - ObjectMapper (3.3.0)
+  - Mobile-Buy-SDK (3.1.8)
   - PINCache (3.0.1-beta.6):
     - PINCache/Arc-exception-safe (= 3.0.1-beta.6)
     - PINCache/Core (= 3.0.1-beta.6)
@@ -28,11 +26,10 @@ PODS:
     - Reusable/View (= 4.0.2)
   - Reusable/Storyboard (4.0.2)
   - Reusable/View (4.0.2)
-  - RxCocoa (4.1.2):
+  - RxCocoa (4.2.0):
     - RxSwift (~> 4.0)
-  - RxSwift (4.1.2)
+  - RxSwift (4.2.0)
   - SnapKit (4.0.0)
-  - SwiftGen (4.2.1)
   - Texture (2.7):
     - Texture/PINRemoteImage (= 2.7)
   - Texture/Core (2.7)
@@ -42,25 +39,20 @@ PODS:
     - Texture/Core
 
 DEPENDENCIES:
-  - ActiveLabel (~> 0.8.1)
   - AlamofireImage (~> 3.3)
   - Mobile-Buy-SDK
-  - ObjectMapper (~> 3.3)
   - R.swift
   - Reusable (~> 4.0)
   - RxCocoa (~> 4.0)
   - RxSwift (~> 4.0)
   - SnapKit (~> 4.0.0)
-  - SwiftGen (~> 4.2)
   - Texture
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
-    - ActiveLabel
     - Alamofire
     - AlamofireImage
     - Mobile-Buy-SDK
-    - ObjectMapper
     - PINCache
     - PINOperation
     - PINRemoteImage
@@ -70,27 +62,23 @@ SPEC REPOS:
     - RxCocoa
     - RxSwift
     - SnapKit
-    - SwiftGen
     - Texture
 
 SPEC CHECKSUMS:
-  ActiveLabel: e361127c355b911a467db3d5a897b3d7f902e568
-  Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   AlamofireImage: 3b35b586853abaf94ca1250f4e94cff3c21a4c0d
-  Mobile-Buy-SDK: ae72bde37c30a7bc29034a8654df91b9df62213b
-  ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
+  Mobile-Buy-SDK: c94c2db580f9d4b201d1f2b07873a075437e4858
   PINCache: d195fdba255283f7e9900a55e3cced377f431f9b
   PINOperation: a6219e6fc9db9c269eb7a7b871ac193bcf400aac
   PINRemoteImage: d6d51c5d2adda55f1ce30c96e850b6c4ebd2856a
   R.swift: d6a5ec2f55a8441dc0ed9f1f8b37d7d11ae85c66
   R.swift.Library: c3af34921024333546e23b70e70d0b4e0cffca75
   Reusable: 584a5629747c52e0f6a77841b400dc2643f6fa0f
-  RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
-  RxSwift: e49536837d9901277638493ea537394d4b55f570
+  RxCocoa: 0b54909c902e1e581212a03e690bbd94032d8baa
+  RxSwift: 99e10317ddfcc7fbe01356aafd118fde4a0be104
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
-  SwiftGen: 2ba2a88fc6130b96e38e2baa0029e4bd222ffd85
   Texture: 9d7e38965cf22ccd7cd9c249dd78b3f14e70ab6c
 
-PODFILE CHECKSUM: 8c21e113943fb8549e91276e4e9e7d11ea80353b
+PODFILE CHECKSUM: dfcf6cd4752bbf6abfa4ba8a04cdbc0bdf943de0
 
 COCOAPODS: 1.5.0

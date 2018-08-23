@@ -100,6 +100,7 @@
                         <viewLayoutGuide key="safeArea" id="Qom-4W-Ks9"/>
                     </view>
                     <connections>
+                        <outlet property="subTotal" destination="FUK-ce-jhf" id="ZKB-Lc-XhR"/>
                         <outlet property="tableView" destination="Fg7-cy-CXF" id="h0R-3s-Hvn"/>
                     </connections>
                 </viewController>

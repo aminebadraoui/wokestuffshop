@@ -40,6 +40,16 @@ extension Storefront {
 			return self
 		}
 
+		/// The associated customer object. 
+		@discardableResult
+		open func customer(alias: String? = nil, _ subfields: (CustomerQuery) -> Void) -> CheckoutCustomerAssociatePayloadQuery {
+			let subquery = CustomerQuery()
+			subfields(subquery)
+
+			addField(field: "customer", aliasSuffix: alias, subfields: subquery)
+			return self
+		}
+
 		/// List of errors that occurred executing the mutation. 
 		@discardableResult
 		open func userErrors(alias: String? = nil, _ subfields: (UserErrorQuery) -> Void) -> CheckoutCustomerAssociatePayloadQuery {
@@ -63,6 +73,13 @@ extension Storefront {
 				}
 				return try Checkout(fields: value)
 
+				case "customer":
+				if value is NSNull { return nil }
+				guard let value = value as? [String: Any] else {
+					throw SchemaViolationError(type: CheckoutCustomerAssociatePayload.self, field: fieldName, value: fieldValue)
+				}
+				return try Customer(fields: value)
+
 				case "userErrors":
 				guard let value = value as? [[String: Any]] else {
 					throw SchemaViolationError(type: CheckoutCustomerAssociatePayload.self, field: fieldName, value: fieldValue)
@@ -83,6 +100,15 @@ extension Storefront {
 			return field(field: "checkout", aliasSuffix: alias) as! Storefront.Checkout
 		}
 
+		/// The associated customer object. 
+		open var customer: Storefront.Customer? {
+			return internalGetCustomer()
+		}
+
+		func internalGetCustomer(alias: String? = nil) -> Storefront.Customer? {
+			return field(field: "customer", aliasSuffix: alias) as! Storefront.Customer?
+		}
+
 		/// List of errors that occurred executing the mutation. 
 		open var userErrors: [Storefront.UserError] {
 			return internalGetUserErrors()
@@ -99,6 +125,12 @@ extension Storefront {
 					case "checkout":
 					response.append(internalGetCheckout())
 					response.append(contentsOf: internalGetCheckout().childResponseObjectMap())
+
+					case "customer":
+					if let value = internalGetCustomer() {
+						response.append(value)
+						response.append(contentsOf: value.childResponseObjectMap())
+					}
 
 					case "userErrors":
 					internalGetUserErrors().forEach {

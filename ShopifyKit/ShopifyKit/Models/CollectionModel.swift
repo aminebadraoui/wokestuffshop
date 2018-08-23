@@ -11,6 +11,7 @@ import MobileBuySDK
 
 public class CollectionModel {
     public var model: Storefront.Collection
+    
     public var title: String
     public var handle: String
     public var description: String

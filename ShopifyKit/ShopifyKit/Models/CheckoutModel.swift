@@ -11,6 +11,7 @@ import MobileBuySDK
 
 public struct  CheckoutModel {
     public let model:  Storefront.Checkout
+    
     public   let webURL:           URL
     public  let lineItems:        [LineItemModel]
     
@@ -19,6 +20,7 @@ public struct  CheckoutModel {
     //
     public init(from model: Storefront.Checkout) {
         self.model            = model
+        
         self.webURL           = model.webUrl
         self.lineItems        = model.lineItems.edges.map { LineItemModel(from: $0)}
     }

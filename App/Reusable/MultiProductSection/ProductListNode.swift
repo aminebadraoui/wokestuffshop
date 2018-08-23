@@ -7,6 +7,8 @@
 //
 
 import AsyncDisplayKit
+import RxSwift
+import ShopifyKit
 
 class ProductListNode: ASCellNode {
 
@@ -14,6 +16,10 @@ class ProductListNode: ASCellNode {
     //  A list has a title and a collection
     private var _collectionTitleNode: ASTextNode!
     private var  _collectionNode: ASCollectionNode!
+    
+    var disposeBag = DisposeBag()
+    
+    var _selectedProductSubject = PublishSubject<ProductModel>()
 
     //  The datasource for the collection
     var sectionDatasource = Datasource()
@@ -42,8 +48,14 @@ class ProductListNode: ASCellNode {
         //  and append it to the productListDataSource
         var productList = [ProductListItemViewModel]()
         for product in vm.productListDatasource {
-            let productViewModel = ProductListItemViewModel(productModel: product)
-            productList.append(productViewModel)
+            let cell = ProductListItemViewModel(productModel: product)
+            
+            cell.outputs.cellTapped
+                .map{ _ in product }
+                .bind(to: self._selectedProductSubject)
+                .disposed(by: disposeBag)
+          
+            productList.append(cell)
         }
         
         //  Assigning the productListDatasource to the collection dataSource

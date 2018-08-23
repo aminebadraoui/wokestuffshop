@@ -15,9 +15,11 @@ class ProductImagesCell: UITableViewCell, NibReusable {
     
     @IBOutlet weak var containerView: UIView!
     let pageViewController = ImagesPageViewController()
+    var viewModel: ProductImagesRowViewModel!
     
-    func configure(product: ProductModel) {
-        pageViewController.imagesUrls = product.images
+    func configure(row: ProductImagesRowViewModel) {
+        self.viewModel = row
+        pageViewController.imagesUrls = row.product.images
         
         self.containerView.addSubview(pageViewController.view)
         pageViewController.view.snp.makeConstraints {

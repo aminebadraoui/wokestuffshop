@@ -8,15 +8,17 @@
 
 import AsyncDisplayKit
 import ShopifyKit
+import RxSwift
+import RxCocoa
 
 class ProductListSectionViewModel : NSObject, ASTableCompatible {
     
-   
-    
-   
     //  Properties
     let sectionTitle: String
     var productListDatasource: [ProductModel]!
+    
+    var _selectedProductSubject =  PublishSubject<ProductModel>()
+    var disposeBag = DisposeBag()
     
     //  initialization
     init(title: String, productFeed: [ProductModel]) {
@@ -28,6 +30,11 @@ class ProductListSectionViewModel : NSObject, ASTableCompatible {
     func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
         let productList = ProductListNode()
         productList.setup(vm: self)
+        
+        productList._selectedProductSubject
+            .bind(to: _selectedProductSubject)
+            .disposed(by: disposeBag)
+        
         return productList
     }
     

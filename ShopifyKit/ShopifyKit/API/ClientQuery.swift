@@ -56,6 +56,7 @@ public class ClientQuery {
                                     })
                                 }
                                 .options { $0
+                                    .id()
                                     .name()
                                     .values()
                                 }
@@ -115,7 +116,9 @@ public class ClientQuery {
             .shop { $0
                 .productByHandle(handle: product.handle) { $0
                     .options { $0
+                        .id()
                         .name()
+                        .values()
                     }
                     
                 }
@@ -130,8 +133,11 @@ public class ClientQuery {
                 .productByHandle(handle: product.handle) { $0
                     .variantBySelectedOptions(selectedOptions: selectedOptions) {$0
                         .id()
+                        .compareAtPrice()
                         .price()
                         .title()
+                        .sku()
+                        .availableForSale()
                     }
                 }
             }

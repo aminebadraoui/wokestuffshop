@@ -34,69 +34,52 @@ class ProductDetailCoordinator: Coordinator {
         productDetailViewModel = ProductDetailViewModel(product: self.product)
         let vc = ProductDetailViewController.instantiate(viewModel: productDetailViewModel)
         
-        productDetailViewModel.outputs.atcTapped.subscribe(onNext: { _ in
-            self.coordinateToCart()
-        }).disposed(by: disposeBag)
-        
         if let productNav = rootViewController as? UINavigationController {
             productNav.pushViewController(vc, animated: true)
         }
         
-        productDetailViewModel.outputs.selectedOption.subscribe(onNext: { selectedOption in
-            self.coordinateToVariantScreen(option: selectedOption)
+        //  Tapped on option
+        productDetailViewModel.outputs.selectedOption
+            .subscribe(onNext: { selectedOption in
+                self.coordinateToVariantScreen(option: selectedOption)
+            }).disposed(by: disposeBag)
+        
+        //  Tapped on atc button
+        productDetailViewModel.outputs.atcTapped.subscribe(onNext: { product in
+            self.coordinateToCart(product: product)
         }).disposed(by: disposeBag)
     }
     
-    //  TODO: REPLACE WITH VARIANT COORDINATOR
-    func coordinateToVariantScreen(option: Storefront.ProductOption) {
-        optionListViewModel = OptionListViewModel(option: option)
-        let optionListViewController = OptionListViewController.make(viewModel: optionListViewModel)
+    //  Go to variant screen
+    func coordinateToVariantScreen(option: OptionModel) {
         
-        if let optionListNav = rootViewController as? UINavigationController {
-            optionListNav.pushViewController(optionListViewController, animated: true)
-            
-            let attrs = [
-                NSAttributedStringKey.foregroundColor: UIColor.white
-            ]
-            
-            optionListNav.navigationBar.titleTextAttributes = attrs
-            optionListNav.setNeedsStatusBarAppearanceUpdate()
-        }
+        let productVariantCoordinator = ProductVariantCoordinator(rootViewController: rootViewController, option: option)
+        productVariantCoordinator.start()
         
-        optionListViewModel.outputs.selectedOptionValue
-            .bind(to: productDetailViewModel.inputs.selectOptionAtIndexAction)
+        productVariantCoordinator.optionListViewModel.outputs.selectedOptionValue
+            .bind(to: productDetailViewModel.inputs.newOptionValue)
             .disposed(by: disposeBag)
+        
     }
     
     //  TODO: REPLACE WITH CART COORDINATOR
-    func coordinateToCart() {
-        //self.product.varia
+    func coordinateToCart(product: ProductModel) {
+        
         var selectedOptions : [Storefront.SelectedOptionInput] = []
         
-//        let option1 = Storefront.SelectedOptionInput.create(name: "Color", value: "Black")
-//        selectedOptions.append(option1)
-//        let option2 = Storefront.SelectedOptionInput.create(name: "Size", value: "L")
-//        selectedOptions.append(option2)
+        product.options.forEach {
+            let option = Storefront.SelectedOptionInput.create(name: $0.name, value: $0.selectedValue)
+            
+            selectedOptions.append(option)
+        }
         
-      client.fetchVariantForOptions(in: self.product, for: selectedOptions).debug()
+        client.fetchVariantForOptions(in: self.product, for: selectedOptions)
             .subscribe(onNext: { variant in
-        }).disposed(by: disposeBag)
-        
-    let item = CartItemModel(product: self.product, variant: VariantModel(from: (self.product.variants.first?.node)!))
-    
-    CartManager.shared.add(item)
-    
-    let vc = CartViewController.make()
-    if let productNav = self.rootViewController as? UINavigationController {
-        productNav.pushViewController(vc, animated: true)
-        
-        let attrs = [
-            NSAttributedStringKey.foregroundColor: UIColor.white
-        ]
-        
-        productNav.navigationBar.titleTextAttributes = attrs
-        productNav.setNeedsStatusBarAppearanceUpdate()
+                let item = CartItemModel(product: self.product, variant: variant)
+                
+                CartManager.shared.add(item)
+            })
+            .disposed(by: disposeBag)
     }
-}
-
+    
 }

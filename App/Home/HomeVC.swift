@@ -37,6 +37,7 @@ class HomeVC: ASViewController<ASTableNode>  {
         setup()
         
         viewModel.createList(handle: CollectionHandle.sale.rawValue, title: "Latest")
+        
         viewModel.createList(handle: CollectionHandle.bestsellers.rawValue, title: "Bestsellers")
         
     }

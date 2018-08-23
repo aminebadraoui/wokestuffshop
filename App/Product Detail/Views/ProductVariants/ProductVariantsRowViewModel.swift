@@ -13,14 +13,15 @@ import RxCocoa
 import MobileBuySDK
 
 protocol ProductVariantsRowViewModelInputs {
- var optionButtonTapAction: AnyObserver<Storefront.ProductOption> { get }
-    var currentOptionValue: AnyObserver<IndexPath> { get }
+    var option: AnyObserver<OptionModel> { get }
+    var selectOptionAction: AnyObserver<Int> { get }
 }
 
 protocol ProductVariantsRowViewModelOutputs {
-    var optionsView: Observable<[Storefront.ProductOption]> { get }
-    var optionButtonTapped: Observable<Storefront.ProductOption> { get }
-    var currentSelectedOptionValue: Observable<IndexPath> { get }
+    var optionTitle: Observable<String> { get }
+    var optionValue: Observable<String> { get }
+    var selectedOption: Observable<Int> { get }
+    
 }
 
 protocol ProductVariantsRowViewModelTypes {
@@ -28,47 +29,57 @@ protocol ProductVariantsRowViewModelTypes {
     var outputs: ProductVariantsRowViewModelOutputs { get }
 }
 
-class ProductVariantsRowViewModel: TableCompatible, ProductVariantsRowViewModelInputs, ProductVariantsRowViewModelOutputs, ProductVariantsRowViewModelTypes   {
+class ProductVariantsRowViewModel:
+    ProductDetailItem,
+    ProductVariantsRowViewModelInputs,
+    ProductVariantsRowViewModelOutputs,
+ProductVariantsRowViewModelTypes   {
+    
+    var rowCount: Int
+    var sectionTitle: String = "Variants"
+    var type: ProductDetailViewModelType = .variants
+    
+    
     init(product: ProductModel){
         self.product = product
+        
+        height = UITableViewAutomaticDimension
+        rowCount = product.options.count
+       
+        optionTitle = _currentOptionSubject.asObservable().debug()
+            .map {
+                guard $0.name != "Title" else { return "" }
+                return $0.name
+        }
+        
+        optionValue = _currentOptionSubject.asObservable().debug()
+            .map {
+                guard $0.selectedValue != "Default Title" else { return "" }
+                return $0.selectedValue
+        }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        tableView.register(cellType: ProductVariantsCell.self)
-        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: ProductVariantsCell.self)
-        cell.configure(row: self)
-        
-        _optionsSubject.onNext(product.options)
-        
-        return cell
+    // Subjects
+    private var _selectOptionSubject =  PublishSubject<Int>()
+    private var _currentOptionSubject = PublishSubject<OptionModel>()
+    
+    // Inputs
+    var selectOptionAction: AnyObserver<Int>{
+        return _selectOptionSubject.asObserver()
+    }
+    var option: AnyObserver<OptionModel> {
+        return _currentOptionSubject.asObserver()
     }
     
-    var height: CGFloat = UITableViewAutomaticDimension
+    // outputs
+    var selectedOption: Observable<Int> {
+        return _selectOptionSubject.asObservable()
+    }
+    var optionTitle: Observable<String>
+    var optionValue: Observable<String>
+    
+    var height: CGFloat
     var product: ProductModel
-    
-    //  Subjects
-    private var _optionsSubject = PublishSubject<[Storefront.ProductOption]>()
-    private var _optionButtonTappedSubject = PublishSubject<Storefront.ProductOption>()
-    private var _currentOptionValueSubject = BehaviorSubject<IndexPath>(value: [0,0])
-    
-    //  Inputs
-    var optionButtonTapAction: AnyObserver<Storefront.ProductOption>{
-        return _optionButtonTappedSubject.asObserver()
-    }
-    var currentOptionValue: AnyObserver<IndexPath>{
-        return _currentOptionValueSubject.asObserver()
-    }
-    
-    //  Outputs
-    var optionsView: Observable<[Storefront.ProductOption]> {
-        return _optionsSubject.asObservable()
-    }
-    var optionButtonTapped: Observable<Storefront.ProductOption>{
-        return _optionButtonTappedSubject.asObservable()
-    }
-    var currentSelectedOptionValue: Observable<IndexPath>{
-        return _currentOptionValueSubject.asObservable()
-    }
     
     //  Types
     var inputs: ProductVariantsRowViewModelInputs { return self }
