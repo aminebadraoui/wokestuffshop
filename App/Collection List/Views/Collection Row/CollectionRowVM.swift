@@ -41,6 +41,10 @@ class CollectionRowVM: ASTableCompatible, CollectionRowInputs, CollectionRowOutp
         _cellTappedSubject.onNext(())
     }
     
+    func tableNode(_ tableNode: ASTableNode, didHighlightRowAt indexPath: IndexPath) {
+        tableNode.nodeForRow(at: indexPath)?.backgroundColor = .white
+    }
+    
     // Subject
     private var _cellTappedSubject = PublishSubject<Void>()
     

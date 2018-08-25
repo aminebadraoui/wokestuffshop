@@ -28,35 +28,41 @@ class TabBarCoordinator: Coordinator {
     let collectionNav = UINavigationController()
     let cartNav = UINavigationController()
     
-    let wokeTabBarController = UITabBarController()
+    let tabBarController = UITabBarController()
     
     var tabControllers: [UINavigationController] = []
  
     init() {
+         rootViewController = UITabBarController()
+        
         let attrs = [
             NSAttributedStringKey.foregroundColor: UIColor.white
         ]
+        
         collectionNav.navigationBar.titleTextAttributes = attrs
         collectionNav.setNeedsStatusBarAppearanceUpdate()
-
-        rootViewController = UITabBarController()
+        
+        cartNav.navigationBar.titleTextAttributes = attrs
+        cartNav.setNeedsStatusBarAppearanceUpdate()
+        
+        homeNav.navigationBar.titleTextAttributes = attrs
+        homeNav.setNeedsStatusBarAppearanceUpdate()
+        
         homeNav.navigationBar.barTintColor = .black
         collectionNav.navigationBar.barTintColor = .black
+        cartNav.navigationBar.barTintColor = .black
      
-        
         childCoordinators = []
-        
-        
     }
     
     func start() {
         configureTabs()
         configureNavControllers()
-        wokeTabBarController.viewControllers = [homeNav,collectionNav,cartNav]
-        wokeTabBarController.tabBar.barTintColor = .black
-        wokeTabBarController.tabBar.tintColor = .white
+        tabBarController.viewControllers = [homeNav,collectionNav,cartNav]
+        tabBarController.tabBar.barTintColor = .black
+        tabBarController.tabBar.tintColor = .white
         
-        rootViewController = wokeTabBarController
+        rootViewController = tabBarController
         
         }
     
@@ -76,9 +82,9 @@ class TabBarCoordinator: Coordinator {
     
     private func configureNavControllers() {
         
-        let homeCoordinator       = HomeCoordinator(rootViewController: homeNav)
+        let homeCoordinator           = HomeCoordinator(rootViewController: homeNav)
         let collectionListCoordinator = CollectionListCoordinator(rootViewController: collectionNav)
-        let cartCoordinator       = CartCoordinator(rootViewController: cartNav)
+        let cartCoordinator           = CartCoordinator(rootViewController: cartNav)
         
         homeCoordinator.start()
         

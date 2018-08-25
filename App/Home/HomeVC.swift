@@ -11,11 +11,9 @@ import ShopifyKit
 import MobileBuySDK
 import RxSwift
 
-
-
 class HomeVC: ASViewController<ASTableNode>  {
-    
     let client = Client.shared
+    
     let disposeBag = DisposeBag()
     
     //  Properties
@@ -24,9 +22,9 @@ class HomeVC: ASViewController<ASTableNode>  {
     
     //  initialization
     init (vm: HomeVM) {
-        
         self.viewModel = vm
-        homeTableNode  = ASTableNode()
+        
+        homeTableNode = ASTableNode()
        
         super.init(node: homeTableNode)
         
@@ -35,11 +33,6 @@ class HomeVC: ASViewController<ASTableNode>  {
             }).disposed(by: disposeBag)
         
         setup()
-        
-        viewModel.createList(handle: CollectionHandle.sale.rawValue, title: "Latest")
-        
-        viewModel.createList(handle: CollectionHandle.bestsellers.rawValue, title: "Bestsellers")
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -47,14 +40,11 @@ class HomeVC: ASViewController<ASTableNode>  {
     }
     
     func setup() {
-        
-    
-
         //Setup of the table Node
+   
         homeTableNode.view.allowsSelection = false
         homeTableNode.view.separatorStyle = .singleLine
         
-      
         homeTableNode.delegate = viewModel.dataSource
         homeTableNode.dataSource = viewModel.dataSource
         

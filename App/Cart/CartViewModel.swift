@@ -64,6 +64,8 @@ class CartViewModel: CartViewModelInputs, CartViewModelOutputs, CartViewModelTyp
             CartManager.shared.removeItemAt(index)
         })
         .disposed(by: disposeBag)
+        
+        
     }
     
     //  Subjects

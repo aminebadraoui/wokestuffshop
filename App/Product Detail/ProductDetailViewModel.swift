@@ -86,7 +86,10 @@ class ProductDetailViewModel:  NSObject, ProductDetailViewModelInputs, ProductDe
         var productVariants    = [ProductVariantsRowViewModel]()
         let productDescription = [ProductDescriptionRowViewModel(product: product)]
         
+        
         product.options.forEach { option in
+            guard option.name != "Title" else { return }
+            
             let row = ProductVariantsRowViewModel(product: product)
             row.outputs.selectedOption
                 .map{ index in
@@ -94,6 +97,7 @@ class ProductDetailViewModel:  NSObject, ProductDetailViewModelInputs, ProductDe
                 }
                 .bind(to: _selectedOptionSubject)
                 .disposed(by: disposeBag)
+            
             productVariants.append(row)
         }
         
@@ -223,7 +227,7 @@ extension ProductDetailViewModel: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 3 {
-            return 20
+            return 32
         } else {
             return 0
         }

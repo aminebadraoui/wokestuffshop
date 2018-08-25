@@ -28,10 +28,8 @@ class FeaturedProductNode: ASDisplayNode {
     
     func setup(vm: FeaturedProductViewModel) {
         self.viewModel = vm
-       // _productImageUrl = vm.product.imageURL
-       
-      //  _featuredImageNode.url = URL(string: _productImageUrl)
-        
+
+        _featuredImageNode.url = vm.product.images.first
         
         //  Title setup
         let titleTextAttributes: [NSAttributedStringKey: Any] = [
@@ -52,8 +50,14 @@ class FeaturedProductNode: ASDisplayNode {
         self.backgroundColor = .white
         self.automaticallyManagesSubnodes = true
         
+        let imageTap = UIGestureRecognizer(target: self, action: #selector(imageTapAction))
+        _featuredImageNode.view.addGestureRecognizer(imageTap)
+        _featuredImageNode.view.isUserInteractionEnabled = true
     }
     
+    @objc fileprivate func imageTapAction() {
+       print( "Image Tapped")
+    }
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
         
        let mainStack = ASStackLayoutSpec.vertical()

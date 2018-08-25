@@ -20,16 +20,24 @@ class CartCell: UITableViewCell, NibReusable {
     @IBOutlet private weak var subtitleLabel: UILabel!
     @IBOutlet private weak var priceLabel:    UILabel!
     @IBOutlet private weak var quantityLabel: UILabel!
-    @IBOutlet private weak var stepper:       UIStepper!
+    @IBOutlet private weak var stepper:       UIStepper! {
+        didSet {
+            stepper.value = 2.0
+        }
+    }
     
     var disposeBag = DisposeBag()
     
     override func prepareForReuse() {
         super.prepareForReuse()
         disposeBag = DisposeBag()
+        
     }
-
     
+    override func awakeFromNib() {
+        
+    }
+   
     func configure(row: CartRowViewModel) {
         
         row.outputs.productTitleView
@@ -52,6 +60,12 @@ class CartCell: UITableViewCell, NibReusable {
             .drive(quantityLabel.rx.text)
             .disposed(by: disposeBag)
         
+        row.outputs.quantityView
+            .map { Double($0)! + 1}
+            .asDriver(onErrorJustReturn: 0)
+            .drive(stepper.rx.value)
+            .disposed(by: disposeBag)
+        
         row.outputs.imageUrl
             .subscribe(onNext: { url in
                 Alamofire.request((url?.absoluteString)!).responseImage { response in
@@ -62,15 +76,11 @@ class CartCell: UITableViewCell, NibReusable {
                     .disposed(by: disposeBag)
         
         stepper.rx.value
-            .map { Int($0) }
+            .map { Int($0) - 1 }
             .bind(to: row.inputs.stepperTapAction)
             .disposed(by: disposeBag)
     }
     
-    
-    
-
-
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

@@ -9,12 +9,10 @@
 import AsyncDisplayKit
 
  class Datasource: NSObject {
-
     var ASCollectionData = [ASCollectionCompatible]()
     var ASTableData      = [ASTableCompatible]()
     var collectionData   = [CollectionCompatible]()
     var tableData        = [TableCompatible]()
-
 }
 
 extension Datasource : ASCollectionDelegate, ASCollectionDataSource {
@@ -30,8 +28,8 @@ extension Datasource : ASCollectionDelegate, ASCollectionDataSource {
     func collectionNode(_ collectionNode: ASCollectionNode, didSelectItemAt indexPath: IndexPath) {
         ASCollectionData[indexPath.row].collectionNode(collectionNode, didSelectItemAt: indexPath)
     }
-}
 
+}
 
 extension Datasource:  ASTableDelegate, ASTableDataSource {
     
@@ -47,6 +45,7 @@ extension Datasource:  ASTableDelegate, ASTableDataSource {
     func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
         ASTableData[indexPath.row].tableNode(tableNode, didSelectRowAt: indexPath)
     }
+    
 }
 
 extension Datasource: UITableViewDelegate, UITableViewDataSource {
@@ -71,6 +70,4 @@ extension Datasource: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return collectionData[indexPath.row].collectionView(collectionView, cellForItemAt: indexPath)
     }
-    
-    
 }

@@ -24,7 +24,7 @@ class FeaturedSectionNode: ASCellNode {
         //  Title setup
         
         let titleTextAttributes: [NSAttributedStringKey: Any] = [
-            NSAttributedStringKey.font : AppFont.customFont(ofSize: 36, ofType: .bold),
+            NSAttributedStringKey.font : AppFont.customFont(ofSize: 24, ofType: .bold),
             NSAttributedStringKey.foregroundColor : AppColor.defaultColor ]
         
         
@@ -50,8 +50,8 @@ class FeaturedSectionNode: ASCellNode {
         
         super.init()
     }
+ 
 
-    
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
         
         

@@ -45,17 +45,20 @@ UIPageViewControllerDelegate{
     }
     
     private func configurePageControl() {
-        pageControl = UIPageControl(frame: CGRect(x: 0,y: UIScreen.main.bounds.maxY, width: UIScreen.main.bounds.width, height: 20))
+        pageControl = UIPageControl(frame: CGRect(x: 0,y: UIScreen.main.bounds.maxY, width: UIScreen.main.bounds.width, height: 10))
         
+       
         self.pageControl.numberOfPages = imagesUrls.count
         self.pageControl.currentPage = 0
-        self.pageControl.tintColor = UIColor.black
-        self.pageControl.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        self.pageControl.tintColor = UIColor.white
+        self.pageControl.backgroundColor = UIColor.white
         self.pageControl.pageIndicatorTintColor = UIColor.lightGray
-        self.pageControl.currentPageIndicatorTintColor = UIColor.white
+        self.pageControl.currentPageIndicatorTintColor = UIColor.black
         
         self.view.addSubview(pageControl)
         pageControl.snp.makeConstraints {
+            $0.height.equalTo(16)
+            
             $0.left.equalToSuperview()
             $0.right.equalToSuperview()
             $0.bottom.equalToSuperview()

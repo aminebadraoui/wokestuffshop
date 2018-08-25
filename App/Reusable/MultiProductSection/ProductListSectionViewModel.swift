@@ -18,6 +18,7 @@ class ProductListSectionViewModel : NSObject, ASTableCompatible {
     var productListDatasource: [ProductModel]!
     
     var _selectedProductSubject =  PublishSubject<ProductModel>()
+    var _viewAllTapSubject =  PublishSubject<Void>()
     var disposeBag = DisposeBag()
     
     //  initialization
@@ -28,17 +29,28 @@ class ProductListSectionViewModel : NSObject, ASTableCompatible {
     
     //  Delegate method
     func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
-        let productList = ProductListNode()
-        productList.setup(vm: self)
+       let productList = ProductListNode()
+        
+        productList.configure(viewModel: self)
         
         productList._selectedProductSubject
             .bind(to: _selectedProductSubject)
             .disposed(by: disposeBag)
         
+        productList._viewAllTapSubject
+            .bind(to: _viewAllTapSubject)
+            .disposed(by: disposeBag)
+        
+        tableNode.allowsSelection = true
+        
         return productList
     }
     
     func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+    
+    func tableNode(_ tableNode: ASTableNode, didHighlightRowAt indexPath: IndexPath) {
         
     }
 }

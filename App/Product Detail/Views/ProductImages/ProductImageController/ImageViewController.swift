@@ -36,7 +36,11 @@ class ImageViewController: UIViewController {
         self.view.addSubview(imageView)
         
         imageView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.height.equalTo(416)
+            
+            $0.top.equalToSuperview()
+            $0.left.equalToSuperview()
+            $0.right.equalToSuperview()
         }
     }
 }

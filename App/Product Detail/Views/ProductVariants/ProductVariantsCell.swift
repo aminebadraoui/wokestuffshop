@@ -29,8 +29,6 @@ class ProductVariantsCell: UITableViewCell, NibReusable {
     func configure(row: ProductVariantsRowViewModel){
         print("variant configure called")
         
-//        optionTitle.text = option.name
-//        optionValue.setTitle(option.selectedValue, for: .normal)
         self.viewModel = row
         
         row.outputs.optionTitle

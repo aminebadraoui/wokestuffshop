@@ -451,6 +451,7 @@ struct _R: Rswift.Validatable {
       try cart.validate()
       try optionListViewController.validate()
       try productDetailViewController.validate()
+      try launchScreen.validate()
     }
     
     struct cart: Rswift.StoryboardResourceType, Rswift.Validatable {
@@ -469,11 +470,15 @@ struct _R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    struct launchScreen: Rswift.StoryboardResourceWithInitialControllerType {
+    struct launchScreen: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
       typealias InitialController = UIKit.UIViewController
       
       let bundle = R.hostingBundle
       let name = "LaunchScreen"
+      
+      static func validate() throws {
+        if UIKit.UIImage(named: "logo_wokestuff") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'logo_wokestuff' is used in storyboard 'LaunchScreen', but couldn't be loaded.") }
+      }
       
       fileprivate init() {}
     }

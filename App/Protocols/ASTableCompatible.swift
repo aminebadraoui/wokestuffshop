@@ -14,4 +14,6 @@ protocol ASTableCompatible {
     func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode
     
     func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath)
+    
+    func tableNode(_ tableNode: ASTableNode, didHighlightRowAt indexPath: IndexPath) 
 }

@@ -35,7 +35,7 @@ class ProductGridViewController: ASViewController<ASCollectionNode>  {
         
         super.init(node: productList)
         
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = AppColor.appBackground
         
         setup()
         

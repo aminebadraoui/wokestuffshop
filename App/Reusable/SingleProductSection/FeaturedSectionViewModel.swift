@@ -8,14 +8,13 @@
 
 import AsyncDisplayKit
 import ShopifyKit
+import RxSwift
 
 class FeaturedSectionViewModel : NSObject, ASTableCompatible {
   
-    
-    
     var sectionTitle: String
     var productDatasource: ProductModel
-    
+    var selectedFeaturedProductSubject = PublishSubject<ProductModel>()
     
     init(title: String, productFeed: ProductModel) {
         self.sectionTitle = title
@@ -29,6 +28,11 @@ class FeaturedSectionViewModel : NSObject, ASTableCompatible {
     }
     
     func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
-        
+        selectedFeaturedProductSubject.onNext(self.productDatasource)
+     
+    }
+
+    func tableNode(_ tableNode: ASTableNode, didHighlightRowAt indexPath: IndexPath) {
+//        tableNode.nodeForRow(at: indexPath)?.backgroundColor = .white
     }
 }

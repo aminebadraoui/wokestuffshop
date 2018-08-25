@@ -48,13 +48,11 @@ ProductVariantsRowViewModelTypes   {
        
         optionTitle = _currentOptionSubject.asObservable().debug()
             .map {
-                guard $0.name != "Title" else { return "" }
                 return $0.name
         }
         
         optionValue = _currentOptionSubject.asObservable().debug()
             .map {
-                guard $0.selectedValue != "Default Title" else { return "" }
                 return $0.selectedValue
         }
     }
@@ -67,6 +65,7 @@ ProductVariantsRowViewModelTypes   {
     var selectOptionAction: AnyObserver<Int>{
         return _selectOptionSubject.asObserver()
     }
+    
     var option: AnyObserver<OptionModel> {
         return _currentOptionSubject.asObserver()
     }
@@ -75,10 +74,12 @@ ProductVariantsRowViewModelTypes   {
     var selectedOption: Observable<Int> {
         return _selectOptionSubject.asObservable()
     }
+    
     var optionTitle: Observable<String>
     var optionValue: Observable<String>
     
     var height: CGFloat
+    
     var product: ProductModel
     
     //  Types

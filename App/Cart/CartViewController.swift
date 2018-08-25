@@ -49,6 +49,8 @@ class CartViewController: UIViewController, StoryboardSceneBased {
             .asDriver(onErrorJustReturn: "0.0")
             .drive(subTotal.rx.text)
             .disposed(by: disposeBag)
+        
+        
     }
     
 

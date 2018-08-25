@@ -9,9 +9,10 @@
 import UIKit
 
 extension String {
+    
     func interpretAsHTML(font: String, size: CGFloat) -> NSAttributedString? {
-        
         var style = ""
+        
         style += "<style>* { "
         style += "font-family: \"\(font)\" !important;"
         style += "font-size: \(size) !important;"

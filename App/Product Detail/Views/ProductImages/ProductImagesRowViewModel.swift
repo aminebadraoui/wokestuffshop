@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 
 class ProductImagesRowViewModel:  ProductDetailItem {
-    var height: CGFloat = 350
+    var height: CGFloat = 416
     var product: ProductModel
     
     var type: ProductDetailViewModelType = .images

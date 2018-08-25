@@ -18,6 +18,7 @@ public class CartManager {
     
     public var itemsObservable = BehaviorSubject<[CartItemModel]>(value: [])
     public var subtotalObservable = BehaviorSubject<Decimal>(value: 0.0)
+    public var totalQuantityObservable = BehaviorSubject<Int>(value: 0)
     
     var disposeBag = DisposeBag()
     
@@ -27,6 +28,12 @@ public class CartManager {
         }
         .bind(to: subtotalObservable)
         .disposed(by: disposeBag)
+        
+        itemsObservable.map { _ in
+            return self.computeTotalQuantity()
+            }
+            .bind(to: totalQuantityObservable)
+            .disposed(by: disposeBag)
     }
     
     public func add(_ cartItem: CartItemModel) {
@@ -49,6 +56,9 @@ public class CartManager {
     
     public func updateQuantity(_ quantity: Int, at indexPath: IndexPath) {
         items[indexPath.row].quantity = quantity
+        
+        guard  items[indexPath.row].quantity != 0 else { return self.removeItemAt(indexPath)}
+        
         itemsObservable.onNext(items)
     }
     
@@ -60,6 +70,11 @@ public class CartManager {
     private func computeSubtotal()-> Decimal {
         let subtotal = items.map { ($0.variant.price) * Decimal($0.quantity)}.reduce(0,+)
         return subtotal
+    }
+    
+    public func computeTotalQuantity() -> Int {
+        let totalQuantity = items.map { ($0.quantity) }.reduce(0, +)
+        return totalQuantity
     }
     
 }

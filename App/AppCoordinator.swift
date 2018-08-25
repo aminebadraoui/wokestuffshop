@@ -27,10 +27,10 @@ class AppCoordinator: Coordinator {
     // Start function
     func start()  {
       
-        let wokeTabBarCoordinator = MenuTabBarCoordinator()
+        let wokeTabBarCoordinator = TabBarCoordinator()
         wokeTabBarCoordinator.start()
       
-       rootViewController = wokeTabBarCoordinator.wokeTabBarController
+       rootViewController = wokeTabBarCoordinator.tabBarController
     }
     
     

@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,33 +16,30 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProductHeaderCell" rowHeight="119" id="wJ2-fb-0ec" customClass="ProductHeaderCell" customModule="App" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="670" height="119"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProductHeaderCell" rowHeight="130" id="wJ2-fb-0ec" customClass="ProductHeaderCell" customModule="App" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="670" height="130"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wJ2-fb-0ec" id="fB3-Qu-da6">
-                <rect key="frame" x="0.0" y="0.0" width="670" height="118.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="670" height="129.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yA9-LO-tNe">
-                        <rect key="frame" x="20" y="11" width="630" height="97"/>
+                        <rect key="frame" x="20" y="11" width="630" height="108"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PRODUCT TILE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ymW-Zv-VGP">
-                                <rect key="frame" x="8" y="8" width="614" height="31"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="PRODUCT TILE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ymW-Zv-VGP">
+                                <rect key="frame" x="8" y="8" width="614" height="23.5"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="PRICE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H9Q-Zq-7en">
-                                <rect key="frame" x="8" y="43" width="614" height="23.5"/>
+                                <rect key="frame" x="8" y="54" width="614" height="23.5"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="APo-tN-AXS">
-                                <rect key="frame" x="8" y="68.5" width="614" height="20.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20.5" id="4OE-Q1-FT3"/>
-                                </constraints>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="APo-tN-AXS">
+                                <rect key="frame" x="8" y="79.5" width="614" height="20.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="CompareAtPrice">
                                         <attributes>
@@ -57,9 +53,9 @@
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="APo-tN-AXS" secondAttribute="bottom" constant="8" id="44K-Wg-mv0"/>
-                            <constraint firstItem="H9Q-Zq-7en" firstAttribute="top" secondItem="ymW-Zv-VGP" secondAttribute="bottom" constant="4" id="BOO-dx-Mh3"/>
                             <constraint firstItem="H9Q-Zq-7en" firstAttribute="leading" secondItem="yA9-LO-tNe" secondAttribute="leading" constant="8" id="CJg-fa-1P0"/>
                             <constraint firstAttribute="trailing" secondItem="H9Q-Zq-7en" secondAttribute="trailing" constant="8" id="DT0-2T-ouI"/>
+                            <constraint firstItem="H9Q-Zq-7en" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ymW-Zv-VGP" secondAttribute="bottom" constant="4" id="Jee-gu-Nml"/>
                             <constraint firstItem="APo-tN-AXS" firstAttribute="top" secondItem="H9Q-Zq-7en" secondAttribute="bottom" constant="2" id="LLY-Ab-OvA"/>
                             <constraint firstItem="APo-tN-AXS" firstAttribute="leading" secondItem="yA9-LO-tNe" secondAttribute="leading" constant="8" id="NNU-HI-yd5"/>
                             <constraint firstAttribute="trailing" secondItem="ymW-Zv-VGP" secondAttribute="trailing" constant="8" id="Xbb-iq-tzK"/>
@@ -81,7 +77,7 @@
                 <outlet property="price" destination="H9Q-Zq-7en" id="VR5-Ub-fiL"/>
                 <outlet property="productName" destination="ymW-Zv-VGP" id="cIN-L5-Hat"/>
             </connections>
-            <point key="canvasLocation" x="-59" y="42.5"/>
+            <point key="canvasLocation" x="-341" y="-369"/>
         </tableViewCell>
     </objects>
 </document>

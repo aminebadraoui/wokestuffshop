@@ -9,7 +9,6 @@
 import UIKit
 import AsyncDisplayKit
 
-
 class ProductListItemCell: ASCellNode {
     
     let productImageNode: ASNetworkImageNode = {
@@ -30,14 +29,19 @@ class ProductListItemCell: ASCellNode {
         //  Image Configuration
         self.productImageNode.url = viewModel.product.images.first
         
-        let currentPrice = viewModel.product.variants.first?.price
-        let compareAtPrice = viewModel.product.variants.first?.price ?? nil
+        let currentPriceString: String
+        let compareAtPriceString: String
         
-        let currentPriceString = HelperMethods.priceFormatter(price: currentPrice)
-        let compareAtPriceString = HelperMethods.priceFormatter(price: compareAtPrice)
+        guard let currentPrice = viewModel.product.variants.first?.price else { return }
+        currentPriceString = Currency.stringFrom(currentPrice)
+        
+        if let compareAtPrice = viewModel.product.variants.first?.price ?? nil {
+            compareAtPriceString = Currency.stringFrom(compareAtPrice)
+        } else {
+            compareAtPriceString = ""
+        }
         
         //  Text Configuration
-        
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .left
       
@@ -68,7 +72,7 @@ class ProductListItemCell: ASCellNode {
     
     override init() {
         super.init()
-        self.backgroundColor = .white
+        self.backgroundColor = AppColor.appBackground
         //  Cell configuration
         
         let size = UIScreen.main.bounds.size.width/2 - 20
@@ -87,7 +91,6 @@ class ProductListItemCell: ASCellNode {
         let productStack = ASStackLayoutSpec.vertical()
         //  TODO: Move to constants
         let defaultInsets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
-        let smallInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
         let zeroVerticalInsets = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 4)
         
         //Image section

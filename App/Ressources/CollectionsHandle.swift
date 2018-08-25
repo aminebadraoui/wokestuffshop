@@ -8,8 +8,6 @@
 
 import Foundation
 
-
-
 enum CollectionHandle: String {
     case sale = "sale"
     case bikinis = "bikinis"

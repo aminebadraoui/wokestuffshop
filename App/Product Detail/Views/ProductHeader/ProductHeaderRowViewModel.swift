@@ -40,11 +40,9 @@ ProductHeaderRowViewModelTypes {
     
     init(product: ProductModel){
     self.product = product
-        
       
     }
 
-    
     func bindData() {
         
         let productTitle = formatProductName(product.title)
@@ -57,7 +55,7 @@ ProductHeaderRowViewModelTypes {
     }
     
     private func formatCompareAt(_ price: Decimal??) -> NSAttributedString{
-        let productCompareAtPrice = HelperMethods.priceFormatter(price: price ?? nil)
+        let productCompareAtPrice = HelperMethod.priceFormatter(price: price ?? nil)
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
@@ -75,7 +73,7 @@ ProductHeaderRowViewModelTypes {
     }
     
     private func formatCurrentPrice(_ price: Decimal?) -> NSAttributedString{
-        let productCurrentPrice = HelperMethods.priceFormatter(price: price )
+        let productCurrentPrice = HelperMethod.priceFormatter(price: price )
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
