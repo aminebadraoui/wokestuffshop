@@ -7,20 +7,17 @@
 //
 
 import UIKit
-import Rswift
-import Reusable
 import RxSwift
 import RxCocoa
 
-class ProductDetailViewController: UIViewController, StoryboardSceneBased {
-    static var sceneStoryboard: UIStoryboard = R.storyboard.productDetailViewController()
-    
+class ProductDetailViewController: UIViewController {
     var viewModel: ProductDetailViewModel!
     
     var disposeBag = DisposeBag()
     
     public static func instantiate(viewModel: ProductDetailViewModel) -> ProductDetailViewController {
-        let vc = self.instantiate()
+        let vc = UIStoryboard(name: "ProductDetailViewController", bundle: nil).instantiateViewController(withIdentifier: "ProductDetailViewController") as! ProductDetailViewController
+        
         vc.viewModel = viewModel
         return vc
     }

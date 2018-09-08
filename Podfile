@@ -15,8 +15,7 @@ def shared_pods
 end
     
   target 'App' do
-    
-      
+
       shared_pods
   end
 target 'ShopifyKit' do

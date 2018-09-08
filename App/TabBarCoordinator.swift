@@ -16,78 +16,72 @@ class TabBarCoordinator: Coordinator {
     var childCoordinators: [Coordinator]
     var rootViewController: UIViewController
     
-
     var disposeBag = DisposeBag()
     
     //Tabs corresponding to each navigation controller
     let homeTab = UITabBarItem()
-    let collectionTab = UITabBarItem()
     let cartTab = UITabBarItem()
     
     let homeNav = UINavigationController()
-    let collectionNav = UINavigationController()
     let cartNav = UINavigationController()
     
-    let wokeTabBarController = UITabBarController()
+    let tabBarController = UITabBarController()
     
     var tabControllers: [UINavigationController] = []
  
     init() {
+         rootViewController = UITabBarController()
+        
         let attrs = [
             NSAttributedStringKey.foregroundColor: UIColor.white
         ]
-        collectionNav.navigationBar.titleTextAttributes = attrs
-        collectionNav.setNeedsStatusBarAppearanceUpdate()
-
-        rootViewController = UITabBarController()
-        homeNav.navigationBar.barTintColor = .black
-        collectionNav.navigationBar.barTintColor = .black
+        
+        homeNav.navigationBar.titleTextAttributes = attrs
+        homeNav.setNeedsStatusBarAppearanceUpdate()
+        
+        cartNav.navigationBar.titleTextAttributes = attrs
+        cartNav.setNeedsStatusBarAppearanceUpdate()
+        
+        homeNav.navigationBar.barTintColor = UIColor.black
+        homeNav.navigationBar.isTranslucent = false
+        
+        cartNav.navigationBar.barTintColor = .black
+        cartNav.navigationBar.isTranslucent = false
      
-        
         childCoordinators = []
-        
-        
     }
     
     func start() {
         configureTabs()
         configureNavControllers()
-        wokeTabBarController.viewControllers = [homeNav,collectionNav,cartNav]
-        wokeTabBarController.tabBar.barTintColor = .black
-        wokeTabBarController.tabBar.tintColor = .white
+        tabBarController.viewControllers = [homeNav,cartNav]
+        tabBarController.tabBar.barTintColor = .black
+        tabBarController.tabBar.tintColor = .white
         
-        rootViewController = wokeTabBarController
+        rootViewController = tabBarController
         
         }
     
     private func configureTabs() {
         
         homeTab.title       = "Home"
-        homeTab.image       = R.image.ic_home()
-
-        collectionTab.title = "Collections"
-        collectionTab.image = R.image.ic_apps()
+        homeTab.image       = #imageLiteral(resourceName: "ic_home")
 
         cartTab.title       = "Your Cart"
-        cartTab.image       = R.image.ic_shopping_cart()
+        cartTab.image       = #imageLiteral(resourceName: "ic_shopping_cart")
         
     }
     
-    
     private func configureNavControllers() {
         
-        let homeCoordinator       = HomeCoordinator(rootViewController: homeNav)
-        let collectionListCoordinator = CollectionListCoordinator(rootViewController: collectionNav)
-        let cartCoordinator       = CartCoordinator(rootViewController: cartNav)
+        let homeCoordinator           = HomeCoordinator(rootViewController: homeNav)
+        let cartCoordinator           = CartCoordinator(rootViewController: cartNav)
         
         homeCoordinator.start()
-        
-        collectionListCoordinator.start()
        
         cartCoordinator.start()
         
         homeNav.tabBarItem       = homeTab
-        collectionNav.tabBarItem = collectionTab
         cartNav.tabBarItem       = cartTab
       
         cartNav.tabBarItem.badgeColor = .red
@@ -101,6 +95,4 @@ class TabBarCoordinator: Coordinator {
             .disposed(by: disposeBag)
  
     }
-    
-    
 }

@@ -7,17 +7,13 @@
 //
 
 import UIKit
-import Rswift
-import Reusable
 import MobileBuySDK
 import ShopifyKit
 import SafariServices
 import RxSwift
 import RxCocoa
 
-class CartViewController: UIViewController, StoryboardSceneBased {
-    
-    static var sceneStoryboard: UIStoryboard = R.storyboard.cart()
+class CartViewController: UIViewController {
     
     @IBOutlet fileprivate weak var tableView: UITableView!
     @IBOutlet weak var subTotal: UILabel!
@@ -31,7 +27,8 @@ class CartViewController: UIViewController, StoryboardSceneBased {
     }
     
     public static func make(viewModel: CartViewModel) -> CartViewController {
-        let vc = self.instantiate()
+        let vc = UIStoryboard(name: "CartViewController", bundle: nil).instantiateViewController(withIdentifier: "CartViewController") as! CartViewController
+        
         vc.title = "Cart"
         vc.viewModel = viewModel
         return vc

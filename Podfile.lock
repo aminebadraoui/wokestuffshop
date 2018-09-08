@@ -1,14 +1,14 @@
 PODS:
-  - Kingfisher (4.8.1)
+  - Kingfisher (4.9.0)
   - Mobile-Buy-SDK (3.1.8)
   - R.swift (4.0.0):
     - R.swift.Library (~> 4.0.0)
   - R.swift.Library (4.0.0)
-  - Reusable (4.0.2):
-    - Reusable/Storyboard (= 4.0.2)
-    - Reusable/View (= 4.0.2)
-  - Reusable/Storyboard (4.0.2)
-  - Reusable/View (4.0.2)
+  - Reusable (4.0.3):
+    - Reusable/Storyboard (= 4.0.3)
+    - Reusable/View (= 4.0.3)
+  - Reusable/Storyboard (4.0.3)
+  - Reusable/View (4.0.3)
   - RxCocoa (4.2.0):
     - RxSwift (~> 4.0)
   - RxSwift (4.2.0)
@@ -24,7 +24,7 @@ DEPENDENCIES:
   - SnapKit (~> 4.0.0)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - Kingfisher
     - Mobile-Buy-SDK
     - R.swift
@@ -35,15 +35,15 @@ SPEC REPOS:
     - SnapKit
 
 SPEC CHECKSUMS:
-  Kingfisher: 868c1149679a7ab6869be118faa9b5aed154aaf0
+  Kingfisher: 64539b51826b778206daa6ed815d12653caa69dd
   Mobile-Buy-SDK: c94c2db580f9d4b201d1f2b07873a075437e4858
   R.swift: d6a5ec2f55a8441dc0ed9f1f8b37d7d11ae85c66
   R.swift.Library: c3af34921024333546e23b70e70d0b4e0cffca75
-  Reusable: 584a5629747c52e0f6a77841b400dc2643f6fa0f
+  Reusable: 12b67a60e1f3e8c523cc910795dab733f58fbc7e
   RxCocoa: 0b54909c902e1e581212a03e690bbd94032d8baa
   RxSwift: 99e10317ddfcc7fbe01356aafd118fde4a0be104
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
 
-PODFILE CHECKSUM: dc91027a7cd64165b7ecaf45e2ba2b306f639c34
+PODFILE CHECKSUM: 5fd7b6843daade2a24c73dc6c7e22b760b397b09
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.3

@@ -7,24 +7,20 @@
 //
 
 import UIKit
-import Rswift
-import Reusable
 import RxSwift
 import RxCocoa
 import MobileBuySDK
 
-class OptionListViewController: UIViewController, StoryboardSceneBased {
-    
+class OptionListViewController: UIViewController{
 
     @IBOutlet weak var tableview: UITableView!
  
-    static var sceneStoryboard: UIStoryboard = R.storyboard.optionListViewController()
-    
     var viewModel: OptionListViewModel!
     var disposeBag = DisposeBag()
     
     public static func make(viewModel: OptionListViewModel) -> OptionListViewController {
-        let vc = self.instantiate()
+        let vc = UIStoryboard(name: "OptionListViewController", bundle: nil).instantiateViewController(withIdentifier: "OptionListViewController") as! OptionListViewController
+        
         vc.viewModel = viewModel
         return vc
     }
