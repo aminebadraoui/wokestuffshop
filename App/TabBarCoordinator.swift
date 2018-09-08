@@ -16,16 +16,13 @@ class TabBarCoordinator: Coordinator {
     var childCoordinators: [Coordinator]
     var rootViewController: UIViewController
     
-
     var disposeBag = DisposeBag()
     
     //Tabs corresponding to each navigation controller
     let homeTab = UITabBarItem()
-    let collectionTab = UITabBarItem()
     let cartTab = UITabBarItem()
     
     let homeNav = UINavigationController()
-    let collectionNav = UINavigationController()
     let cartNav = UINavigationController()
     
     let tabBarController = UITabBarController()
@@ -39,18 +36,17 @@ class TabBarCoordinator: Coordinator {
             NSAttributedStringKey.foregroundColor: UIColor.white
         ]
         
-        collectionNav.navigationBar.titleTextAttributes = attrs
-        collectionNav.setNeedsStatusBarAppearanceUpdate()
+        homeNav.navigationBar.titleTextAttributes = attrs
+        homeNav.setNeedsStatusBarAppearanceUpdate()
         
         cartNav.navigationBar.titleTextAttributes = attrs
         cartNav.setNeedsStatusBarAppearanceUpdate()
         
-        homeNav.navigationBar.titleTextAttributes = attrs
-        homeNav.setNeedsStatusBarAppearanceUpdate()
+        homeNav.navigationBar.barTintColor = UIColor.black
+        homeNav.navigationBar.isTranslucent = false
         
-        homeNav.navigationBar.barTintColor = .black
-        collectionNav.navigationBar.barTintColor = .black
         cartNav.navigationBar.barTintColor = .black
+        cartNav.navigationBar.isTranslucent = false
      
         childCoordinators = []
     }
@@ -58,7 +54,7 @@ class TabBarCoordinator: Coordinator {
     func start() {
         configureTabs()
         configureNavControllers()
-        tabBarController.viewControllers = [homeNav,collectionNav,cartNav]
+        tabBarController.viewControllers = [homeNav,cartNav]
         tabBarController.tabBar.barTintColor = .black
         tabBarController.tabBar.tintColor = .white
         
@@ -71,29 +67,21 @@ class TabBarCoordinator: Coordinator {
         homeTab.title       = "Home"
         homeTab.image       = R.image.ic_home()
 
-        collectionTab.title = "Collections"
-        collectionTab.image = R.image.ic_apps()
-
         cartTab.title       = "Your Cart"
         cartTab.image       = R.image.ic_shopping_cart()
         
     }
     
-    
     private func configureNavControllers() {
         
         let homeCoordinator           = HomeCoordinator(rootViewController: homeNav)
-        let collectionListCoordinator = CollectionListCoordinator(rootViewController: collectionNav)
         let cartCoordinator           = CartCoordinator(rootViewController: cartNav)
         
         homeCoordinator.start()
-        
-        collectionListCoordinator.start()
        
         cartCoordinator.start()
         
         homeNav.tabBarItem       = homeTab
-        collectionNav.tabBarItem = collectionTab
         cartNav.tabBarItem       = cartTab
       
         cartNav.tabBarItem.badgeColor = .red
@@ -107,6 +95,4 @@ class TabBarCoordinator: Coordinator {
             .disposed(by: disposeBag)
  
     }
-    
-    
 }

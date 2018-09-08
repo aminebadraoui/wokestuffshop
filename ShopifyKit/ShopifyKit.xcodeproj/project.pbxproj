@@ -92,10 +92,10 @@
 			isa = PBXGroup;
 			children = (
 				674F393020E1D815007C5519 /* API */,
+				67EA9EAA211A8C9B00309DF8 /* CartManager.swift */,
 				676991C220E1CC0B001C6CA1 /* Models */,
 				676991AF20E1C99F001C6CA1 /* ShopifyKit.h */,
 				676991B020E1C99F001C6CA1 /* Info.plist */,
-				67EA9EAA211A8C9B00309DF8 /* CartManager.swift */,
 			);
 			path = ShopifyKit;
 			sourceTree = "<group>";

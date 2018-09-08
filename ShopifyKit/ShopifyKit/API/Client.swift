@@ -10,6 +10,11 @@ import Foundation
 import MobileBuySDK
 import RxSwift
 
+public enum CollectionSortKey: String {
+    case besteller = "bestseller"
+    case newest = "newest"
+}
+
 public class Client {
     
     //  TODO: REPLACE BY CONSTANTS
@@ -57,12 +62,12 @@ public class Client {
     // ----------------------------------
     //  MARK: - Products of collection -
     //
-    public func fetchProducts(in collection: CollectionModel)-> Observable<[ProductModel]>  {
+    public func fetchProducts(in collection: CollectionModel, sortKey: CollectionSortKey? = nil)-> Observable<[ProductModel]>  {
         
         return Observable.create { observer in
             var productList = [ProductModel]()
             
-            let query = ClientQuery.queryForProducts(in: collection)
+            let query = ClientQuery.queryForProducts(in: collection, sortKey: sortKey)
             
             let response = self.client.queryGraphWith(query) { response, error in
                 

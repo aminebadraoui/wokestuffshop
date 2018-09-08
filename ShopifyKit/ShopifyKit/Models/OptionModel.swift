@@ -23,10 +23,9 @@ public struct  OptionModel {
     public init(from model: Storefront.ProductOption) {
         self.model  = model
         
-        self.id     = model.id.rawValue
-        self.name  = model.name
-        self.values = model.values
+        self.id            = model.id.rawValue
+        self.name          = model.name
+        self.values        = model.values
         self.selectedValue = model.values.first ?? ""
-        
     }
 }

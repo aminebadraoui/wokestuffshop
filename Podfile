@@ -10,9 +10,8 @@ def shared_pods
     pod 'Reusable',                             '~> 4.0'
     pod 'SnapKit',                              '~> 4.0.0'
     pod 'R.swift'
-    pod 'Texture'
     pod 'Mobile-Buy-SDK'
-    pod 'AlamofireImage',                       '~> 3.3'
+    pod 'Kingfisher',                           '~> 4.0'
 end
     
   target 'App' do

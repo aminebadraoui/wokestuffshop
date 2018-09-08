@@ -1,23 +1,6 @@
 PODS:
-  - Alamofire (4.7.3)
-  - AlamofireImage (3.3.1):
-    - Alamofire (~> 4.5)
+  - Kingfisher (4.8.1)
   - Mobile-Buy-SDK (3.1.8)
-  - PINCache (3.0.1-beta.6):
-    - PINCache/Arc-exception-safe (= 3.0.1-beta.6)
-    - PINCache/Core (= 3.0.1-beta.6)
-  - PINCache/Arc-exception-safe (3.0.1-beta.6):
-    - PINCache/Core
-  - PINCache/Core (3.0.1-beta.6):
-    - PINOperation (~> 1.1.0)
-  - PINOperation (1.1.1)
-  - PINRemoteImage/Core (3.0.0-beta.13):
-    - PINOperation
-  - PINRemoteImage/iOS (3.0.0-beta.13):
-    - PINRemoteImage/Core
-  - PINRemoteImage/PINCache (3.0.0-beta.13):
-    - PINCache (= 3.0.1-beta.6)
-    - PINRemoteImage/Core
   - R.swift (4.0.0):
     - R.swift.Library (~> 4.0.0)
   - R.swift.Library (4.0.0)
@@ -30,55 +13,37 @@ PODS:
     - RxSwift (~> 4.0)
   - RxSwift (4.2.0)
   - SnapKit (4.0.0)
-  - Texture (2.7):
-    - Texture/PINRemoteImage (= 2.7)
-  - Texture/Core (2.7)
-  - Texture/PINRemoteImage (2.7):
-    - PINRemoteImage/iOS (= 3.0.0-beta.13)
-    - PINRemoteImage/PINCache
-    - Texture/Core
 
 DEPENDENCIES:
-  - AlamofireImage (~> 3.3)
+  - Kingfisher (~> 4.0)
   - Mobile-Buy-SDK
   - R.swift
   - Reusable (~> 4.0)
   - RxCocoa (~> 4.0)
   - RxSwift (~> 4.0)
   - SnapKit (~> 4.0.0)
-  - Texture
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
-    - Alamofire
-    - AlamofireImage
+    - Kingfisher
     - Mobile-Buy-SDK
-    - PINCache
-    - PINOperation
-    - PINRemoteImage
     - R.swift
     - R.swift.Library
     - Reusable
     - RxCocoa
     - RxSwift
     - SnapKit
-    - Texture
 
 SPEC CHECKSUMS:
-  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
-  AlamofireImage: 3b35b586853abaf94ca1250f4e94cff3c21a4c0d
+  Kingfisher: 868c1149679a7ab6869be118faa9b5aed154aaf0
   Mobile-Buy-SDK: c94c2db580f9d4b201d1f2b07873a075437e4858
-  PINCache: d195fdba255283f7e9900a55e3cced377f431f9b
-  PINOperation: a6219e6fc9db9c269eb7a7b871ac193bcf400aac
-  PINRemoteImage: d6d51c5d2adda55f1ce30c96e850b6c4ebd2856a
   R.swift: d6a5ec2f55a8441dc0ed9f1f8b37d7d11ae85c66
   R.swift.Library: c3af34921024333546e23b70e70d0b4e0cffca75
   Reusable: 584a5629747c52e0f6a77841b400dc2643f6fa0f
   RxCocoa: 0b54909c902e1e581212a03e690bbd94032d8baa
   RxSwift: 99e10317ddfcc7fbe01356aafd118fde4a0be104
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
-  Texture: 9d7e38965cf22ccd7cd9c249dd78b3f14e70ab6c
 
-PODFILE CHECKSUM: dfcf6cd4752bbf6abfa4ba8a04cdbc0bdf943de0
+PODFILE CHECKSUM: dc91027a7cd64165b7ecaf45e2ba2b306f639c34
 
 COCOAPODS: 1.5.0

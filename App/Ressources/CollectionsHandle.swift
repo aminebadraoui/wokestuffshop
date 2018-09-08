@@ -17,8 +17,8 @@ enum CollectionHandle: String {
     case pets = "pets"
     case baby = "baby"
     case health = "health-beauty"
-    case all = "quantity-breakdown"
+    case all = "all"
     case automotive = "automotive"
-    case bestsellers = "all"
+
 }
 

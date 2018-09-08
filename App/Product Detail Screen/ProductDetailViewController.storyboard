@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="OpenSans-Semibold.ttf">
+            <string>OpenSans-Semibold</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Product Detail View Controller-->
+        <scene sceneID="l0d-p1-107">
+            <objects>
+                <viewController storyboardIdentifier="ProductDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bKe-yP-kO6" customClass="ProductDetailViewController" customModule="App" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Xnl-UJ-sSm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqK-7N-zko">
+                                <rect key="frame" x="0.0" y="613" width="375" height="54"/>
+                                <color key="backgroundColor" red="0.19607843137254902" green="0.51764705882352935" blue="0.050980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="54" id="CA6-Q4-p9x"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="18"/>
+                                <state key="normal" title="ADD TO CART">
+                                    <color key="titleColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                </state>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0s2-m6-eMK">
+                                <rect key="frame" x="0.0" y="20" width="375" height="593"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <constraints>
+                            <constraint firstItem="0s2-m6-eMK" firstAttribute="trailing" secondItem="nTl-Xa-2hb" secondAttribute="trailing" id="Fbe-Fw-gmA"/>
+                            <constraint firstItem="wqK-7N-zko" firstAttribute="bottom" secondItem="nTl-Xa-2hb" secondAttribute="bottom" id="KeH-xp-eSZ"/>
+                            <constraint firstItem="wqK-7N-zko" firstAttribute="top" secondItem="0s2-m6-eMK" secondAttribute="bottom" id="LJK-gu-q5A"/>
+                            <constraint firstItem="0s2-m6-eMK" firstAttribute="leading" secondItem="nTl-Xa-2hb" secondAttribute="leading" id="UjC-5o-UUZ"/>
+                            <constraint firstItem="wqK-7N-zko" firstAttribute="trailing" secondItem="nTl-Xa-2hb" secondAttribute="trailing" id="cu5-Qa-B2Y"/>
+                            <constraint firstItem="wqK-7N-zko" firstAttribute="leading" secondItem="nTl-Xa-2hb" secondAttribute="leading" id="mgL-Dc-qIS"/>
+                            <constraint firstItem="0s2-m6-eMK" firstAttribute="top" secondItem="nTl-Xa-2hb" secondAttribute="top" id="rFJ-de-Nzx"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="nTl-Xa-2hb"/>
+                    </view>
+                    <connections>
+                        <outlet property="productBtn" destination="wqK-7N-zko" id="mAX-G3-cc0"/>
+                        <outlet property="tableView" destination="0s2-m6-eMK" id="aXt-bm-oZ4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E4q-Gp-cSm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="276" y="330.58470764617692"/>
+        </scene>
+    </scenes>
+</document>
