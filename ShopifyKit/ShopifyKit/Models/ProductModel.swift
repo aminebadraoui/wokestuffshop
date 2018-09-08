@@ -24,13 +24,14 @@ public struct ProductModel  {
     public init(from model: Storefront.Product) {
         self.model = model
         
-        self.title = model.title
-        self.handle = model.handle
+        self.title       = model.title
+        self.handle      = model.handle
         self.description = model.descriptionHtml
-        self.images = model.images.edges.map { $0.node.originalSrc }
-        self.id = model.id.rawValue
-        self.options = model.options.map { OptionModel(from: $0)}
-        self.variants = model.variants.edges.map { VariantModel(from: $0.node)}
+        self.images      = model.images.edges.map { $0.node.originalSrc }
+        self.id          = model.id.rawValue
+        self.options     = model.options.map { OptionModel(from: $0) }
+        
+        self.variants    = model.variants.edges.map { VariantModel(from: $0.node)}
     }
 }
 

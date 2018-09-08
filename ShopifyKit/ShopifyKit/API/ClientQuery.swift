@@ -28,6 +28,20 @@ public class ClientQuery {
                                 .id()
                                 .originalSrc()
                             })
+                            .products(first: 1) { $0
+                                .edges { $0
+                                    .node { $0
+                                        .images(first: 1) { $0
+                                            .edges { $0
+                                                .node { $0
+                                                    .originalSrc()
+                                                }
+                                            }
+                                        }
+                                        
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -36,11 +50,20 @@ public class ClientQuery {
     }
     
     //  fetch products in a specific collection
-    static func queryForProducts( in collection: CollectionModel, limit: Int32 = 20, after cursor: String? = nil) -> Storefront.QueryRootQuery {
+    static func queryForProducts( in collection: CollectionModel, sortKey: CollectionSortKey? = nil, limit: Int32 = 100, after cursor: String? = nil) -> Storefront.QueryRootQuery {
+        var querySortKey: Storefront.ProductCollectionSortKeys = .collectionDefault
+        
+        if let sortKey = sortKey {
+            switch sortKey {
+            case .besteller: querySortKey = .bestSelling
+            case .newest: querySortKey = .created
+            }
+        }
+        
         return Storefront.buildQuery { $0
             .node(id: collection.model.id) { $0
                 .onCollection { $0
-                    .products(first: limit) { $0
+                    .products(first: limit, sortKey: querySortKey) { $0
                         .edges{ $0
                             .node { $0
                                 .id()
@@ -93,7 +116,7 @@ public class ClientQuery {
         }
     }
     
-    //  fetch a specific collection by its handle 
+    //  fetch a specific collection by its handle
     static func queryForCollection(handle: String, limit: Int32 = 100) -> Storefront.QueryRootQuery {
         return Storefront.buildQuery { $0
             .shop { $0
@@ -106,10 +129,25 @@ public class ClientQuery {
                         .id()
                         .originalSrc()
                     })
+                    .products(first: 1) { $0
+                        .edges { $0
+                            .node { $0
+                                .images(first: 1) { $0
+                                    .edges { $0
+                                        .node { $0
+                                            .originalSrc()
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
     }
+    
+    
     
     static func queryForOptionsInProduct(in product: ProductModel)-> Storefront.QueryRootQuery {
         return Storefront.buildQuery{ $0
@@ -144,6 +182,7 @@ public class ClientQuery {
             
         }
     }
+    
     
     
     

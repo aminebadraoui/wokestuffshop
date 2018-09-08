@@ -23,12 +23,13 @@ public struct  VariantModel {
     //  MARK: - Init -
     //
     public init(from model: Storefront.ProductVariant) {
-        self.model  = model
-        self.id     = model.id.rawValue
-        self.title  = model.title
-        self.price  = model.price
-        self.compareAtPrice = model.compareAtPrice
-        self.sku = model.sku
+        self.model = model
+        
+        self.id               = model.id.rawValue
+        self.title            = model.title != "Default Title" ? model.title : ""
+        self.price            = model.price
+        self.compareAtPrice   = model.compareAtPrice
+        self.sku              = model.sku
         self.availableForSale = model.availableForSale
     }
 }

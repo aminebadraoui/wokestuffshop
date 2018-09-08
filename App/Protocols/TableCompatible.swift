@@ -12,6 +12,8 @@ protocol TableCompatible {
     
     var height : CGFloat { get }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell 
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
 }
 
