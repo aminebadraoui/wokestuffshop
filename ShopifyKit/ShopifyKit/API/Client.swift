@@ -46,6 +46,7 @@ public class Client {
                         
                         collections.forEach { collectionList.append(CollectionModel(from: $0)) }
                         observer.onNext(collectionList)
+                        observer.onCompleted()
                     }
                 }
                 
@@ -78,6 +79,7 @@ public class Client {
                     products?.forEach { productList.append(ProductModel(from: $0)) }
                         observer.onNext(productList)
                         print("product fetch count \(productList.count)")
+                        observer.onCompleted()
                     
                 }
             }
@@ -86,6 +88,7 @@ public class Client {
             
             return Disposables.create {
                 response.cancel()
+                observer.onCompleted()
             }
         }
     }
@@ -104,12 +107,13 @@ public class Client {
                     if let query = query, let collection = query.shop.collectionByHandle  {
                         let collectionModel = CollectionModel(from: collection)
                         observer.onNext(collectionModel)
+                        observer.onCompleted()
                     }
                 }
             }
             
             response.resume()
-            
+           
             return Disposables.create {
                 response.cancel()
             }
