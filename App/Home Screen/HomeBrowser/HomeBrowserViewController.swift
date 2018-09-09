@@ -48,9 +48,9 @@ class HomeBrowserViewController: UIViewController {
     func setup() {
         self.productGrid.dataSource = viewModel.datasource
         self.productGrid.delegate = viewModel.datasource
-
+        
         viewModel.output.datasourceOutput
-            .bind(onNext: {
+            .subscribe(onNext: {
                 self.productGrid.reloadData()
             })
             .disposed(by: disposeBag)

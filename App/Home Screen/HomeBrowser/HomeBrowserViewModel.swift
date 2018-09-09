@@ -59,6 +59,7 @@ class HomeBrowserViewModel: HomeBrowserViewModelInput, HomeBrowserViewModelOutpu
     }
     
     func fetchProducts() {
+        LoadingAnimation.instance.showLoader()
         let productsObservable =
             client.fetchCollection(handle: option.handle ?? CollectionHandle.all.rawValue)
             .flatMap { collection in
@@ -81,13 +82,18 @@ class HomeBrowserViewModel: HomeBrowserViewModelInput, HomeBrowserViewModelOutpu
                 
                 self.datasource.collectionData = self.products
                 self._datasourceSubject.onNext(())
-                
-            }).disposed(by: disposeBag)
+            },
+                       onCompleted: {
+                        print("COMPLETED")
+                        LoadingAnimation.instance.hideLoader()
+            }
+        
+            ).disposed(by: disposeBag)
     }
         
 
         func fetchCollections() {
-            
+            LoadingAnimation.instance.showLoader()
             let collections = client.fetchCollections().asObservable().share(replay: 1)
 
             collections.observeOn(MainScheduler.instance)
@@ -108,7 +114,11 @@ class HomeBrowserViewModel: HomeBrowserViewModelInput, HomeBrowserViewModelOutpu
 
                     self.datasource.collectionData = self.collections
                     self._datasourceSubject.onNext(())
+                },
                     
+                    onCompleted: {
+                        print("COMPLETED")
+                        LoadingAnimation.instance.hideLoader()
                 }).disposed(by: disposeBag)
         }
     
