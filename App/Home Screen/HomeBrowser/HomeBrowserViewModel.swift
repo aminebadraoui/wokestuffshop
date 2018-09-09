@@ -66,17 +66,15 @@ class HomeBrowserViewModel: HomeBrowserViewModelInput, HomeBrowserViewModelOutpu
                 self.client.fetchProducts(in: collection) }
             .share(replay: 1)
         
-        let cellDisposeBag = DisposeBag()
-        
         productsObservable.observeOn(MainScheduler.instance)
             .subscribe(onNext: { productList in
                 self.products = productList.map { product in
                     let cell = ProductCardItemViewModel(productModel: product)
                     
                     cell.outputs.cellTapped
-                        .map{ _ in product }
+                        .map{ _ in product }.debug("log - product tapped")
                         .bind(to: self._selectedProductSubject)
-                        .disposed(by: cellDisposeBag)
+                        .disposed(by: self.disposeBag)
                     return cell
                 }
                 

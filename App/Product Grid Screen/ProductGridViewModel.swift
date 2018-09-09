@@ -42,11 +42,11 @@ class ProductGridViewModel: ProductGridViewModelInputs, ProductGridViewModelOutp
     }
     
     func fetchProducts() {
-        
+        LoadingAnimation.instance.showLoader()
         let productsObservable = client.fetchProducts(in: collection).asObservable().share(replay: 1)
-        let cellDisposeBag = DisposeBag()
         
         productsObservable.observeOn(MainScheduler.instance)
+            
             .subscribe(onNext: { productList in
                 self.products = productList.map { product in
                     let cell = ProductItemViewModel(productModel: product)
@@ -54,13 +54,16 @@ class ProductGridViewModel: ProductGridViewModelInputs, ProductGridViewModelOutp
                  cell.outputs.cellTapped
                     .map{ _ in product }
                     .bind(to: self._selectedProductSubject)
-                    .disposed(by: cellDisposeBag)
+                    .disposed(by: self.disposeBag)
                     return cell
                 }
                 
                 self.datasource.collectionData = self.products
                 self._datasourceSubject.onNext(())
-            }).disposed(by: disposeBag)
+            },
+        onCompleted: {
+            LoadingAnimation.instance.hideLoader()
+        }).disposed(by: disposeBag)
     }
     
     //  Subjects

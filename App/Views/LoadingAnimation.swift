@@ -14,12 +14,12 @@ class LoadingAnimation: UIView {
     lazy var transparentView: UIView = {
         let transparentView = UIView(frame: UIScreen.main.bounds)
         transparentView.backgroundColor = UIColor.clear
-        transparentView.isUserInteractionEnabled = false
+        //transparentView.isUserInteractionEnabled = false
         return transparentView
     }()
     
     lazy var gifImage: UIImageView = {
-        let gifImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
+        let gifImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
         gifImage.contentMode = .scaleAspectFit
         gifImage.center = transparentView.center
         gifImage.isUserInteractionEnabled = false

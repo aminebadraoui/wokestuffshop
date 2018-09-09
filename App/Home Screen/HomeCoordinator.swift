@@ -29,6 +29,7 @@ class HomeCoordinator: Coordinator {
         
         vc.pager.browserViewControllers.forEach({
             $0.viewModel.selectedProduct
+                .debug("log - Coordinator selected product")
                 .bind(to: vm._selectedProduct)
                 .disposed(by: disposeBag)
         })
