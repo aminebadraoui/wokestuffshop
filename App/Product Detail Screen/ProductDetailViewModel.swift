@@ -227,7 +227,7 @@ extension ProductDetailViewModel: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 3 {
-            return 32
+            return 0
         } else {
             return 0
         }

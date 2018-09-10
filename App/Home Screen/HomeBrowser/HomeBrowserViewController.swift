@@ -35,6 +35,7 @@ class HomeBrowserViewController: UIViewController {
         
         setupConstraints()
         setup()
+        bindData()
         viewModel.fetchFeed()
     }
     
@@ -47,11 +48,26 @@ class HomeBrowserViewController: UIViewController {
     
     func setup() {
         self.productGrid.dataSource = viewModel.datasource
-        self.productGrid.delegate = viewModel.datasource
-        
+        self.productGrid.delegate   = viewModel.datasource
+    }
+    
+    func bindData() {
         viewModel.output.datasourceOutput
             .subscribe(onNext: {
                 self.productGrid.reloadData()
+                LoadingAnimation.instance.hideLoader()
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.showLoaderSubject
+            .subscribe(onNext: {
+                LoadingAnimation.instance.showLoader(in: self.view)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.hideLoaderSubject
+            .subscribe(onNext: {
+                LoadingAnimation.instance.hideLoader()
             })
             .disposed(by: disposeBag)
     }

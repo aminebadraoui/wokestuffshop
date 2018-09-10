@@ -11,11 +11,13 @@ import RxSwift
 import Kingfisher
 
 protocol CollectionCardItemViewModelInput {
-    
+    var selectProductAction: AnyObserver<ProductModel> { get }
 }
 
 protocol CollectionCardItemViewModelOutput {
     var cellTapped: Observable<Void> { get }
+    var selectedProduct: Observable<ProductModel> { get }
+    var datasourceOutput: Observable<Void> { get }
 }
 
 protocol CollectionCardItemViewModelType {
@@ -36,13 +38,11 @@ class CollectionCardItemViewModel: CollectionCompatible, CollectionCardItemViewM
          _cellTappedSubject.onNext(())
     }
     
-   
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       
-    }
-    
-
+    let client = Client.shared
+    let disposeBag = DisposeBag()
+    var datasource = Datasource()
     var collection: CollectionModel
+    var products: [ProductItemViewModel] = []
     let imageUrl: URL?
     
     init(collection: CollectionModel){
@@ -55,13 +55,58 @@ class CollectionCardItemViewModel: CollectionCompatible, CollectionCardItemViewM
         }
     }
     
-
+    func fetchProducts(limit: Int32 = 100) {
+        
+        let productsObservable = client.fetchProducts(in: collection, limit: limit).asObservable().share(replay: 1)
+        
+        productsObservable.observeOn(MainScheduler.instance)
+            
+            .subscribe(onNext: { productList in
+                self.products = productList.map { product in
+                    let cell = ProductItemViewModel(productModel: product)
+                    
+                    cell.outputs.cellTapped
+                        .map{ _ in product }
+                        .bind(to: self._selectedProductSubject)
+                        .disposed(by: self.disposeBag)
+                    return cell
+                }
+                
+                self.datasource.collectionData = self.products
+                
+                if self.products.isEmpty {
+                    self.datasource.collectionData = [EmptyProductItemViewModel()]
+                }
+                
+            },
+                       onCompleted: {
+                        self._datasourceSubject.onNext(())
+                        
+            }).disposed(by: disposeBag)
+    }
+    
     // Subject
     private var _cellTappedSubject = PublishSubject<Void>()
+   
+    private var _selectedProductSubject = PublishSubject<ProductModel>()
+    private var _selectedCollectionSubject = PublishSubject<CollectionModel>()
+    private var _datasourceSubject = PublishSubject<Void>()
+    //  Inputs
+    var selectProductAction: AnyObserver<ProductModel> {
+        return _selectedProductSubject.asObserver()
+    }
     
     //  Outputs
     var cellTapped: Observable<Void> {
         return _cellTappedSubject.asObservable()
+    }
+    
+    var datasourceOutput: Observable<Void> {
+        return _datasourceSubject.asObservable()
+    }
+    
+    var selectedProduct: Observable<ProductModel> {
+        return _selectedProductSubject.asObservable()
     }
     
     var inputs: CollectionCardItemViewModelInput { return self }

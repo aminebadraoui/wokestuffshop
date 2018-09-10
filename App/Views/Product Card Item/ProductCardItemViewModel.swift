@@ -24,16 +24,54 @@ protocol ProductCardItemViewModelTypes {
 
 class ProductCardItemViewModel: CollectionCompatible, ProductCardItemViewModelInputs, ProductCardItemViewModelOutputs, ProductCardItemViewModelTypes {
     var product : ProductModel
-    let productTitle: String
-    let productPrice: String
-    let productCompareAtPrice: String
+    let productTitleAttributed: NSAttributedString
+    
+    let productPriceBlock: NSAttributedString
     
     init (productModel: ProductModel) {
         self.product = productModel
         
-        productTitle = productModel.title
-        productPrice = Currency.stringFrom(productModel.variants.first?.price ?? 0.0)
-        productCompareAtPrice = Currency.stringFrom(productModel.variants.first?.compareAtPrice ?? 0.0)
+        let productTitle = productModel.title
+        
+        let productPrice = Currency.stringFrom(productModel.variants.first?.price ?? 0.0)
+        
+        let productCompareAtPrice: String
+        if let productCompareAtPriceDecimal = productModel.variants.first?.compareAtPrice {
+            productCompareAtPrice = Currency.stringFrom(productCompareAtPriceDecimal)
+        } else {
+             productCompareAtPrice = ""
+        }
+        
+        //  Text Configuration
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .left
+        
+        let productNameAttributes = [
+            NSAttributedStringKey.font : AppFont.customFont(ofSize: AppFont.productNameSize, ofType: .semibold),
+            NSAttributedStringKey.foregroundColor : AppColor.defaultColor,
+            NSAttributedStringKey.paragraphStyle : paragraphStyle
+        ]
+        
+        let productPriceAttributes = [
+            NSAttributedStringKey.font : AppFont.customFont(ofSize: AppFont.productPriceSize, ofType: .regular),
+            NSAttributedStringKey.foregroundColor : AppColor.productPrice,
+            NSAttributedStringKey.paragraphStyle : paragraphStyle
+        ]
+        
+        let productOldPriceAttributes: [NSAttributedStringKey: Any] = [
+            NSAttributedStringKey.font : AppFont.customFont(ofSize: AppFont.productOldPriceSize, ofType: .regular),
+            NSAttributedStringKey.foregroundColor : AppColor.productOldPrice ,
+            NSAttributedStringKey.strikethroughStyle : NSUnderlineStyle.styleSingle.rawValue,
+            NSAttributedStringKey.paragraphStyle : paragraphStyle
+        ]
+        
+        productTitleAttributed = NSAttributedString(string: productTitle, attributes: productNameAttributes)
+        
+        let productPriceAttributed = NSAttributedString(string: productPrice, attributes: productPriceAttributes)
+        let productOldPriceAttributed = NSAttributedString(string: productCompareAtPrice, attributes: productOldPriceAttributes)
+        
+        productPriceBlock = [productPriceAttributed,productOldPriceAttributed].filter{ !$0.string.isEmpty }.joined(separator: NSAttributedString(string: " - "))
+       
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

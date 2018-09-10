@@ -44,47 +44,16 @@ class ProductCardItemCell: UICollectionViewCell {
         productImageView.clipsToBounds = true
         productImageView.kf.setImage(with: viewModel.product.images.first)
         
-        productTitle.text = viewModel.productTitle
         productTitle.numberOfLines = 2
-        productPrice.text = viewModel.productPrice
-        productCompareAtPrice.text = viewModel.productCompareAtPrice
+
+        self.productTitle.attributedText = viewModel.productTitleAttributed
+        self.productPrice.attributedText = viewModel.productPriceBlock
+        //self.productCompareAtPrice.attributedText = NSAttributedString(string: viewModel.productCompareAtPrice, attributes: productOldPriceAttributes)
         
-        priceStackView.addArrangedSubview(productPrice)
-        priceStackView.addArrangedSubview(productCompareAtPrice)
-        priceStackView.axis = .vertical
-        priceStackView.spacing = 4.0
-        
-        //  Text Configuration
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .left
-        
-        let productNameAttributes = [
-            NSAttributedStringKey.font : AppFont.customFont(ofSize: AppFont.productNameSize, ofType: .semibold),
-            NSAttributedStringKey.foregroundColor : AppColor.defaultColor,
-            NSAttributedStringKey.paragraphStyle : paragraphStyle
-        ]
-        
-        let productPriceAttributes = [
-            NSAttributedStringKey.font : AppFont.customFont(ofSize: AppFont.productPriceSize, ofType: .regular),
-            NSAttributedStringKey.foregroundColor : AppColor.productPrice,
-            NSAttributedStringKey.paragraphStyle : paragraphStyle
-        ]
-        
-        let productOldPriceAttributes: [NSAttributedStringKey: Any] = [
-            NSAttributedStringKey.font : AppFont.customFont(ofSize: AppFont.productOldPriceSize, ofType: .regular),
-            NSAttributedStringKey.foregroundColor : AppColor.productOldPrice ,
-            NSAttributedStringKey.strikethroughStyle : NSUnderlineStyle.styleSingle.rawValue,
-            NSAttributedStringKey.paragraphStyle : paragraphStyle
-        ]
-        
-        self.productTitle.attributedText = NSAttributedString(string: viewModel.productTitle, attributes: productNameAttributes)
-        self.productPrice.attributedText = NSAttributedString(string: viewModel.productPrice, attributes: productPriceAttributes)
-        self.productCompareAtPrice.attributedText = NSAttributedString(string: viewModel.productCompareAtPrice, attributes: productOldPriceAttributes)
-        
-        self.backgroundColor =  AppColor.appBackground
-        self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowOffset = CGSize(width: -3, height: 3)
-        self.layer.shadowOpacity = 0.7
+//        self.backgroundColor =  AppColor.appBackground
+//        self.layer.shadowColor = UIColor.black.cgColor
+//        self.layer.shadowOffset = CGSize(width: -3, height: 3)
+//        self.layer.shadowOpacity = 0.7
         
         setupConstraints()
         
@@ -94,7 +63,8 @@ class ProductCardItemCell: UICollectionViewCell {
         self.addSubview(productImageView)
         productImageView.snp.makeConstraints({
             $0.top.equalToSuperview()
-            $0.width.equalToSuperview()
+            $0.left.equalToSuperview()
+            $0.right.equalToSuperview()
             $0.height.equalToSuperview().offset(-80)
         })
         
@@ -102,21 +72,20 @@ class ProductCardItemCell: UICollectionViewCell {
         productTitle.snp.makeConstraints({
             $0.top.equalTo(productImageView.snp.bottom).offset(8)
             $0.left.equalTo(8)
+            $0.right.equalTo(-8)
         })
         
         self.addSubview(priceFooterView)
         priceFooterView.snp.makeConstraints({
-            $0.top.equalTo(productTitle.snp.bottom).offset(8)
+            $0.top.equalTo(productTitle.snp.bottom).offset(4)
             $0.width.equalToSuperview()
-            $0.bottom.equalToSuperview().offset(-8)
         })
         
-        priceFooterView.addSubview(priceStackView)
-        priceStackView.snp.makeConstraints({
+        priceFooterView.addSubview(productPrice)
+        productPrice.snp.makeConstraints({
             $0.centerY.equalToSuperview()
             $0.left.equalTo(8)
             $0.right.equalTo(-8)
-            
         })
     }
 }

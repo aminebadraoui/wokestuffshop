@@ -17,7 +17,6 @@ class ProductGridViewController: UIViewController {
     
     var productGrid: UICollectionView
     
-    
     //  initialization
     init (vm: ProductGridViewModel) {
         self.viewModel = vm
@@ -37,6 +36,7 @@ class ProductGridViewController: UIViewController {
         
         setupConstraints()
         setup()
+        bindData()
         
         viewModel.fetchProducts()
     }
@@ -52,23 +52,38 @@ class ProductGridViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
     }
     
-    func setupConstraints() {
+   private func setupConstraints() {
         self.view.addSubview(productGrid)
         productGrid.snp.makeConstraints({
             $0.edges.equalToSuperview()
         })
     }
     
-    func setup() {
+    private func setup() {
         self.productGrid.dataSource = viewModel.datasource
         self.productGrid.delegate = viewModel.datasource
         
         self.navigationItem.title = viewModel.title
-        self.navigationController?.navigationBar.tintColor = .white 
-  
-        
+        self.navigationController?.navigationBar.tintColor = .white
+    }
+    
+    private func bindData() {
         viewModel.outputs.datasourceOutput
             .bind(onNext: { self.productGrid.reloadData() })
             .disposed(by: disposeBag)
+        
+        viewModel.showLoaderSubject
+            .subscribe(onNext: {
+                LoadingAnimation.instance.showLoader(in: self.view)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.hideLoaderSubject
+            .subscribe(onNext: {
+                LoadingAnimation.instance.hideLoader()
+            })
+            .disposed(by: disposeBag)
     }
+    
+    
 }

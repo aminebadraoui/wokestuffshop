@@ -7,34 +7,50 @@
 //
 
 import UIKit
+import SnapKit
 
-class LoadingAnimation: UIView {
+class LoadingAnimation {
     static let instance = LoadingAnimation()
     
     lazy var transparentView: UIView = {
-        let transparentView = UIView(frame: UIScreen.main.bounds)
+        let transparentView = UIView(frame: CGRect.zero)
         transparentView.backgroundColor = UIColor.clear
-        //transparentView.isUserInteractionEnabled = false
+        transparentView.isUserInteractionEnabled = false
         return transparentView
     }()
     
     lazy var gifImage: UIImageView = {
-        let gifImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
+        let gifImage = UIImageView(frame: CGRect.zero)
         gifImage.contentMode = .scaleAspectFit
-        gifImage.center = transparentView.center
         gifImage.isUserInteractionEnabled = false
         gifImage.loadGif(asset: "loader_alt")
         return gifImage
     }()
     
-    func showLoader() {
-        self.addSubview(transparentView)
-        self.transparentView.addSubview(gifImage)
-        self.transparentView.bringSubview(toFront: gifImage)
-        UIApplication.shared.keyWindow?.addSubview(transparentView)
+    func showLoader(in currentView: UIView) {
+        currentView.addSubview(transparentView)
+        
+        transparentView.snp.makeConstraints({
+            if #available(iOS 11.0, *) {
+                $0.edges.equalTo(currentView.safeAreaLayoutGuide.snp.edges)
+            } else {
+                // Fallback on earlier versions
+            }
+        })
+        
+        transparentView.addSubview(gifImage)
+        gifImage.snp.makeConstraints {
+            $0.height.equalTo(60)
+            $0.width.equalTo(60)
+            $0.centerX.equalToSuperview()
+            $0.centerY.equalToSuperview()
+        }
+        
+        transparentView.bringSubview(toFront: gifImage)
+       
     }
     
     func hideLoader() {
-        self.transparentView.removeFromSuperview()
+        transparentView.removeFromSuperview()
     }
 }

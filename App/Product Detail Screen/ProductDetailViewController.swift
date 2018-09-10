@@ -48,10 +48,8 @@ class ProductDetailViewController: UIViewController {
         .disposed(by: disposeBag)
     }
 
-    
     @IBOutlet weak var productBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
     
     var showCart = PublishSubject<Bool>()
-    
 }

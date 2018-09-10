@@ -28,6 +28,6 @@ class ProductDescriptionCell: UITableViewCell, NibReusable {
     
     func configure(row: ProductDescriptionRowViewModel){
         descriptionLabel.numberOfLines = 0
-        descriptionLabel.attributedText = row.product.description.interpretAsHTML(font: "OpenSans", size: 17)
+        //descriptionLabel.attributedText = row.product.description.interpretAsHTML(font: "OpenSans", size: 17)
     }
 }

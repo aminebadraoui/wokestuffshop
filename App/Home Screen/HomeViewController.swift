@@ -58,7 +58,11 @@ class HomeViewController: UIViewController {
         self.view.addSubview(segmentedControl.view)
         //self.view.safeAreaInsets
         segmentedControl.view.snp.makeConstraints({
-            $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+            if #available(iOS 11.0, *) {
+                $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+            } else {
+                // Fallback on earlier versions
+            }
             $0.left.equalToSuperview()
             $0.right.equalToSuperview()
             $0.height.equalTo(36)
@@ -71,7 +75,11 @@ class HomeViewController: UIViewController {
             $0.top.equalTo(segmentedControl.view.snp.bottom)
             $0.left.equalToSuperview()
             $0.right.equalToSuperview()
-            $0.bottom.equalToSuperview()
+            if #available(iOS 11.0, *) {
+                $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+            } else {
+                // Fallback on earlier versions
+            }
         })
     }
     

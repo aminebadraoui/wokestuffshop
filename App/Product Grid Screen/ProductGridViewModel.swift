@@ -42,7 +42,7 @@ class ProductGridViewModel: ProductGridViewModelInputs, ProductGridViewModelOutp
     }
     
     func fetchProducts() {
-        LoadingAnimation.instance.showLoader()
+        showLoaderSubject.onNext(())
         let productsObservable = client.fetchProducts(in: collection).asObservable().share(replay: 1)
         
         productsObservable.observeOn(MainScheduler.instance)
@@ -62,13 +62,16 @@ class ProductGridViewModel: ProductGridViewModelInputs, ProductGridViewModelOutp
                 self._datasourceSubject.onNext(())
             },
         onCompleted: {
-            LoadingAnimation.instance.hideLoader()
+            self.hideLoaderSubject.onNext(())
         }).disposed(by: disposeBag)
     }
     
     //  Subjects
     private var _selectedProductSubject = PublishSubject<ProductModel>()
     private var _datasourceSubject = PublishSubject<Void>()
+    
+    var showLoaderSubject = PublishSubject<Void>()
+    var hideLoaderSubject = PublishSubject<Void>()
     
     //  Inputs
     var selectProductAction: AnyObserver<ProductModel> {

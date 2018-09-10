@@ -63,12 +63,12 @@ public class Client {
     // ----------------------------------
     //  MARK: - Products of collection -
     //
-    public func fetchProducts(in collection: CollectionModel, sortKey: CollectionSortKey? = nil)-> Observable<[ProductModel]>  {
+    public func fetchProducts(in collection: CollectionModel, sortKey: CollectionSortKey? = nil, limit: Int32 = 10)-> Observable<[ProductModel]>  {
         
         return Observable.create { observer in
             var productList = [ProductModel]()
             
-            let query = ClientQuery.queryForProducts(in: collection, sortKey: sortKey)
+            let query = ClientQuery.queryForProducts(in: collection, sortKey: sortKey, limit: limit)
             
             let response = self.client.queryGraphWith(query) { response, error in
                 
@@ -80,6 +80,7 @@ public class Client {
                         observer.onNext(productList)
                         print("product fetch count \(productList.count)")
                         observer.onCompleted()
+                       
                     
                 }
             }

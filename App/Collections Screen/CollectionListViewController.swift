@@ -60,7 +60,6 @@ class CollectionListViewController: UIViewController {
         
         tableView.separatorStyle = .none
 
-        
         self.navigationItem.title = viewModel.title
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         self.navigationController?.navigationBar.tintColor = .white

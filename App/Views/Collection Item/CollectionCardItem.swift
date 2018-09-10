@@ -11,15 +11,26 @@ import SnapKit
 import Kingfisher
 
 class CollectionCardItem: UICollectionViewCell {
-    let collectionImageView: UIImageView
-    let titleBackground: UIView
-    let titleStackView: UIStackView
-    let title: UILabel
-    let shopCollectionButton: UIButton
-    let gradient = CAGradientLayer()
+    private var backgroundImageView: UIImageView
+    private var gradient = CAGradientLayer()
     
+    private var collectionImageView: UIImageView
+    
+    private var titleBackground: UIView
+    private var title: UILabel
+    private var shopCollectionButton: UIButton
+    private var titleStackView: UIStackView
+    
+    private var collectionViewTitleContainer: UIView
+    private var collectionViewTitle: UILabel
+    private var viewAllTitle: UILabel
+    private var collectionView: UICollectionView
     
     override init(frame: CGRect) {
+        backgroundImageView = UIImageView(frame: CGRect.zero)
+        backgroundImageView.contentMode = .scaleAspectFill
+        backgroundImageView.clipsToBounds = true
+        
         collectionImageView = UIImageView(frame: CGRect.zero)
         collectionImageView.contentMode = .scaleAspectFill
         collectionImageView.clipsToBounds = true
@@ -30,6 +41,18 @@ class CollectionCardItem: UICollectionViewCell {
         shopCollectionButton = UIButton(frame: CGRect.zero)
         
         titleStackView = UIStackView(frame: CGRect.zero)
+        
+        collectionViewTitleContainer = UIView(frame: CGRect.zero)
+        collectionViewTitle = UILabel(frame: CGRect.zero)
+        viewAllTitle = UILabel(frame: CGRect.zero)
+        
+        let collectionViewLayout = UICollectionViewFlowLayout()
+        collectionViewLayout.scrollDirection = .horizontal
+        collectionViewLayout.itemSize = CGSize(width: 150, height: 200)
+        collectionViewLayout.sectionInset = UIEdgeInsetsMake(16, 16, 16, 16)
+        
+        
+        collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: collectionViewLayout)
         
         super.init(frame: frame)
         
@@ -43,6 +66,18 @@ class CollectionCardItem: UICollectionViewCell {
     
     func configure(viewModel: CollectionCardItemViewModel ) {
         let imageURL = viewModel.imageUrl
+        viewModel.datasourceOutput
+            .subscribe(onNext: {
+                self.collectionView.reloadData()
+            })
+        .disposed(by: disposeBag)
+        
+        backgroundImageView.kf.setImage(with: imageURL)
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.regular)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = backgroundImageView.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        backgroundImageView.addSubview(blurEffectView)
         
         collectionImageView.kf.setImage(with: imageURL )
         
@@ -50,17 +85,34 @@ class CollectionCardItem: UICollectionViewCell {
             NSAttributedStringKey.font : AppFont.customFont(ofSize: 24, ofType: .semibold),
             NSAttributedStringKey.foregroundColor : UIColor.white ]
         
-        
         let titleText = NSAttributedString(string: viewModel.collection.title, attributes: titleTextAttributes)
-        
         title.attributedText =  titleText
+        
+        let collectionTitleTextAttributes: [NSAttributedStringKey: Any] = [
+            NSAttributedStringKey.font : AppFont.customFont(ofSize: 12, ofType: .semibold),
+            NSAttributedStringKey.foregroundColor : UIColor.black ]
+        
+        let collectionTitleText = NSAttributedString(string: viewModel.collection.title, attributes: collectionTitleTextAttributes)
+        collectionViewTitle.attributedText = collectionTitleText
+        
+        let viewAllTitleTextAttributes: [NSAttributedStringKey: Any] = [
+            NSAttributedStringKey.font : AppFont.customFont(ofSize: 12, ofType: .semibold),
+            NSAttributedStringKey.foregroundColor : UIColor.black ]
+        
+        let viewAllTitleText = NSAttributedString(string: "View All", attributes: viewAllTitleTextAttributes)
+        viewAllTitle.attributedText = viewAllTitleText
+        
         self.backgroundColor = AppColor.appBackground
         
+        collectionView.backgroundColor = AppColor.appBackground
+        
+        collectionView.delegate = viewModel.datasource
+        collectionView.dataSource = viewModel.datasource
     }
     
     func setupViews() {
         let shopButtonTitleAttributes: [NSAttributedStringKey: Any] = [
-            NSAttributedStringKey.font : AppFont.customFont(ofSize: 16, ofType: .semibold),
+            NSAttributedStringKey.font : AppFont.customFont(ofSize: 12, ofType: .semibold),
             NSAttributedStringKey.foregroundColor : UIColor.black ]
         
         let shopButtonTitle = NSAttributedString(string: "Shop Collection", attributes: shopButtonTitleAttributes)
@@ -78,9 +130,8 @@ class CollectionCardItem: UICollectionViewCell {
         titleStackView.addArrangedSubview(title)
         titleStackView.addArrangedSubview(shopCollectionButton)
         
-        
         gradient.frame = titleBackground.bounds
-        gradient.colors = [UIColor.black.withAlphaComponent(0.8).cgColor, UIColor.clear.withAlphaComponent(0).cgColor]
+        gradient.colors = [UIColor.black.withAlphaComponent(0.5).cgColor, UIColor.clear.withAlphaComponent(0).cgColor]
         gradient.startPoint = CGPoint(x: 0, y: 1)
         gradient.endPoint = CGPoint(x: 0, y: 0)
         gradient.locations = [0.3]
@@ -95,12 +146,20 @@ class CollectionCardItem: UICollectionViewCell {
     }
 
     func setupConstraints() {
+        self.addSubview(backgroundImageView)
+        backgroundImageView.snp.makeConstraints({
+            $0.top.equalToSuperview()
+            $0.right.equalToSuperview()
+            $0.left.equalToSuperview()
+            $0.height.equalToSuperview().offset(-300)
+        })
+        
         self.addSubview(collectionImageView)
         collectionImageView.snp.makeConstraints({
-            $0.top.equalToSuperview()
-            $0.left.equalToSuperview()
-            $0.bottom.equalToSuperview()
-            $0.right.equalToSuperview()
+            $0.top.equalToSuperview().offset(16)
+            $0.left.equalToSuperview().offset(16)
+            $0.height.equalToSuperview().offset(-332)
+            $0.right.equalToSuperview().offset(-16)
         })
         
         self.collectionImageView.addSubview(titleBackground)
@@ -112,6 +171,36 @@ class CollectionCardItem: UICollectionViewCell {
         titleStackView.snp.makeConstraints({
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview()
+        })
+        
+        self.addSubview(collectionViewTitleContainer)
+        collectionViewTitleContainer.snp.makeConstraints({
+            $0.top.equalTo(backgroundImageView.snp.bottom)
+            $0.right.equalToSuperview()
+            $0.left.equalToSuperview()
+            $0.height.equalTo(50)
+        })
+        
+        collectionViewTitleContainer.addSubview(collectionViewTitle)
+        collectionViewTitle.snp.makeConstraints({
+            $0.top.equalToSuperview()
+            $0.left.equalToSuperview().offset(16)
+            $0.bottom.equalToSuperview()
+        })
+        
+        collectionViewTitleContainer.addSubview(viewAllTitle)
+        viewAllTitle.snp.makeConstraints({
+            $0.top.equalToSuperview()
+            $0.right.equalToSuperview().offset(-16)
+            $0.bottom.equalToSuperview()
+        })
+        
+        self.addSubview(collectionView)
+        collectionView.snp.makeConstraints({
+            $0.top.equalTo(collectionViewTitleContainer.snp.bottom)
+            $0.right.equalToSuperview()
+            $0.left.equalToSuperview()
+            $0.bottom.equalToSuperview()
         })
     }
 }

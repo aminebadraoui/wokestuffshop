@@ -16,7 +16,7 @@ class ImageViewController: UIViewController {
     
     let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
@@ -31,11 +31,7 @@ class ImageViewController: UIViewController {
         self.view.addSubview(imageView)
         
         imageView.snp.makeConstraints {
-            $0.height.equalTo(416)
-            
-            $0.top.equalToSuperview()
-            $0.left.equalToSuperview()
-            $0.right.equalToSuperview()
+            $0.edges.equalToSuperview()
         }
     }
 }

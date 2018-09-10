@@ -81,7 +81,7 @@ class ProductItemCell: UICollectionViewCell {
         self.productPrice.attributedText = NSAttributedString(string: viewModel.productPrice, attributes: productPriceAttributes)
         self.productCompareAtPrice.attributedText = NSAttributedString(string: viewModel.productCompareAtPrice, attributes: productOldPriceAttributes)
         
-        self.backgroundColor =  AppColor.appBackground
+        self.backgroundColor =  .white
 
         setupConstraints()
     }

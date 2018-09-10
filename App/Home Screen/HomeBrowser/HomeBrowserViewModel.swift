@@ -26,7 +26,6 @@ protocol HomeBrowserViewModelType {
 }
 
 class HomeBrowserViewModel: HomeBrowserViewModelInput, HomeBrowserViewModelOutput, HomeBrowserViewModelType {
- 
     let client = Client.shared
     
     let disposeBag = DisposeBag()
@@ -35,6 +34,7 @@ class HomeBrowserViewModel: HomeBrowserViewModelInput, HomeBrowserViewModelOutpu
     var datasource = Datasource()
     var products = [ProductCardItemViewModel]()
     var collections = [CollectionCardItemViewModel]()
+    var productListPreview = [ProductItemViewModel]()
     var cardsFlow = UICollectionViewFlowLayout()
 
     init(option: MenuOption) {
@@ -42,24 +42,23 @@ class HomeBrowserViewModel: HomeBrowserViewModelInput, HomeBrowserViewModelOutpu
     }
     
     func configureFlow() {
-        let cardSizeDimension = UIScreen.main.bounds.width - 16
+        let cardSizeDimension = UIScreen.main.bounds.width
         
         cardsFlow.scrollDirection         = .vertical
-        cardsFlow.minimumInteritemSpacing = 1
-        cardsFlow.minimumLineSpacing      = 24
-        cardsFlow.sectionInset = UIEdgeInsetsMake(16, 16, 16, 16)
+        cardsFlow.minimumInteritemSpacing = 0
+        cardsFlow.minimumLineSpacing      = 0
+        cardsFlow.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
         
         switch option.type {
         case .collectionFeed:
-            cardsFlow.itemSize = CGSize(width: cardSizeDimension, height: cardSizeDimension/2)
+            cardsFlow.itemSize = CGSize(width: cardSizeDimension, height: cardSizeDimension + 250)
         case .productFeed:
             cardsFlow.itemSize = CGSize(width: cardSizeDimension, height: cardSizeDimension)
         }
-        
     }
     
     func fetchProducts() {
-        LoadingAnimation.instance.showLoader()
+        showLoaderSubject.onNext(())
         let productsObservable =
             client.fetchCollection(handle: option.handle ?? CollectionHandle.all.rawValue)
             .flatMap { collection in
@@ -82,16 +81,13 @@ class HomeBrowserViewModel: HomeBrowserViewModelInput, HomeBrowserViewModelOutpu
                 self._datasourceSubject.onNext(())
             },
                        onCompleted: {
-                        print("COMPLETED")
-                        LoadingAnimation.instance.hideLoader()
-            }
-        
-            ).disposed(by: disposeBag)
+                        self.hideLoaderSubject.onNext(())
+            }).disposed(by: disposeBag)
     }
         
 
         func fetchCollections() {
-            LoadingAnimation.instance.showLoader()
+            showLoaderSubject.onNext(())
             let collections = client.fetchCollections().asObservable().share(replay: 1)
 
             collections.observeOn(MainScheduler.instance)
@@ -101,6 +97,12 @@ class HomeBrowserViewModel: HomeBrowserViewModelInput, HomeBrowserViewModelOutpu
 
                         let row = CollectionCardItemViewModel(collection: collectionModel)
 
+                        row.fetchProducts(limit: 10)
+                    
+                        row.outputs.selectedProduct
+                            .bind(to: self._selectedProductSubject)
+                            .disposed(by: self.disposeBag)
+                        
                         row.outputs.cellTapped
                             .map{ _ in collectionModel }
                             .bind(to: self._selectedCollectionSubject)
@@ -109,16 +111,18 @@ class HomeBrowserViewModel: HomeBrowserViewModelInput, HomeBrowserViewModelOutpu
                         return row
 
                     }
-
-                    self.datasource.collectionData = self.collections
-                    self._datasourceSubject.onNext(())
                 },
-                    
                     onCompleted: {
-                        print("COMPLETED")
-                        LoadingAnimation.instance.hideLoader()
+                        self._datasourceSubject.onNext(())
+                        self.datasource.collectionData = self.collections
                 }).disposed(by: disposeBag)
-        }
+    }
+    
+    func fetchCollectionPreview() {
+        self.collections.forEach({ collection in
+        })
+    }
+    
     
     func fetchFeed() {
         switch option.type {
@@ -133,7 +137,11 @@ class HomeBrowserViewModel: HomeBrowserViewModelInput, HomeBrowserViewModelOutpu
     //  Subjects
     private var _selectedProductSubject = PublishSubject<ProductModel>()
     private var _selectedCollectionSubject = PublishSubject<CollectionModel>()
+    private var _fetchCollectionPreviewSubject = PublishSubject<Void>()
     private var _datasourceSubject = PublishSubject<Void>()
+    
+    var showLoaderSubject = PublishSubject<Void>()
+    var hideLoaderSubject = PublishSubject<Void>()
     
     //  Inputs
     var selectProductAction: AnyObserver<ProductModel> {
